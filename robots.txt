@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.uk-expat-mortgage.co.uk/sitemap.xml
