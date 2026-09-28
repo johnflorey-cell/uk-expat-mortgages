@@ -180,6 +180,7 @@ footer strong{color:#fff}
       <input type="hidden" name="_subject" value="New enquiry from UK Expat Mortgages (Qatar page)">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_autoresponse" value="Thank you for contacting UK Expat Mortgages. We have received your enquiry and one of our specialist UK mortgage advisers will be in touch with you shortly. Kind regards, John Florey, UK Expat Mortgages">
+      <input type="hidden" name="_next" value="https://www.uk-expat-mortgage.co.uk/thank-you/">
       <input type="hidden" name="page" value="Qatar">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <label>Name<input name="name" required autocomplete="name"></label>
@@ -229,18 +230,7 @@ footer strong{color:#fff}
 </footer>
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 <script>
-(function(){var f=document.getElementById('enquiry');if(!f)return;
-f.addEventListener('submit',function(ev){ev.preventDefault();
-var h=f.querySelector('[name=_honey]');if(h&&h.value)return;
-var b=f.querySelector('button[type=submit]'),old=b.textContent;b.disabled=true;b.textContent='Sending...';
-var err=f.querySelector('.form-err');if(err)err.remove();
-fetch('https://formsubmit.co/ajax/john.florey@opesfp.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
-.then(function(r){return r.json()}).then(function(d){
-if(String(d.success)!=='true')throw new Error('fail');
-f.innerHTML='<div role="status" style="background:#eef6f0;border:1px solid #9cc9a8;border-radius:12px;padding:28px 24px"><p style="font-size:22px;font-weight:600;color:#0e3b53;margin:0 0 10px">&#10003; Thank you, your enquiry has been sent</p><p style="margin:0">We have received your message and will be in touch shortly. A confirmation has also been sent to your email address.</p></div>';
-f.scrollIntoView({behavior:'smooth',block:'center'});})
-.catch(function(){b.disabled=false;b.textContent=old;var p=document.createElement('p');p.className='form-err';p.setAttribute('role','alert');p.style.cssText='color:#a3261d;font-weight:600;margin-top:12px';p.innerHTML='Sorry, your enquiry could not be sent. Please try again or email <a href="mailto:john.florey@opesfp.com">john.florey@opesfp.com</a>.';f.appendChild(p);});
-});})();
+(function(){var f=document.getElementById('enquiry');if(!f)return;f.addEventListener('submit',function(){var b=f.querySelector('button[type=submit]');if(b){b.textContent='Sending...';b.style.opacity='.7';}});})();
 </script>
 </body>
 </html>
