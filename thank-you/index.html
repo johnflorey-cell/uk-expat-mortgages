@@ -94,6 +94,13 @@ footer strong{color:#fff}
   section{padding:56px 0}
   header.top .btn{display:none}
 }
+.nav{display:flex;align-items:center;gap:22px}
+.navlink{font-size:15px;font-weight:600;text-decoration:none;color:var(--brand)}
+.navlink:hover{text-decoration:underline}
+@media (max-width:760px){.navlink .long{display:none}.navlink{text-transform:capitalize}}
+.calc-cta{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.calc-cta h3{font-size:22px;margin-bottom:4px}
+.calc-cta p{color:var(--ink-soft);font-size:16px;max-width:620px}
 </style>
 </head>
 <body>
@@ -101,7 +108,10 @@ footer strong{color:#fff}
 <header class="top">
   <div class="wrap">
     <a class="logo" href="/">UK Expat <span>Mortgages</span></a>
-    <a class="btn small" href="#contact">Free consultation</a>
+    <div class="nav">
+      <a class="navlink" href="/calculator/"><span class="long">Mortgage </span>calculator</a>
+      <a class="btn small" href="#contact">Free consultation</a>
+    </div>
   </div>
 </header>
 
