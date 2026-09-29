@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UK Expat Mortgage Calculator | How Much Can I Borrow &amp; Monthly Cost</title>
+<meta name="description" content="Free UK expat mortgage calculator. See how much buy-to-let mortgage you could get from your rental income, then the monthly cost at current expat rates, shown in your home currency.">
+<link rel="canonical" href="https://www.uk-expat-mortgage.co.uk/calculator/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="UK Expat Mortgage Calculator | UK Expat Mortgages">
+<meta property="og:description" content="How much you could borrow and what it would cost each month, in one calculator for expats.">
+<meta property="og:url" content="https://www.uk-expat-mortgage.co.uk/calculator/">
+<meta property="og:locale" content="en_GB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UK Expat Mortgage Calculator",
+  "url": "https://www.uk-expat-mortgage.co.uk/calculator/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "Calculate how much UK buy-to-let mortgage expats could get from rental income, and the monthly repayments.",
+  "provider": {"@type": "FinancialService", "name": "UK Expat Mortgages", "url": "https://www.uk-expat-mortgage.co.uk/"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.uk-expat-mortgage.co.uk/"},
+    {"@type":"ListItem","position":2,"name":"Mortgage calculator","item":"https://www.uk-expat-mortgage.co.uk/calculator/"}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --ink:#10222e; --ink-soft:#44586a; --bg:#fbfaf7; --card:#ffffff;
+  --brand:#0e3b53; --accent:#c89b3c; --line:#e4e0d6; --tint:#f1ede4;
+  --good:#2f7a4f; --warn:#b7791f; --bad:#b23b3b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.2;color:var(--brand)}
+a{color:var(--brand)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:var(--bg)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:16px;padding-bottom:16px;gap:12px}
+.logo{font-family:Fraunces,serif;font-size:20px;font-weight:600;color:var(--brand);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav{display:flex;align-items:center;gap:22px}
+.navlink{font-size:15px;font-weight:600;text-decoration:none;color:var(--brand)}
+.navlink:hover{text-decoration:underline}
+@media (max-width:760px){.navlink .long{display:none}.navlink{text-transform:capitalize}}
+.btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:14px 26px;border-radius:6px;font-weight:600;border:0;cursor:pointer;font-size:16px;text-align:center}
+.btn:hover{background:#0a2c3f}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn.small{padding:10px 18px;font-size:15px}
+.btn.gold{background:var(--accent);color:#fff}
+.btn.gold:hover{background:#b0862f}
+.hero{padding:56px 0 40px;background:linear-gradient(180deg,var(--tint),var(--bg))}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:14px}
+.hero h1{font-size:clamp(32px,4.5vw,50px);max-width:820px;margin-bottom:18px}
+.hero p.lead{font-size:19px;color:var(--ink-soft);max-width:720px}
+.guide{margin-top:18px;max-width:720px;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:12px 16px}
+.crumb{font-size:14px;margin-bottom:18px;color:var(--ink-soft)}
+.crumb a{color:var(--ink-soft)}
+section{padding:64px 0}
+section h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:14px}
+.intro{color:var(--ink-soft);max-width:700px;margin-bottom:32px}
+
+/* calculator */
+.calc{padding-top:8px}
+.calc-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:28px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px}
+.panel h3{font-size:20px;margin-bottom:4px}
+.panel .sub{font-size:14px;color:var(--ink-soft);margin-bottom:18px}
+.group{border-top:1px solid var(--line);padding-top:20px;margin-top:20px}
+.group:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.glabel{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--accent);margin-bottom:12px}
+.seg3{grid-template-columns:repeat(3,1fr)!important}
+.seg3 label{display:flex!important;align-items:center;justify-content:center;line-height:1.3}
+@media (max-width:480px){.seg3{grid-template-columns:1fr!important}}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.seg{position:relative}
+.seg input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;left:0;top:0}
+.seg label{display:block;text-align:center;padding:11px 8px;font-size:15px;font-weight:600;cursor:pointer;color:var(--ink-soft);margin:0}
+.seg input:checked + label{background:var(--brand);color:#fff}
+.seg input:focus-visible + label{outline:2px solid var(--accent);outline-offset:-2px}
+.segs{display:grid;gap:12px}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field > span{font-size:14px;font-weight:600}
+.field > span.hint{font-weight:400}
+.field small{font-size:13px;color:var(--ink-soft);font-weight:400}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.money{position:relative}
+.money::before{content:"£";position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-size:16px}
+.money input{padding-left:28px}
+.pct{position:relative}
+.pct::after{content:"%";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft)}
+.pct input{padding-right:30px}
+input,select,textarea{font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:6px;background:#fff;width:100%;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(14,59,83,.25);border-color:var(--brand)}
+input[type=range]{padding:0;border:0;accent-color:var(--brand);background:transparent}
+.rangehead{display:flex;justify-content:space-between;align-items:baseline}
+.rangehead b{font-size:15px;color:var(--brand)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:500;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:3px;flex:none;accent-color:var(--brand)}
+.hint{font-size:13px;color:var(--ink-soft);margin-top:4px}
+.hidden{display:none!important}
+
+.results{position:sticky;top:16px;display:grid;gap:16px}
+.hero-num{background:var(--brand);color:#e8eef2;border-radius:12px;padding:26px 28px}
+.hero-num .k{font-size:14px;color:#b9cbd6;font-weight:500}
+.hero-num .v{font-family:Fraunces,Georgia,serif;font-size:clamp(38px,5vw,50px);color:#fff;line-height:1.1;margin:4px 0 6px}
+.ltvtag{display:inline-block;background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:8px}
+.fxinline{margin-top:12px;background:var(--tint);border-radius:8px;padding:12px 14px;font-size:15px;color:var(--ink)}
+.fxinline b{color:var(--brand)}
+.hero-num .fx{font-size:17px!important;font-weight:600;font-size:15px;color:#e3c889;min-height:1em}
+.hero-num .alt{font-size:14px;color:#b9cbd6;margin-top:8px}
+.rows{display:grid}
+.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.row:last-child{border-bottom:0}
+.row span{color:var(--ink-soft)}
+.row b{font-weight:600;text-align:right}
+.row.total b{color:var(--brand);font-size:17px}
+.ltvbar{height:10px;border-radius:10px;background:var(--tint);position:relative;overflow:hidden;margin:12px 0 8px}
+.ltvbar i{position:absolute;left:0;top:0;bottom:0;border-radius:10px;background:var(--good);transition:width .25s}
+.ltvscale{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft)}
+.badge{display:inline-block;font-size:13px;font-weight:600;padding:4px 10px;border-radius:20px;margin-top:10px}
+.badge.good{background:#e6f2ea;color:var(--good)}
+.badge.warn{background:#fbf1de;color:var(--warn)}
+.badge.bad{background:#f7e4e4;color:var(--bad)}
+.note{font-size:14px;color:var(--ink-soft);margin-top:8px}
+.stress{width:100%;border-collapse:collapse;font-size:15px;margin-top:6px}
+.stress th,.stress td{text-align:left;padding:8px 0;border-bottom:1px solid var(--line)}
+.stress th{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600}
+.stress td:last-child,.stress th:last-child{text-align:right}
+.stress tr:last-child td{border-bottom:0}
+.rangerow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rangerow div{background:var(--tint);border-radius:8px;padding:10px 12px;text-align:center}
+.rangerow span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600}
+.rangerow b{font-family:Fraunces,Georgia,serif;font-size:22px;color:var(--brand)}
+.stages{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.stages li{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-weight:600;color:var(--ink-soft);cursor:pointer;font-size:16px}
+.stages li span{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--tint);color:var(--brand);font-weight:600}
+.stages li.on{border-color:var(--brand);color:var(--brand);box-shadow:inset 0 -3px 0 var(--accent)}
+.stages li.on span{background:var(--brand);color:#fff}
+.stages li.done span{background:var(--accent);color:#fff}
+.stagehead{font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:var(--accent);margin-bottom:4px}
+.formula{font-size:13px;color:var(--ink-soft);background:var(--tint);border-radius:6px;padding:10px 12px;margin-top:12px;font-variant-numeric:tabular-nums}
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--brand);text-decoration:underline;cursor:pointer}
+.cta-box button.btn{width:100%}
+@media (max-width:600px){.stages{grid-template-columns:1fr}.stages li{font-size:15px;padding:12px 14px}}
+.cta-box{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
+.cta-box p{font-size:15px;color:var(--ink-soft);margin:6px 0 14px}
+.cta-box .btn{width:100%}
+
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:26px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{color:var(--ink-soft);font-size:16px}
+
+.contact{background:var(--tint)}
+.contact-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:28px;display:grid;gap:14px}
+form label{font-size:14px;font-weight:600;display:grid;gap:6px}
+textarea{min-height:100px;resize:vertical}
+.summary{background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:14px 16px;font-size:14px;color:var(--ink-soft);white-space:pre-line}
+footer{background:#0a2533;color:#9fb3c0;font-size:12px;line-height:1.5;padding:28px 0}
+footer p{margin-bottom:6px}
+footer strong{color:#fff}
+.repo{color:#fff;font-weight:600;margin-bottom:10px!important}
+
+@media (max-width:960px){
+  .calc-grid{grid-template-columns:1fr}
+  .results{position:static}
+  .cards{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .contact-box{grid-template-columns:1fr}
+  .hero{padding:40px 0 28px}
+  section{padding:48px 0}
+  header.top .btn{display:none}
+  .panel{padding:22px 18px}
+  .hero-num{padding:22px}
+}
+@media (max-width:420px){
+  .two{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/">UK Expat <span>Mortgages</span></a>
+    <div class="nav">
+      <a class="navlink" href="/calculator/"><span class="long">Mortgage </span>calculator</a>
+      <a class="btn small" href="#contact">Free consultation</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="crumb"><a href="/">Home</a> / Mortgage calculator</p>
+    <p class="eyebrow">Free expat mortgage calculator</p>
+    <h1>UK expat mortgage calculator</h1>
+    <p class="lead">Two quick stages. First, find out how much mortgage you could get, based on the rent and an industry standard of up to a maximum of 75% of the value. Then see what it would cost each month, including the payment in your home currency.</p>
+    <p class="guide"><strong>Indicative guide only.</strong> This calculator gives estimates to help you plan. It is not a quote, a mortgage offer or advice.<br><strong>Standard UK residential property only.</strong> It does not cover commercial or semi-commercial property, HMOs, auction purchases or other specialist property. If your purchase is one of these, <a href="#contact">speak to an adviser</a>.<br><strong>Subject to valuation.</strong> The property value and rent are subject to the lender's valuation.</p>
+  </div>
+</section>
+
+<section class="calc">
+  <div class="wrap">
+    <ol class="stages" aria-label="Calculator stages">
+      <li class="on" id="st1tab"><span>1</span> How much mortgage can I get?</li>
+      <li id="st2tab"><span>2</span> What will it cost each month?</li>
+    </ol>
+  </div>
+
+  <!-- STAGE 1 -->
+  <div class="wrap calc-grid" id="stage1">
+    <div class="panel" id="inputs1">
+      <p class="stagehead">Stage 1</p>
+      <h3>How much mortgage can I get?</h3>
+      <p class="sub">For buy-to-let, the mortgage is based on the rent the property will earn, up to a maximum of 75% of the value. For standard residential property in the UK only.</p>
+
+      <div class="group">
+        <p class="glabel">What are you looking to do?</p>
+        <div class="seg seg3" role="radiogroup" aria-label="What are you looking to do">
+          <input type="radio" name="goal" id="g-btl" value="btl" checked><label for="g-btl">Buy-to-let investment</label>
+          <input type="radio" name="goal" id="g-re" value="remo"><label for="g-re">Remortgaging</label>
+          <input type="radio" name="goal" id="g-home" value="home"><label for="g-home">Buying own home</label>
+        </div>
+      </div>
+
+      <div class="group">
+        <p class="glabel">The property</p>
+        <label class="field"><span id="valueLabel">Purchase price</span>
+          <div class="money"><input id="value" inputmode="numeric" value="450,000" aria-label="Property value in pounds"></div>
+          <span class="hint">All figures are subject to the lender's valuation of the property. If the valuation comes in lower, the mortgage available will be lower.</span>
+        </label>
+        <label class="field" id="balanceField"><span>Current mortgage balance</span>
+          <div class="money"><input id="balance" inputmode="numeric" value="250,000" aria-label="Current mortgage balance"></div>
+        </label>
+      </div>
+
+      <div class="group" id="btlGroup">
+        <p class="glabel">Rental income</p>
+        <label class="field"><span>Estimated monthly rent</span>
+          <div class="money"><input id="rent" inputmode="numeric" value="2,100" aria-label="Estimated monthly rent"></div>
+          <span class="hint">Use a realistic figure from a letting agent. The lender's valuer will confirm it.</span>
+        </label>
+        <div class="field">
+          <span id="ownerLabel">Buying as</span>
+          <div class="seg" role="radiogroup" aria-label="Buying as">
+            <input type="radio" name="owner" id="o-ind" value="ind" checked><label for="o-ind">Individual</label>
+            <input type="radio" name="owner" id="o-co" value="co"><label for="o-co">Limited company</label>
+          </div>
+          <span class="hint" id="icrHint"></span>
+        </div>
+        <label class="field"><span>Stress rate</span>
+          <div class="pct"><input id="stressRate" inputmode="decimal" value="6.06" aria-label="Stress rate"></div>
+          <span class="hint" id="stressHint"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="hero-num">
+        <div class="k" id="maxLabel">Maximum mortgage you could get</div>
+        <div class="v" id="maxMort">£0</div>
+        <div class="ltvtag" id="maxLtv"></div>
+        <div class="fx" id="maxLimit"></div>
+        <div class="alt" style="margin-top:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px">Indicative guide only, not a quote or offer of lending. Subject to the lender's valuation of the property.</div>
+      </div>
+
+      <div class="panel">
+        <h3>How it is worked out</h3>
+        <div class="rows">
+          <div class="row" id="rentRow"><span id="rentCalc">Based on rent</span><b id="rentMax">£0</b></div>
+          <div class="row"><span>Maximum at 75% of the value</span><b id="ltvMax">£0</b></div>
+          <div class="row total"><span>Your maximum mortgage (the lower figure)</span><b id="maxMort2">£0</b></div>
+          <div class="row"><span>Loan to value (LTV)</span><b id="maxLtv2">0%</b></div>
+          <div class="row" id="minDepRow"><span>Minimum deposit needed</span><b id="minDep">£0</b></div>
+          <div class="row" id="raiseRow"><span>Could raise above your current balance</span><b id="raise">£0</b></div>
+        </div>
+        <p class="formula" id="formula"></p>
+        <p class="note" id="resNote">For your own home, lenders also assess your income and outgoings, so the amount may be lower. Your adviser will confirm what you can borrow.</p>
+      </div>
+
+      <div class="cta-box">
+        <h3>Next: what will it cost each month?</h3>
+        <p>See the monthly payment on this mortgage using current expat rates, plus the deposit needed and payments in your home currency.</p>
+        <button type="button" class="btn gold" id="toStage2">Continue to stage 2</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 2 -->
+  <div class="wrap calc-grid hidden" id="stage2">
+    <div class="panel" id="inputs2">
+      <p class="stagehead">Stage 2</p>
+      <h3>What will it cost each month?</h3>
+      <p class="sub"><button type="button" class="linkbtn" id="backTo1">Back to stage 1</button> to change the property, rent or buyer details.</p>
+
+      <div class="group">
+        <p class="glabel">The mortgage</p>
+        <label class="field"><span>Mortgage amount <small id="loanNote"></small></span>
+          <div class="money"><input id="loan" inputmode="numeric" value="0" aria-label="Mortgage amount"></div>
+          <span class="hint" id="loanWarn"></span>
+        </label>
+        <div class="field">
+          <div class="rangehead"><span style="font-size:14px;font-weight:600">Mortgage term</span><b id="termOut">25 years</b></div>
+          <input type="range" id="term" min="2" max="25" step="1" value="25" aria-label="Mortgage term in years">
+          <span class="hint">The term is the total length of the mortgage, from 2 years up to 25 years.</span>
+        </div>
+        <div class="field">
+          <span>Fixed rate period</span>
+          <div class="seg" role="radiogroup" aria-label="Fixed rate period">
+            <input type="radio" name="fix" id="f-2" value="2"><label for="f-2">2 year fixed</label>
+            <input type="radio" name="fix" id="f-5" value="5" checked><label for="f-5">5 year fixed</label>
+          </div>
+          <span class="hint">The fixed rate period is how long your interest rate is set for. After that, the mortgage moves to the lender's variable rate unless you choose another fixed rate.</span>
+        </div>
+        <div class="two">
+          <label class="field"><span>Rate to use</span>
+            <select id="rateChoice">
+              <option value="low">Lowest</option>
+              <option value="avg" selected>Average</option>
+              <option value="high">Highest</option>
+              <option value="own">My own rate</option>
+            </select>
+          </label>
+          <label class="field"><span>Interest rate</span>
+            <div class="pct"><input id="rate" inputmode="decimal" value="6.06" aria-label="Interest rate"></div>
+          </label>
+        </div>
+        <p class="hint" id="rateHint"></p>
+        <label class="field" style="margin-top:14px"><span>Interest only or repayment</span>
+          <select id="rtype">
+            <option value="io">Interest only</option>
+            <option value="cai">Repayment (capital and interest)</option>
+          </select>
+          <span class="hint" id="rtypeHint"></span>
+        </label>
+      </div>
+
+      <div class="group">
+        <p class="glabel">See the figures in your own currency <small style="text-transform:none;letter-spacing:0;color:var(--ink-soft);font-weight:400">(optional)</small></p>
+        <p class="hint" style="margin:0 0 12px">UK mortgages are in pounds. If you are paid in another currency, choose it to see what the monthly payment, mortgage and deposit are in that currency.</p>
+        <div class="two">
+          <label class="field"><span>Currency</span>
+            <select id="ccy">
+              <option value="">Pounds only</option>
+              <option>AED</option><option>SAR</option><option>QAR</option><option>BHD</option><option>KWD</option><option>OMR</option>
+              <option>USD</option><option>CAD</option><option>EUR</option><option>HKD</option><option>SGD</option><option>MYR</option>
+              <option>CNY</option><option>INR</option><option>ZAR</option>
+            </select>
+          </label>
+          <label class="field"><span id="fxLabel">1 GBP equals</span>
+            <input id="fx" inputmode="decimal" placeholder="Choose a currency" aria-label="Exchange rate">
+          </label>
+        </div>
+        <p class="hint" id="fxHint">Choose your currency and the exchange rate is filled in for you. You can change it. Exchange rates move, so the amount in your currency will change.</p>
+        <div class="fxinline hidden" id="fxInline"></div>
+      </div>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="hero-num">
+        <div class="k" id="payLabel">Estimated monthly payment</div>
+        <div class="v" id="pay">£0</div>
+        <div class="ltvtag" id="payLtv"></div>
+        <div class="fx" id="payFx"></div>
+        <div class="alt" id="payAlt"></div>
+        <div class="alt" style="margin-top:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px">Indicative guide only, not a quote or offer of lending.</div>
+      </div>
+
+      <div class="panel hidden" id="fxPanel">
+        <h3 id="fxTitle">In your currency</h3>
+        <p class="sub" id="fxSub" style="margin-bottom:6px"></p>
+        <div class="rows">
+          <div class="row total"><span>Monthly payment</span><b id="fxPay"></b></div>
+          <div class="row"><span>Mortgage amount</span><b id="fxLoan"></b></div>
+          <div class="row" id="fxDepRow"><span>Deposit</span><b id="fxDep"></b></div>
+          <div class="row" id="fxRentRow"><span>Monthly rent</span><b id="fxRent"></b></div>
+        </div>
+        <p class="note">Your payments are made in pounds, so if the exchange rate moves, the amount in your currency will change.</p>
+      </div>
+
+      <div class="panel rangebox">
+        <h3>Rates vary by lender</h3>
+        <p class="sub" id="rangeCat" style="margin-bottom:10px"></p>
+        <div class="rangerow"><div><span>Lowest</span><b id="rLow"></b></div><div><span>Average</span><b id="rAvg"></b></div><div><span>Highest</span><b id="rHigh"></b></div></div>
+        <p class="note">There is a range of rates depending on the lender, and each lender has its own criteria, fees and rental cover rules. Your mortgage adviser is best placed to advise on the most suitable one for your requirements.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Your mortgage</h3>
+        <div class="rows">
+          <div class="row"><span>Mortgage amount</span><b id="loanOut">£0</b></div>
+          <div class="row"><span>Loan to value</span><b id="ltv">0%</b></div>
+          <div class="row"><span>Total interest over the term</span><b id="interest">£0</b></div>
+          <div class="row" id="ioRow"><span>Mortgage to repay at the end of the term</span><b id="ioEnd">£0</b></div>
+          <div class="row total"><span>Total repayable</span><b id="total">£0</b></div>
+        </div>
+      </div>
+
+      <div class="panel" id="sdltPanel">
+        <h3>Deposit needed</h3>
+        <div class="rows">
+          <div class="row total"><span>Deposit</span><b id="dep2">£0</b></div>
+        </div>
+        <p class="note">Stamp duty, solicitor, valuation, lender and broker fees are extra. Stamp duty for non-UK residents depends on whether you buy as an individual or a company and whether you already own property, so your adviser will confirm it.</p>
+      </div>
+
+      <div class="panel">
+        <h3>If rates change</h3>
+        <table class="stress">
+          <thead><tr><th>Interest rate</th><th>Monthly payment</th></tr></thead>
+          <tbody id="stressBody"></tbody>
+        </table>
+      </div>
+
+      <div class="cta-box">
+        <h3>Want to know what you can actually get?</h3>
+        <p>Rates range from lender to lender. Send us these figures and a specialist adviser will recommend the most suitable lender for your requirements, check which lenders accept your country, income and currency, and can arrange a Decision in Principle, usually within 24 to 48 hours.</p>
+        <a class="btn gold" href="#contact">Send my figures to an adviser</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <h2>How expat lenders look at your mortgage</h2>
+    <p class="intro">The calculator gives a guide. Lenders then apply their own rules, which is why the right lender matters so much for expats.</p>
+    <div class="cards">
+      <div class="card"><h3>Loan to value</h3><p>Expat lenders cap borrowing at 75% of the property value, so you will need a deposit, or equity if remortgaging, of at least 25%. The best rates are often found at 60% to 65%.</p></div>
+      <div class="card"><h3>Rental cover</h3><p>For buy-to-let, lenders test that the rent covers the interest at a stress rate. Individual buyers usually need 145% cover and limited company (SPV) buyers 125%. The mortgage is the lower of this rent-based figure and 75% of the value, so the rent often sets the limit.</p></div>
+      <div class="card"><h3>Term and fixed rate period</h3><p>The term is the total length of the mortgage, from 2 years up to 25 years. The fixed rate period, usually 2 or 5 years, is how long your interest rate is set for. When it ends, the mortgage moves to the lender's variable rate unless you choose another fixed rate, and we can help you arrange that.</p></div>
+      <div class="card"><h3>Interest only or repayment</h3><p>Interest only is the most popular choice for buy-to-let and investment property, keeping monthly costs down and helping the rent cover the mortgage. The loan is repaid at the end of the term, so you need a repayment plan. Repayment mortgages clear the loan over the term.</p></div>
+      <div class="card"><h3>Foreign currency income</h3><p>Income in AED, SAR, USD, HKD and other currencies is widely accepted, though some lenders reduce it by 10% to 25% to allow for exchange rate movements.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-box">
+    <div>
+      <h2>Speak to a UK expat mortgage adviser</h2>
+      <p class="intro" style="margin-bottom:20px">Your calculator figures are added to the form automatically, so we can come back to you with lenders that fit. The consultation is free and there is no obligation.</p>
+      <p><strong>Email:</strong> <a href="mailto:john.florey@opesfp.com">john.florey@opesfp.com</a></p>
+      <p style="margin-top:18px"><a href="/">Back to UK Expat Mortgages</a></p>
+    </div>
+    <form id="enquiry" action="https://formsubmit.co/john.florey@opesfp.com" method="POST">
+      <input type="hidden" name="_subject" value="New calculator enquiry from UK Expat Mortgages website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Thank you for contacting UK Expat Mortgages. We have received your enquiry and your calculator figures, and one of our specialist UK mortgage advisers will be in touch with you shortly. Kind regards, John Florey, UK Expat Mortgages">
+      <input type="hidden" name="_next" value="https://www.uk-expat-mortgage.co.uk/thank-you/">
+      <input type="hidden" name="calculator_figures" id="calcFigures">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <label>Name<input name="name" required autocomplete="name"></label>
+      <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      <label>Phone or WhatsApp<input name="phone" autocomplete="tel"></label>
+      <label>Country you live in<input name="country" autocomplete="country-name" placeholder="e.g. United Arab Emirates"></label>
+      <label>Anything else we should know?<textarea name="message" placeholder="e.g. I am paid in AED, employed, and looking to buy a flat in Manchester to let"></textarea></label>
+      <div><p style="font-size:14px;font-weight:600;margin-bottom:6px">Figures we will receive</p><div class="summary" id="summary"></div></div>
+      <p style="font-size:13px;color:var(--ink-soft)">By sending this form you agree to be contacted about your enquiry.</p>
+      <button class="btn" type="submit">Send enquiry</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="repo">YOUR HOME OR PROPERTY MAY BE REPOSSESSED IF YOU DO NOT KEEP UP REPAYMENTS ON A MORTGAGE OR ANY OTHER DEBT SECURED ON IT.</p>
+    <p>The property value and rental income used are subject to the lender's own valuation of the property. If the valuation is lower than the figure entered, the amount the lender will offer may be lower. This calculator is for standard residential property in the UK only. It does not apply to commercial or semi-commercial property, houses in multiple occupation (HMOs), auction purchases or other specialist property. This calculator is an indicative guide only. It is not a quote and does not constitute advice or an offer of lending. Results are estimates based on the figures you enter and simplified assumptions. The actual amount you can borrow, your interest rate and your repayments will depend on the lender, your circumstances and a full assessment. Stamp duty and other purchase costs are not included.</p>
+    <p><strong>UK Expat Mortgages</strong> is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710. Registered address: Sterling House, 27 Hatchlands Road, Redhill, Surrey RH1 6RW.</p>
+    <p>The Financial Conduct Authority does not regulate some aspects of buy to let mortgages, overseas mortgages and tax advice.</p>
+    <p>A typical fee of up to 1% of the mortgage amount may be payable on successful completion. The fee will be agreed with each applicant prior to submitting an application. The total fee is non-refundable. We may also be paid commission from the lender.</p>
+    <p>All mortgages are subject to status, the lender's criteria and a valuation of the property. Rates, criteria and availability can change at any time. Where income is paid in a foreign currency, changes in exchange rates may affect the amount you need to repay in sterling.</p>
+    <p>If you have a complaint, please contact us in the first instance. If we cannot resolve it, you may be entitled to refer it to the Financial Ombudsman Service (www.financial-ombudsman.org.uk).</p>
+    <p>Privacy: information you submit through this website is used only to respond to your enquiry and to provide mortgage advice, and is not sold or shared for marketing purposes.</p>
+    <p>&copy; <span id="yr">2026</span> UK Expat Mortgages. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var gbp=function(n,dp){return '£'+Number(n).toLocaleString('en-GB',{minimumFractionDigits:dp||0,maximumFractionDigits:dp||0})};
+  var num=function(el){var v=parseFloat(String(el.value).replace(/[^0-9.]/g,''));return isFinite(v)?v:0};
+  var radio=function(n){return document.querySelector('input[name="'+n+'"]:checked').value};
+  var fmt=function(el){var v=num(el);el.value=v?v.toLocaleString('en-GB'):'0';};
+
+  // Published expat fixed rates up to 75% LTV (lowest rate per lender, standard loan sizes).
+  // Checked 29 September 2026. Lender names deliberately not shown.
+  var RATES={
+    updated:'29 September 2026',
+    res:{'2':{low:5.51,avg:5.61,high:5.70},'5':{low:5.80,avg:5.85,high:5.89}},
+    btlInd:{'2':{low:5.51,avg:6.00,high:6.40},'5':{low:5.59,avg:6.06,high:6.54}},
+    btlCo:{'2':{low:5.51,avg:6.08,high:6.64},'5':{low:5.69,avg:6.11,high:6.74}}
+  };
+  var ICR={ind:1.45,co:1.25};
+  // Fallback exchange rates (1 GBP =), 29 September 2026. Live rates are fetched when available.
+  var FX={date:'29 September 2026',live:false,r:{AED:4.8684,SAR:4.9711,QAR:4.8253,BHD:0.4984,KWD:0.4085,OMR:0.5097,USD:1.3254,CAD:1.8777,EUR:1.1655,HKD:10.3993,SGD:1.6937,MYR:5.4142,CNY:8.9012,INR:127.22,ZAR:21.7554}};
+  var fxTyped=false,fxTried=false;
+  function fxDp(c){return FX.r[c]>=20?2:4;}
+  function fillFx(){
+    var c=$('ccy').value;
+    if(!c){$('fx').value='';calc();return;}
+    if(!fxTyped){$('fx').value=FX.r[c].toFixed(fxDp(c));}
+    $('fxHint').textContent='Indicative rate: 1 GBP = '+FX.r[c].toFixed(fxDp(c))+' '+c+(FX.live?', updated '+FX.date:', as at '+FX.date)+'. You can change it. Exchange rates move, so the amount in your currency will change.';
+    calc();
+  }
+  function loadLiveFx(){
+    if(fxTried)return;fxTried=true;
+    try{
+      fetch('https://open.er-api.com/v6/latest/GBP').then(function(r){return r.json();}).then(function(d){
+        if(d&&d.result==='success'&&d.rates){
+          Object.keys(FX.r).forEach(function(k){if(d.rates[k])FX.r[k]=d.rates[k];});
+          FX.live=true;
+          var t=new Date(d.time_last_update_unix*1000);
+          FX.date=t.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+          fillFx();
+        }
+      }).catch(function(){});
+    }catch(e){}
+  }
+  $('ccy').addEventListener('change',function(){fxTyped=false;fillFx();loadLiveFx();});
+  $('fx').addEventListener('input',function(){fxTyped=true;});
+  var MAX_LTV=0.75;
+  var S={maxMort:0,loanTouched:false,stressEdited:false};
+  $('stressRate').addEventListener('input',function(){S.stressEdited=true;});
+
+  ['value','balance','rent','loan'].forEach(function(id){$(id).addEventListener('blur',function(){fmt($(id));});});
+  $('rate').addEventListener('input',function(){$('rateChoice').value='own';});
+  $('loan').addEventListener('input',function(){S.loanTouched=true;});
+
+  function payment(P,annual,years,io){
+    if(P<=0)return 0;
+    var r=annual/100/12;
+    if(io)return P*r;
+    var n=years*12;
+    if(r===0)return P/n;
+    return P*r/(1-Math.pow(1+r,-n));
+  }
+
+  // ---------- STAGE 1: how much mortgage can I get? ----------
+  function stage1(){
+    var goal=radio('goal'),buying=goal!=='remo',btl=goal!=='home',owner=radio('owner');
+    var value=num($('value'));
+    $('valueLabel').textContent=buying?'Purchase price':'Current property value';
+    $('ownerLabel').textContent=buying?'Buying as':'Property owned by';
+    $('balanceField').classList.toggle('hidden',buying);
+    $('btlGroup').classList.toggle('hidden',!btl);
+    $('rentRow').classList.toggle('hidden',!btl);
+    $('resNote').classList.toggle('hidden',btl);
+    $('minDepRow').classList.toggle('hidden',!buying);
+    $('raiseRow').classList.toggle('hidden',buying);
+
+    var ltvMax=Math.floor(value*MAX_LTV);
+    var maxMort=ltvMax,limit='Limited by the 75% maximum loan to value';
+    $('ltvMax').textContent=gbp(ltvMax);
+    $('icrHint').textContent=owner==='co'
+      ?'Limited company purchases: the rent must cover the stressed interest by 125%.'
+      :'Individual purchases: the rent must cover the stressed interest by 145%.';
+
+    if(btl){
+      var stressDefault=RATES[owner==='co'?'btlCo':'btlInd']['5'].avg;
+      if(!S.stressEdited&&document.activeElement!==$('stressRate')){$('stressRate').value=stressDefault.toFixed(2);}
+      $('stressHint').textContent='Lenders test the rent at the 5 year fixed rate. This uses the average expat '+(owner==='co'?'limited company':'individual')+' buy-to-let 5 year fixed rate of '+stressDefault.toFixed(2)+'%. You can change it, and your adviser will confirm the rate for your lender.';
+      var rent=num($('rent')),stress=num($('stressRate')),icr=ICR[owner];
+      var rentMax=stress>0?Math.floor(rent*12/(stress/100)/icr):0;
+      $('rentMax').textContent=gbp(rentMax);
+      $('rentCalc').textContent='Based on rent at '+Math.round(icr*100)+'% cover';
+      $('formula').textContent='Rent calculation: ('+gbp(rent)+' x 12 / '+stress.toFixed(2)+'%) / '+icr.toFixed(2)+' = '+gbp(rentMax);
+      $('formula').classList.remove('hidden');
+      if(rentMax<ltvMax){maxMort=rentMax;limit='Limited by the rent, at '+Math.round(icr*100)+'% cover';}
+    } else {
+      $('formula').classList.add('hidden');
+    }
+    S.maxMort=maxMort;
+    $('maxMort').textContent=gbp(maxMort);
+    $('maxMort2').textContent=gbp(maxMort);
+    var mltv=value>0?maxMort/value*100:0;
+    $('maxLtv').textContent=mltv.toFixed(1)+'% loan to value';
+    $('maxLtv2').textContent=mltv.toFixed(1)+'%';
+    $('maxLimit').textContent=limit;
+    $('maxLabel').textContent=buying?'Maximum mortgage you could get':'Maximum remortgage you could get';
+    $('minDep').textContent=gbp(Math.max(value-maxMort,0));
+    var bal=num($('balance')),raise=maxMort-bal;
+    $('raise').textContent=raise>=0?gbp(raise):'None, balance is above the maximum';
+    if(!S.loanTouched){$('loan').value=(buying?maxMort:Math.min(Math.max(bal,0),maxMort)||maxMort).toLocaleString('en-GB');}
+  }
+
+  // ---------- STAGE 2: what will it cost? ----------
+  function fxText(amount){
+    var c=$('ccy').value,rate=num($('fx'));
+    if(!c||!rate)return '';
+    return 'About '+c+' '+Math.round(amount*rate).toLocaleString('en-GB')+' a month';
+  }
+
+  function stage2(){
+    var goal=radio('goal'),buying=goal!=='remo',btl=goal!=='home',owner=radio('owner');
+    var fix=radio('fix'),value=num($('value'));
+    var cat=!btl?'res':(owner==='co'?'btlCo':'btlInd');
+    var band=RATES[cat][fix],choice=$('rateChoice').value;
+    if(choice!=='own'&&document.activeElement!==$('rate')){$('rate').value=band[choice].toFixed(2);}
+    var catName=cat==='res'?'residential':(cat==='btlCo'?'limited company buy-to-let':'individual buy-to-let');
+    $('rateHint').textContent='Expat '+catName+' '+fix+' year fixed rates up to 75% LTV currently range from '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, average '+band.avg.toFixed(2)+'%. Based on published rates from specialist expat lenders, checked '+RATES.updated+'. Rates vary by lender, and your mortgage adviser is best placed to advise on the most suitable one for your requirements.';
+    $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+RATES.updated+'.';
+    $('rLow').textContent=band.low.toFixed(2)+'%';$('rAvg').textContent=band.avg.toFixed(2)+'%';$('rHigh').textContent=band.high.toFixed(2)+'%';
+
+    var term=+$('term').value,rate=num($('rate')),io=$('rtype').value==='io';
+    $('termOut').textContent=term+' years';
+    $('rtypeHint').textContent=btl
+      ?'Interest only is the most popular choice for buy-to-let and investment property. You pay just the interest each month and repay the mortgage at the end of the term, usually from the sale or refinance of the property.'
+      :'With repayment you pay off the mortgage and interest over the term. With interest only you pay just the interest and need a plan to repay the mortgage at the end.';
+    $('sdltPanel').classList.toggle('hidden',!buying);
+    $('fxLabel').textContent=$('ccy').value?'1 GBP equals ('+$('ccy').value+')':'1 GBP equals';
+
+    var loan=num($('loan'));
+    $('loanNote').textContent='(stage 1 maximum '+gbp(S.maxMort)+')';
+    $('loanWarn').textContent=loan>S.maxMort?'This is above your stage 1 maximum of '+gbp(S.maxMort)+'.':'';
+    $('loanWarn').style.color=loan>S.maxMort?'var(--bad)':'';
+    var ltv=value>0?loan/value*100:0;
+
+    var pay=payment(loan,rate,term,io),other=payment(loan,rate,term,!io);
+    $('pay').textContent=gbp(pay);
+    $('payLabel').textContent='Estimated monthly payment, '+(io?'interest only':'repayment');
+    $('payFx').textContent=fxText(pay);
+    var c=$('ccy').value,xr=num($('fx')),on=!!(c&&xr);
+    var cf=function(n){return c+' '+Math.round(n*xr).toLocaleString('en-GB');};
+    $('fxPanel').classList.toggle('hidden',!on);
+    $('fxInline').classList.toggle('hidden',!on);
+    if(on){
+      $('fxTitle').textContent='In '+c;
+      $('fxSub').textContent='Converted at 1 GBP = '+xr+' '+c+'.';
+      $('fxPay').textContent=cf(pay)+' a month';
+      $('fxLoan').textContent=cf(loan);
+      $('fxDepRow').classList.toggle('hidden',!buying);
+      $('fxDep').textContent=cf(Math.max(value-loan,0));
+      $('fxRentRow').classList.toggle('hidden',!btl);
+      $('fxRent').textContent=cf(num($('rent')))+' a month';
+      $('fxInline').innerHTML='Your monthly payment of <b>'+gbp(pay)+'</b> is about <b>'+cf(pay)+'</b>.';
+    }
+    $('payAlt').textContent=loan>0?(io?'On a repayment basis it would be '+gbp(other)+' a month':'On an interest only basis it would be '+gbp(other)+' a month'):'';
+    $('loanOut').textContent=gbp(loan);
+    $('ltv').textContent=ltv.toFixed(1)+'%';
+    $('payLtv').textContent='On a '+gbp(loan)+' mortgage at '+ltv.toFixed(1)+'% loan to value';
+    var totalPaid=io?pay*term*12+loan:pay*term*12;
+    $('interest').textContent=gbp(Math.max(totalPaid-loan,0));
+    $('total').textContent=gbp(totalPaid);
+    $('ioRow').classList.toggle('hidden',!io);
+    $('ioEnd').textContent=gbp(loan);
+
+    var deposit=Math.max(value-loan,0),sdSummary='';
+    if(buying){$('dep2').textContent=gbp(deposit);}
+
+    var rows='';
+    [-1,0,1,2].forEach(function(d){
+      var r2=rate+d;if(r2<0)return;
+      rows+='<tr'+(d===0?' style="font-weight:600"':'')+'><td>'+r2.toFixed(2)+'%'+(d===0?' (your indicative rate)':'')+'</td><td>'+gbp(payment(loan,r2,term,io))+'</td></tr>';
+    });
+    $('stressBody').innerHTML=rows;
+
+    var rentLine=btl?'Monthly rent: '+gbp(num($('rent')))+', '+(buying?'buying as ':'owned by ')+(owner==='co'?'limited company (125% cover)':'individual (145% cover)')+', stress rate '+num($('stressRate')).toFixed(2)+'%\n':'';
+    var s='Indicative calculator figures (not a quote, standard UK residential property, subject to lender valuation)\n'+
+      'Looking to: '+(goal==='btl'?'Buy-to-let investment':goal==='remo'?'Remortgage (buy-to-let)':'Buy own home')+'\n'+
+      (buying?'Purchase price: ':'Property value: ')+gbp(value)+'\n'+
+      (buying?'':'Current balance: '+gbp(num($('balance')))+'\n')+
+      rentLine+
+      'Stage 1 maximum mortgage: '+gbp(S.maxMort)+' at '+(value>0?(S.maxMort/value*100).toFixed(1):'0')+'% LTV ('+$('maxLimit').textContent.toLowerCase()+')\n'+
+      'Mortgage amount used: '+gbp(loan)+' ('+ltv.toFixed(1)+'% LTV)'+(buying?', deposit '+gbp(deposit):'')+'\n'+
+      'Term: '+term+' years, '+(io?'interest only':'repayment')+', '+fix+' year fixed at '+rate.toFixed(2)+'% ('+(choice==='own'?'own rate':choice==='avg'?'average rate':choice+'est rate')+')\n'+
+      'Monthly payment (est.): '+gbp(pay)+($('payFx').textContent?' ('+$('payFx').textContent.replace('About ','')+')':'')+'\n'+
+      sdSummary;
+    $('summary').textContent=s.trim();
+    $('calcFigures').value=s.trim();
+  }
+
+  function calc(){stage1();stage2();}
+
+  function show(n){
+    $('stage1').classList.toggle('hidden',n!==1);
+    $('stage2').classList.toggle('hidden',n!==2);
+    $('st1tab').classList.toggle('on',n===1);
+    $('st2tab').classList.toggle('on',n===2);
+    $('st1tab').classList.toggle('done',n===2);
+    document.querySelector('.stages').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  $('toStage2').addEventListener('click',function(){S.loanTouched=false;calc();show(2);});
+  $('backTo1').addEventListener('click',function(){show(1);});
+  $('st1tab').addEventListener('click',function(){show(1);});
+  $('st2tab').addEventListener('click',function(){calc();show(2);});
+
+  $('inputs1').addEventListener('input',function(){S.loanTouched=false;});
+  $('inputs1').addEventListener('change',function(){S.loanTouched=false;});
+  ['inputs1','inputs2'].forEach(function(id){
+    $(id).addEventListener('input',calc);
+    $(id).addEventListener('change',calc);
+  });
+  document.querySelectorAll('input[name="goal"]').forEach(function(r){
+    r.addEventListener('change',function(){$('rtype').value=radio('goal')==='home'?'cai':'io';calc();});
+  });
+  calc();
+
+  var f=$('enquiry');
+  f.addEventListener('submit',function(){calc();var b=f.querySelector('button[type=submit]');if(b){b.textContent='Sending...';b.style.opacity='.7';}});
+})();
+</script>
+</body>
+</html>
