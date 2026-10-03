@@ -157,6 +157,10 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(14,59,83,.25);bor
 .bar i{display:block;height:100%}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-soft)}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
+.getbox{margin-top:16px;background:#fbf1de;border:1.5px solid var(--accent);border-radius:10px;padding:14px 18px}
+.gethead{font-family:Fraunces,Georgia,serif;font-size:18px;font-weight:600;color:var(--brand);margin-bottom:2px}
+.getbox .row{border-bottom-color:#ecdcb8}
+.getline{font-size:15px;color:var(--ink);margin-top:8px}
 .fxinline{margin-top:12px;background:var(--tint);border-radius:8px;padding:12px 14px;font-size:15px;color:var(--ink)}
 .cta-box{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
 .cta-box p{font-size:15px;color:var(--ink-soft);margin:6px 0 14px}
@@ -372,8 +376,19 @@ footer strong{color:#fff}
           <div class="row" id="brokerRow"><span>Mortgage broker fee</span><b id="brokerOut">£0</b></div>
           <div class="row total"><span>Estimated budget to plan for</span><b id="totalOut">£0</b></div>
         </div>
+        <div class="getbox">
+          <p class="gethead">What your money buys</p>
+          <div class="rows">
+            <div class="row"><span>Property price</span><b id="getPrice">£0</b></div>
+            <div class="row" id="getLoanRow"><span>Less your mortgage</span><b id="loanOut">£0</b></div>
+            <div class="row"><span id="getDepLbl">Your deposit</span><b id="getDep">£0</b></div>
+            <div class="row"><span>Plus stamp duty and fees</span><b id="getExtra">£0</b></div>
+            <div class="row total"><span>Your estimated budget</span><b id="getBudget">£0</b></div>
+          </div>
+          <p class="getline" id="getLine"></p>
+        </div>
         <div class="fxinline hidden" id="fxInline"></div>
-        <p class="note">These are general estimates to help you plan, not definitive figures. Plus your mortgage of <b id="loanOut">£0</b>, which makes up the rest of the price. Also allow for a building survey if you want one, furnishing and letting costs for a buy-to-let, and exchange rate costs when you send money to the UK.</p>
+        <p class="note">These are general estimates to help you plan, not definitive figures. Also allow for a building survey if you want one, furnishing and letting costs for a buy-to-let, and exchange rate costs when you send money to the UK.</p>
       </div>
 
       <div class="cta-box">
@@ -652,7 +667,15 @@ function sdltCalc(price,o){
     $('lenderOut').textContent=gbp(lender);
     $('brokerOut').textContent=gbp(broker);
     $('totalOut').textContent=gbp(total);
-    $('loanOut').textContent=gbp(loan);
+    $('loanOut').textContent='-'+gbp(loan);
+    $('getBudget').textContent=gbp(total);
+    $('getPrice').textContent=gbp(price);
+    $('getLoanRow').classList.toggle('hidden',!hasLoan);
+    var extra=total-deposit;
+    $('getDep').textContent=gbp(deposit);
+    $('getDepLbl').textContent=hasLoan?'Your deposit':'Paid in cash';
+    $('getExtra').textContent=gbp(extra);
+    $('getLine').innerHTML=price>0?'You spend about <b>'+gbp(total)+'</b> of your own money to buy a property worth <b>'+gbp(price)+'</b>. Of your budget, <b>'+gbp(deposit)+'</b> is '+(hasLoan?'the deposit':'the purchase price')+' and <b>'+gbp(extra)+'</b> is stamp duty and fees ('+(extra/price*100).toFixed(1)+'% of the price).':'';
 
     var parts=[['Deposit',deposit,'#0e3b53'],['Stamp duty',r.total,'#c89b3c'],['Legal and searches',legal+vat+disb,'#6f8fa3'],['Lender, valuation and broker',val+lender+broker,'#b8c7d1']];
     $('bar').innerHTML=total>0?parts.map(function(p){return p[1]>0?'<i style="width:'+(p[1]/total*100)+'%;background:'+p[2]+'"></i>':'';}).join(''):'';
@@ -663,7 +686,7 @@ function sdltCalc(price,o){
     $('fxLabel').textContent=c?'1 GBP equals ('+c+')':'1 GBP equals';
     $('sdltFx').textContent=on?'About '+money(c,xr,r.total):'';
     $('fxInline').classList.toggle('hidden',!on);
-    if(on)$('fxInline').innerHTML='Your estimated budget of <b>'+gbp(total)+'</b> is about <b>'+money(c,xr,total)+'</b>, of which stamp duty is about <b>'+money(c,xr,r.total)+'</b>.';
+    if(on)$('fxInline').innerHTML='Your estimated budget of <b>'+gbp(total)+'</b> is about <b>'+money(c,xr,total)+'</b>, for a property worth about <b>'+money(c,xr,price)+'</b>. Stamp duty is about <b>'+money(c,xr,r.total)+'</b>.';
 
     // Enquiry summary
     var who=company?'Limited company'+(nonRes?', owned from outside the UK':', UK resident and controlled')+(relief?', letting as a rental business':', not a rental business')
@@ -675,7 +698,7 @@ function sdltCalc(price,o){
       'Mortgage: '+gbp(loan)+', deposit '+gbp(deposit)+'\n'+
       'Legal fee: '+gbp(legal+vat)+(vat?' incl. VAT':'')+', searches and other: '+gbp(disb)+'\n'+
       (hasLoan?'Valuation: '+gbp(val)+', lender fee: '+gbp(lender)+', broker fee: '+gbp(broker)+'\n':'')+
-      'Estimated budget to plan for: '+gbp(total)+(on?' (about '+money(c,xr,total)+')':'');
+      'Estimated budget to plan for: '+gbp(total)+(on?' (about '+money(c,xr,total)+')':'')+', for a property worth '+gbp(price);
     $('summary').textContent=s;
     $('calcFigures').value=s;
   }
