@@ -410,7 +410,7 @@ footer strong{color:#fff}
         <h3>Rates vary by lender</h3>
         <p class="sub" id="rangeCat" style="margin-bottom:10px"></p>
         <div class="rangerow"><div><span>Lowest</span><b id="rLow"></b></div><div><span>Average</span><b id="rAvg"></b></div><div><span>Highest</span><b id="rHigh"></b></div></div>
-        <p class="note">There is a range of rates depending on the lender, and each lender has its own criteria, fees and rental cover rules. Your mortgage adviser is best placed to advise on the most suitable one for your requirements.</p>
+        <p class="note"><strong>Rates are updated on a monthly basis.</strong> There is a range of rates depending on the lender, and each lender has its own criteria, fees and rental cover rules. Your mortgage adviser is best placed to advise on the most suitable one for your requirements.</p>
       </div>
 
       <div class="panel">
@@ -634,8 +634,8 @@ footer strong{color:#fff}
     var band=RATES[cat][fix],choice=$('rateChoice').value;
     if(choice!=='own'&&document.activeElement!==$('rate')){$('rate').value=band[choice].toFixed(2);}
     var catName=cat==='res'?'residential':(cat==='btlCo'?'limited company buy-to-let':'individual buy-to-let');
-    $('rateHint').textContent='Expat '+catName+' '+fix+' year fixed rates up to 75% LTV currently range from '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, average '+band.avg.toFixed(2)+'%. Based on published rates from specialist expat lenders, checked '+RATES.updated+'. Rates vary by lender, and your mortgage adviser is best placed to advise on the most suitable one for your requirements.';
-    $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+RATES.updated+'.';
+    $('rateHint').textContent='Expat '+catName+' '+fix+' year fixed rates up to 75% LTV currently range from '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, average '+band.avg.toFixed(2)+'%. Based on published rates from specialist expat lenders, checked '+RATES.updated+'. Rates are updated on a monthly basis. Rates vary by lender, and your mortgage adviser is best placed to advise on the most suitable one for your requirements.';
+    $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+RATES.updated+'. Updated monthly.';
     $('rLow').textContent=band.low.toFixed(2)+'%';$('rAvg').textContent=band.avg.toFixed(2)+'%';$('rHigh').textContent=band.high.toFixed(2)+'%';
 
     var term=+$('term').value,rate=num($('rate')),io=$('rtype').value==='io';
