@@ -308,10 +308,10 @@ footer strong{color:#fff}
 
       <div class="group">
         <p class="glabel">Buying costs <small style="text-transform:none;letter-spacing:0;color:var(--ink-soft);font-weight:400">(typical figures, change any of them)</small></p>
-        <div class="feeline"><div class="lbl">Solicitor's legal fee<small>Conveyancing for the purchase. Typically £1,500 to £2,500. More for leasehold, new build or company purchases.</small></div><div class="money"><input id="legal" inputmode="numeric" value="1,750" aria-label="Solicitor legal fee"></div></div>
-        <div class="feeline"><div class="lbl">VAT on legal fee (20%)<small><label class="check" style="font-size:13px;margin-top:4px"><input type="checkbox" id="vat" checked> Add VAT</label></small></div><div style="text-align:right;font-weight:600" id="vatOut">£350</div></div>
-        <div class="feeline"><div class="lbl">Searches, Land Registry and other costs<small>Local authority and other searches, Land Registry fee, ID checks and bank transfer fees.</small></div><div class="money"><input id="disb" inputmode="numeric" value="500" aria-label="Searches and disbursements"></div></div>
-        <div class="feeline" id="valLine"><div class="lbl">Valuation fee<small>Paid to the lender for its valuation. Set from the price, and some lenders include it free.</small></div><div class="money"><input id="valfee" inputmode="numeric" value="600" aria-label="Valuation fee"></div></div>
+        <div class="feeline"><div class="lbl">Solicitor's legal fee<small>Conveyancing for the purchase. From £1,250, more for leasehold, new build or company purchases.</small></div><div class="money"><input id="legal" inputmode="numeric" value="1,250" aria-label="Solicitor legal fee"></div></div>
+        <div class="feeline"><div class="lbl">VAT on legal fee (20%)<small><label class="check" style="font-size:13px;margin-top:4px"><input type="checkbox" id="vat" checked> Add VAT</label></small></div><div style="text-align:right;font-weight:600" id="vatOut">£250</div></div>
+        <div class="feeline"><div class="lbl">Searches, Land Registry and other costs<small>Searches from £300, plus the Land Registry fee, ID checks and bank transfer fees.</small></div><div class="money"><input id="disb" inputmode="numeric" value="300" aria-label="Searches and disbursements"></div></div>
+        <div class="feeline" id="valLine"><div class="lbl">Valuation fee<small>Paid to the lender for its valuation. From £350, rising with the price. Some lenders include it free.</small></div><div class="money"><input id="valfee" inputmode="numeric" value="350" aria-label="Valuation fee"></div></div>
         <div class="feeline" id="lenderLine"><div class="lbl">Lender arrangement fee<small>Usually £999 to £4,999, or a percentage of the loan. It can often be added to the mortgage instead.</small></div><div class="money"><input id="lenderfee" inputmode="numeric" value="1,999" aria-label="Lender arrangement fee"></div></div>
         <div class="feeline" id="brokerLine"><div class="lbl">Mortgage broker fee<small>Up to 1% of the mortgage amount, agreed with you before we apply. <span id="brokerAmt"></span></small></div><div class="pct"><input id="brokerPct" inputmode="decimal" value="1.00" aria-label="Broker fee percentage"></div></div>
       </div>
@@ -520,7 +520,7 @@ function sdltCalc(price,o){
 
   // Typical lender valuation fee by price. Editable on the page.
   function valuationFee(p){
-    if(p<=250000)return 450;
+    if(p<=250000)return 350;
     if(p<=500000)return 600;
     if(p<=750000)return 800;
     if(p<=1000000)return 1000;
