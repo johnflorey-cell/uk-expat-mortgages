@@ -43,9 +43,10 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {"@type":"Question","name":"Who calculates my stamp duty?","acceptedAnswer":{"@type":"Answer","text":"Your solicitor (conveyancer) calculates your stamp duty, not your mortgage broker. They work out the final figure based on your circumstances, file the stamp duty return and pay HMRC on your behalf within 14 days of completion. This calculator gives an indicative figure to help you budget."}},
     {"@type":"Question","name":"Do expats and non-UK residents pay more stamp duty?","acceptedAnswer":{"@type":"Answer","text":"Yes. Buyers who are not UK resident pay a 2% surcharge on top of the normal stamp duty rates when buying residential property in England or Northern Ireland. For SDLT you are non-UK resident if you were not in the UK for at least 183 days in the 12 months before you buy."}},
     {"@type":"Question","name":"What is the stamp duty surcharge on a buy-to-let or second home?","acceptedAnswer":{"@type":"Answer","text":"If you will own more than one residential property anywhere in the world after the purchase, and you are not replacing your main home, a 5% surcharge applies on top of the normal rates. For a non-UK resident this means 7% more than the standard rates on each band."}},
-    {"@type":"Question","name":"How much stamp duty does a limited company pay?","acceptedAnswer":{"@type":"Answer","text":"Companies buying residential property always pay the 5% additional property surcharge, plus 2% if the company is non-UK resident or controlled by non-UK residents. A 17% flat rate (19% for non-residents) can apply to properties over £500,000 unless a relief applies, such as the property being let to unconnected tenants as part of a rental business."}},
+    {"@type":"Question","name":"How much stamp duty does a limited company pay?","acceptedAnswer":{"@type":"Answer","text":"Buying through a company carries a surcharge. Companies buying residential property always pay the 5% additional property surcharge, plus 2% if the company is non-UK resident or controlled by non-UK residents. A 17% flat rate (19% for non-residents) can apply to properties over £500,000 unless a relief applies, such as the property being let to unconnected tenants as part of a rental business."}},
     {"@type":"Question","name":"Can expats get first-time buyer relief?","acceptedAnswer":{"@type":"Answer","text":"Possibly. First-time buyer relief applies if you, and anyone buying with you, have never owned a home anywhere in the world, you will live in the property as your main home and the price is £500,000 or less. Non-UK residents still pay the 2% surcharge on top. It does not apply to buy-to-let or company purchases."}},
     {"@type":"Question","name":"What other costs are there when buying a UK property?","acceptedAnswer":{"@type":"Answer","text":"As well as the deposit and stamp duty, allow for solicitor (conveyancing) fees plus VAT, searches and Land Registry fees, the lender's valuation and arrangement fees, and the mortgage broker fee. This calculator adds them up to give an estimate of the total cash you need."}}
   ]
@@ -221,8 +222,8 @@ footer strong{color:#fff}
     <p class="crumb"><a href="/">Home</a> / Stamp duty calculator</p>
     <p class="eyebrow">Stamp duty and buying costs for expats</p>
     <h1>UK stamp duty calculator for expats and non-UK residents</h1>
-    <p class="lead">Work out the Stamp Duty Land Tax (SDLT) on your UK purchase, including the 2% non-resident surcharge, the 5% surcharge on additional properties and the rules for buying through a limited company. Then see the total cash you need: deposit, stamp duty, legal fees, valuation and broker fees.</p>
-    <p class="guide"><strong>England and Northern Ireland only.</strong> Scotland (LBTT) and Wales (LTT) have their own taxes and rates. <a href="#contact">Ask an adviser</a> if you are buying there.<br><strong>Indicative guide only.</strong> Stamp duty depends on your exact circumstances. Your solicitor confirms the final figure before completion. You can check it on the <a href="https://www.tax.service.gov.uk/calculate-stamp-duty-land-tax/" target="_blank" rel="noopener">HMRC stamp duty calculator</a>.</p>
+    <p class="lead">Work out the Stamp Duty Land Tax (SDLT) on your UK purchase, including the 2% non-resident surcharge, the 5% surcharge on additional properties and the surcharge for buying through a limited company. Then see the total cash you need: deposit, stamp duty, legal fees, valuation and broker fees.</p>
+    <p class="guide"><strong>A general guide only, not a definitive figure.</strong> The results are estimates to help you budget and must not be relied on as the amount you will pay.<br><strong>England and Northern Ireland only.</strong> Scotland (LBTT) and Wales (LTT) have their own taxes and rates. <a href="#contact">Ask an adviser</a> if you are buying there.<br><strong>Your solicitor calculates your stamp duty, not your mortgage broker.</strong> Stamp duty depends on your exact circumstances, and your solicitor (conveyancer) works out the final figure and pays it to HMRC for you. You can also check it on the <a href="https://www.tax.service.gov.uk/calculate-stamp-duty-land-tax/" target="_blank" rel="noopener">HMRC stamp duty calculator</a>.</p>
   </div>
 </section>
 
@@ -336,11 +337,12 @@ footer strong{color:#fff}
 
     <div class="results" aria-live="polite">
       <div class="hero-num">
-        <div class="k">Stamp duty to pay</div>
+        <div class="k">Estimated stamp duty</div>
         <div class="v" id="sdltOut">£0</div>
         <div class="tag" id="effOut"></div>
         <div class="fx" id="sdltFx"></div>
         <div class="alt" id="ruleOut"></div>
+        <div class="alt" style="margin-top:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px">General guide only, not a definitive figure. Your solicitor calculates the final stamp duty, not your mortgage broker.</div>
       </div>
 
       <div class="panel">
@@ -370,12 +372,12 @@ footer strong{color:#fff}
           <div class="row total"><span>Estimated total budget</span><b id="totalOut">£0</b></div>
         </div>
         <div class="fxinline hidden" id="fxInline"></div>
-        <p class="note">Plus your mortgage of <b id="loanOut">£0</b>, which makes up the rest of the price. Also allow for a building survey if you want one, furnishing and letting costs for a buy-to-let, and exchange rate costs when you send money to the UK.</p>
+        <p class="note">These are general estimates, not definitive figures. Plus your mortgage of <b id="loanOut">£0</b>, which makes up the rest of the price. Also allow for a building survey if you want one, furnishing and letting costs for a buy-to-let, and exchange rate costs when you send money to the UK.</p>
       </div>
 
       <div class="cta-box">
-        <h3>Want these figures confirmed?</h3>
-        <p>Stamp duty for expats and companies has a lot of rules. Send us your figures and a specialist adviser will check them, find the most suitable lender and work with your solicitor on the final stamp duty figure.</p>
+        <h3>Need help with the mortgage?</h3>
+        <p>Your solicitor will calculate and confirm the stamp duty. We arrange the mortgage: send us your figures and a specialist adviser will find the most suitable lender for your purchase and budget.</p>
         <a class="btn gold" href="#contact">Send my figures to an adviser</a>
       </div>
     </div>
@@ -402,8 +404,8 @@ footer strong{color:#fff}
     <div class="cards">
       <div class="card"><h3>Non-UK resident surcharge (2%)</h3><p>If you were in the UK for fewer than 183 days in the 12 months before buying, 2% is added to every band. A company pays it if it is non-UK resident or controlled by non-UK residents. If you become UK resident within a year of buying, you may be able to claim it back.</p></div>
       <div class="card"><h3>Additional property surcharge (5%)</h3><p>If you will own more than one residential property anywhere in the world, including your home overseas, 5% is added to every band. This covers most buy-to-let purchases. It does not apply if you are replacing your main home.</p></div>
-      <div class="card"><h3>Buying through a limited company</h3><p>A company always pays the 5% additional property surcharge, and 2% more if it is controlled by non-UK residents. On homes over £500,000 a 17% flat rate (19% for non-residents) applies, unless the company qualifies for a relief, for example by letting the property to unconnected tenants.</p></div>
-      <div class="card"><h3>When it is paid</h3><p>Your solicitor files the stamp duty return and pays HMRC within 14 days of completion, so the money needs to be with them before you complete. It cannot be added to the mortgage.</p></div>
+      <div class="card"><h3>Company surcharge</h3><p>Buying through a limited company carries a surcharge. A company always pays the 5% surcharge on every band, even if it is its first property, and 2% more if it is controlled by non-UK residents. On homes over £500,000 a 17% flat rate (19% for non-residents) applies, unless the company qualifies for a relief, for example by letting the property to unconnected tenants.</p></div>
+      <div class="card"><h3>When it is paid</h3><p>Your solicitor, not your mortgage broker, calculates the stamp duty, files the return and pays HMRC within 14 days of completion, so the money needs to be with them before you complete. It cannot be added to the mortgage.</p></div>
     </div>
   </div>
 </section>
@@ -411,9 +413,10 @@ footer strong{color:#fff}
 <section class="faq">
   <div class="wrap">
     <h2>Stamp duty questions from expats</h2>
+    <details><summary>Who calculates my stamp duty?</summary><p>Your solicitor (conveyancer) calculates your stamp duty, not your mortgage broker. They work out the final figure based on your circumstances, file the stamp duty return and pay HMRC on your behalf within 14 days of completion. This calculator gives an indicative figure to help you budget.</p></details>
     <details><summary>Do expats and non-UK residents pay more stamp duty?</summary><p>Yes. Buyers who are not UK resident pay a 2% surcharge on top of the normal stamp duty rates when buying residential property in England or Northern Ireland. For stamp duty you are non-UK resident if you were not in the UK for at least 183 days in the 12 months before you buy.</p></details>
     <details><summary>What is the stamp duty surcharge on a buy-to-let or second home?</summary><p>If you will own more than one residential property anywhere in the world after the purchase, and you are not replacing your main home, a 5% surcharge applies on top of the normal rates. For a non-UK resident that means 7% more than the standard rate on each band.</p></details>
-    <details><summary>How much stamp duty does a limited company pay?</summary><p>Companies buying residential property always pay the 5% additional property surcharge, plus 2% if the company is non-UK resident or controlled by non-UK residents. A 17% flat rate (19% for non-residents) can apply to properties over £500,000 unless a relief applies, such as the property being let to unconnected tenants as part of a rental business.</p></details>
+    <details><summary>How much stamp duty does a limited company pay?</summary><p>Buying through a company carries a surcharge. Companies buying residential property always pay the 5% additional property surcharge, plus 2% if the company is non-UK resident or controlled by non-UK residents. A 17% flat rate (19% for non-residents) can apply to properties over £500,000 unless a relief applies, such as the property being let to unconnected tenants as part of a rental business.</p></details>
     <details><summary>Can expats get first-time buyer relief?</summary><p>Possibly. First-time buyer relief applies if you, and anyone buying with you, have never owned a home anywhere in the world, you will live in the property as your main home and the price is £500,000 or less. Non-UK residents still pay the 2% surcharge on top. It does not apply to buy-to-let or company purchases.</p></details>
     <details><summary>What other costs are there when buying a UK property?</summary><p>As well as the deposit and stamp duty, allow for solicitor (conveyancing) fees plus VAT, searches and Land Registry fees, the lender's valuation and arrangement fees, and the mortgage broker fee. This calculator adds them up to give an estimate of the total cash you need.</p></details>
   </div>
@@ -450,7 +453,7 @@ footer strong{color:#fff}
 <footer>
   <div class="wrap">
     <p class="repo">YOUR HOME OR PROPERTY MAY BE REPOSSESSED IF YOU DO NOT KEEP UP REPAYMENTS ON A MORTGAGE OR ANY OTHER DEBT SECURED ON IT.</p>
-    <p>This stamp duty and buying costs calculator is an indicative guide only, for residential property in England and Northern Ireland. It uses the Stamp Duty Land Tax rates in force from 1 April 2025 and simplified assumptions. It does not cover every relief or circumstance, for example shared ownership, multiple dwellings, mixed use or non-residential property, leases, linked transactions or trusts. It is not tax or legal advice. Your solicitor or a tax adviser will confirm the stamp duty payable. Fees shown are typical estimates and will vary. All mortgages are subject to status, the lender's criteria and a valuation of the property.</p>
+    <p>This stamp duty and buying costs calculator is a general guide only and its results are not definitive. It is an indicative guide only, for residential property in England and Northern Ireland. It uses the Stamp Duty Land Tax rates in force from 1 April 2025 and simplified assumptions. It does not cover every relief or circumstance, for example shared ownership, multiple dwellings, mixed use or non-residential property, leases, linked transactions or trusts. It is not tax or legal advice. Stamp duty is calculated and confirmed by your solicitor (conveyancer) or a tax adviser, not by your mortgage broker. UK Expat Mortgages does not give tax advice. Fees shown are typical estimates and will vary. All mortgages are subject to status, the lender's criteria and a valuation of the property.</p>
     <p><strong>UK Expat Mortgages</strong> is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710. Registered address: Sterling House, 27 Hatchlands Road, Redhill, Surrey RH1 6RW.</p>
     <p>The Financial Conduct Authority does not regulate some aspects of buy to let mortgages, overseas mortgages and tax advice.</p>
     <p>A typical fee of up to 1% of the mortgage amount may be payable on successful completion. The fee will be agreed with each applicant prior to submitting an application. The total fee is non-refundable. We may also be paid commission from the lender.</p>
@@ -610,6 +613,7 @@ function sdltCalc(price,o){
       chips.push(['warn','17% company rate'+(nonRes?' + 2%':'')]);
     } else {
       if(r.rule==='ftb'){rule='First-time buyer relief';chips.push(['good','First-time buyer relief']);}
+      else if(company&&price>=SDLT.higherMin){rule='Standard rates plus 5% company surcharge';chips.push(['warn','+5% company surcharge']);}
       else if(higher&&price>=SDLT.higherMin){rule='Standard rates plus 5% additional property surcharge';chips.push(['warn','+5% additional property']);}
       else rule='Standard rates';
       if(nonRes){rule+=', plus 2% non-UK resident surcharge';chips.push(['warn','+2% non-UK resident']);}
@@ -624,11 +628,11 @@ function sdltCalc(price,o){
       return '<tr><td>'+label+'</td><td>'+(+s.rate.toFixed(2))+'%</td><td>'+gbp(Math.floor(s.tax))+'</td></tr>';
     }).join('');
     var note='';
-    if(company)note='Companies always pay the additional property rates. ';
+    if(company)note='Buying through a company carries a surcharge: a company always pays the 5% surcharge on every band, even on its first property'+(nonRes?', plus 2% because it is controlled from outside the UK':'')+', and the 17% rate applies over £500,000 unless a relief applies. ';
     else if(higher)note='The 5% surcharge applies because you will own more than one residential property, including any overseas. ';
     if(nonRes&&!company)note+='If you become UK resident within 12 months of buying you may be able to reclaim the 2% surcharge. ';
     if(!company&&higher&&use==='home')note+='If you sell your previous main home within 3 years you may be able to reclaim the 5% surcharge. ';
-    note+='Rates from 1 April 2025, checked '+SDLT.checked+'.';
+    note+='Your solicitor calculates the final stamp duty, not your mortgage broker. Rates from 1 April 2025, checked '+SDLT.checked+'.';
     $('sdltNote').textContent=note;
 
     // Costs
@@ -663,7 +667,7 @@ function sdltCalc(price,o){
     // Enquiry summary
     var who=company?'Limited company'+(nonRes?', owned from outside the UK':', UK resident and controlled')+(relief?', letting as a rental business':', not a rental business')
       :'Individual, '+(nonRes?'non-UK resident':'UK resident')+', '+(use==='home'?'main home':'buy-to-let or second home')+', '+(other?'owns other property':'no other property')+(ftb?', first-time buyer':'')+(other&&use==='home'&&replace?', replacing main home':'');
-    var s='Indicative stamp duty and buying costs (England and Northern Ireland, not a quote)\n'+
+    var s='Stamp duty and buying costs, general guide only, not definitive (England and Northern Ireland; stamp duty to be calculated by the solicitor)\n'+
       'Purchase price: '+gbp(price)+'\n'+
       'Buyer: '+who+'\n'+
       'Stamp duty: '+gbp(r.total)+' ('+rule.toLowerCase()+')\n'+
