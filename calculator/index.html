@@ -161,6 +161,10 @@ input[type=range]{padding:0;border:0;accent-color:var(--brand);background:transp
 .linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--brand);text-decoration:underline;cursor:pointer}
 .cta-box button.btn{width:100%}
 @media (max-width:600px){.stages{grid-template-columns:1fr}.stages li{font-size:15px;padding:12px 14px}}
+.budget-box{margin-top:16px;background:#fbf1de;border:1.5px solid var(--accent);border-radius:10px;padding:16px 18px}
+.budget-head{font-family:Fraunces,Georgia,serif;font-size:18px;font-weight:600;color:var(--brand);margin-bottom:2px}
+.budget-text{font-size:14px;color:var(--ink-soft);margin-bottom:12px}
+.budget-box .btn{width:100%}
 .cta-box{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
 .cta-box p{font-size:15px;color:var(--ink-soft);margin:6px 0 14px}
 .cta-box .btn{width:100%}
@@ -426,7 +430,11 @@ footer strong{color:#fff}
           <div class="row total"><span>Deposit</span><b id="dep2">£0</b></div>
         </div>
         <p class="note">Stamp duty, solicitor, valuation, lender and broker fees are extra. Stamp duty for non-UK residents depends on whether you buy as an individual or a company (companies pay a surcharge) and whether you already own property. Your solicitor calculates the final stamp duty, not your mortgage broker.</p>
-        <a class="btn ghost small" id="sdltLink" href="/stamp-duty-calculator/" style="margin-top:12px;width:100%">Estimate your total budget, including stamp duty</a>
+        <div class="budget-box">
+          <p class="budget-head">Next: your total budget to plan for</p>
+          <p class="budget-text">See your deposit, stamp duty and all buying fees added up in one figure.</p>
+          <a class="btn gold" id="sdltLink" href="/stamp-duty-calculator/">Estimate my total budget &rarr;</a>
+        </div>
       </div>
 
       <div class="panel">
