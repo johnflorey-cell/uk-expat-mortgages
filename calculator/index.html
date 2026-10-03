@@ -389,9 +389,9 @@ footer strong{color:#fff}
         <div class="k" id="payLabel">Estimated monthly payment</div>
         <div class="v" id="pay">£0</div>
         <div class="ltvtag" id="payLtv"></div>
+        <div class="fx" id="payRent" style="margin-top:4px"></div>
         <div class="fx" id="payFx"></div>
         <div class="alt" id="payAlt"></div>
-        <div class="ltvtag" id="payRent" style="margin-top:10px"></div>
         <div class="alt" style="margin-top:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px">Indicative guide only, not a quote or offer of lending.</div>
       </div>
 
@@ -419,7 +419,7 @@ footer strong{color:#fff}
         <div class="rows">
           <div class="row"><span>Mortgage amount</span><b id="loanOut">£0</b></div>
           <div class="row" id="rentRow2"><span>Monthly rent (gross)</span><b id="rentOut2">£0</b></div>
-          <div class="row" id="rentPctRow"><span>Monthly payment as % of the rent</span><b id="rentPct">0%</b></div>
+          <div class="row" id="rentPctRow"><span id="rentPctLbl">Monthly payment as % of the rent</span><b id="rentPct">0%</b></div>
           <div class="row"><span>Loan to value</span><b id="ltv">0%</b></div>
           <div class="row"><span>Total interest over the term</span><b id="interest">£0</b></div>
           <div class="row" id="ioRow"><span>Mortgage to repay at the end of the term</span><b id="ioEnd">£0</b></div>
@@ -680,8 +680,10 @@ footer strong{color:#fff}
     $('rentPctRow').classList.toggle('hidden',!btl);
     $('rentOut2').textContent=gbp(rentM);
     $('rentPct').textContent=rp.toFixed(1)+'%';
-    $('payRent').textContent=rp.toFixed(1)+'% of the '+gbp(rentM)+' monthly rent';
-    $('payAlt').textContent=loan>0?(io?'On a repayment basis it would be '+gbp(other)+' a month':'On an interest only basis it would be '+gbp(other)+' a month'):'';
+    $('rentPctLbl').textContent=(io?'Interest only':'Repayment')+' payment as % of the rent';
+    var rpo=btl&&rentM>0?other/rentM*100:0;
+    $('payRent').textContent=(io?'The interest only payment is ':'The repayment mortgage payment is ')+rp.toFixed(1)+'% of the '+gbp(rentM)+' monthly rent';
+    $('payAlt').textContent=loan>0?(io?'On a repayment basis it would be '+gbp(other)+' a month':'On an interest only basis it would be '+gbp(other)+' a month')+(btl&&rentM>0?', '+rpo.toFixed(1)+'% of the rent':''):'';
     $('loanOut').textContent=gbp(loan);
     $('ltv').textContent=ltv.toFixed(1)+'%';
     $('payLtv').textContent='On a '+gbp(loan)+' mortgage at '+ltv.toFixed(1)+'% loan to value';
