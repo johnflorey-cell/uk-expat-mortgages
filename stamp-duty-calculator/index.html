@@ -675,7 +675,7 @@ function sdltCalc(price,o){
     $('getDep').textContent=gbp(deposit);
     $('getDepLbl').textContent=hasLoan?'Your deposit':'Paid in cash';
     $('getExtra').textContent=gbp(extra);
-    $('getLine').innerHTML=price>0?'You spend about <b>'+gbp(total)+'</b> of your own money to buy a property worth <b>'+gbp(price)+'</b>. Of your budget, <b>'+gbp(deposit)+'</b> is '+(hasLoan?'the deposit':'the purchase price')+' and <b>'+gbp(extra)+'</b> is stamp duty and fees ('+(extra/price*100).toFixed(1)+'% of the price).':'';
+    $('getLine').innerHTML=price>0?'You spend about <b>'+gbp(total)+'</b> of your own money to buy a property worth <b>'+gbp(price)+'</b>. Of your budget, <b>'+gbp(deposit)+'</b> is '+(hasLoan?'the deposit ('+(deposit/price*100).toFixed(1)+'% of the price)':'the purchase price')+' and <b>'+gbp(extra)+'</b> is stamp duty and fees ('+(extra/price*100).toFixed(1)+'% of the price).':'';
 
     var parts=[['Deposit',deposit,'#0e3b53'],['Stamp duty',r.total,'#c89b3c'],['Legal and searches',legal+vat+disb,'#6f8fa3'],['Lender, valuation and broker',val+lender+broker,'#b8c7d1']];
     $('bar').innerHTML=total>0?parts.map(function(p){return p[1]>0?'<i style="width:'+(p[1]/total*100)+'%;background:'+p[2]+'"></i>':'';}).join(''):'';
