@@ -220,9 +220,9 @@ footer strong{color:#fff}
 <section class="hero">
   <div class="wrap">
     <p class="crumb"><a href="/">Home</a> / Stamp duty calculator</p>
-    <p class="eyebrow">Stamp duty and buying costs for expats</p>
-    <h1>UK stamp duty calculator for expats and non-UK residents</h1>
-    <p class="lead">Work out the Stamp Duty Land Tax (SDLT) on your UK purchase, including the 2% non-resident surcharge, the 5% surcharge on additional properties and the surcharge for buying through a limited company. Then see the total cash you need: deposit, stamp duty, legal fees, valuation and broker fees.</p>
+    <p class="eyebrow">Plan your budget before you buy</p>
+    <h1>UK stamp duty and buying costs calculator for expats</h1>
+    <p class="lead">Get an estimated budget to plan for when buying a UK property: your deposit, stamp duty, legal fees, valuation, lender and broker fees, added up in one figure. The stamp duty estimate includes the 2% non-resident surcharge, the 5% surcharge on additional properties and the surcharge for buying through a limited company.</p>
     <p class="guide"><strong>A general guide only, not a definitive figure.</strong> The results are estimates to help you budget and must not be relied on as the amount you will pay.<br><strong>England and Northern Ireland only.</strong> Scotland (LBTT) and Wales (LTT) have their own taxes and rates. <a href="#contact">Ask an adviser</a> if you are buying there.<br><strong>Your solicitor calculates your stamp duty, not your mortgage broker.</strong> Stamp duty depends on your exact circumstances, and your solicitor (conveyancer) works out the final figure and pays it to HMRC for you. You can also check it on the <a href="https://www.tax.service.gov.uk/calculate-stamp-duty-land-tax/" target="_blank" rel="noopener">HMRC stamp duty calculator</a>.</p>
   </div>
 </section>
@@ -358,7 +358,8 @@ footer strong{color:#fff}
       </div>
 
       <div class="panel">
-        <h3>Total cash needed to buy</h3>
+        <h3>Your estimated budget to plan for</h3>
+        <p class="sub" style="margin-bottom:0">The cash you should plan to have available for the purchase, on top of the mortgage.</p>
         <div class="bar" id="bar" aria-hidden="true"></div>
         <div class="legend" id="legend" aria-hidden="true"></div>
         <div class="rows" style="margin-top:10px">
@@ -369,14 +370,14 @@ footer strong{color:#fff}
           <div class="row" id="valRow"><span>Valuation fee</span><b id="valOut">£0</b></div>
           <div class="row" id="lenderRow"><span>Lender arrangement fee</span><b id="lenderOut">£0</b></div>
           <div class="row" id="brokerRow"><span>Mortgage broker fee</span><b id="brokerOut">£0</b></div>
-          <div class="row total"><span>Estimated total budget</span><b id="totalOut">£0</b></div>
+          <div class="row total"><span>Estimated budget to plan for</span><b id="totalOut">£0</b></div>
         </div>
         <div class="fxinline hidden" id="fxInline"></div>
-        <p class="note">These are general estimates, not definitive figures. Plus your mortgage of <b id="loanOut">£0</b>, which makes up the rest of the price. Also allow for a building survey if you want one, furnishing and letting costs for a buy-to-let, and exchange rate costs when you send money to the UK.</p>
+        <p class="note">These are general estimates to help you plan, not definitive figures. Plus your mortgage of <b id="loanOut">£0</b>, which makes up the rest of the price. Also allow for a building survey if you want one, furnishing and letting costs for a buy-to-let, and exchange rate costs when you send money to the UK.</p>
       </div>
 
       <div class="cta-box">
-        <h3>Need help with the mortgage?</h3>
+        <h3>Ready to plan your purchase?</h3>
         <p>Your solicitor will calculate and confirm the stamp duty. We arrange the mortgage: send us your figures and a specialist adviser will find the most suitable lender for your purchase and budget.</p>
         <a class="btn gold" href="#contact">Send my figures to an adviser</a>
       </div>
@@ -662,7 +663,7 @@ function sdltCalc(price,o){
     $('fxLabel').textContent=c?'1 GBP equals ('+c+')':'1 GBP equals';
     $('sdltFx').textContent=on?'About '+money(c,xr,r.total):'';
     $('fxInline').classList.toggle('hidden',!on);
-    if(on)$('fxInline').innerHTML='Your total budget of <b>'+gbp(total)+'</b> is about <b>'+money(c,xr,total)+'</b>, of which stamp duty is about <b>'+money(c,xr,r.total)+'</b>.';
+    if(on)$('fxInline').innerHTML='Your estimated budget of <b>'+gbp(total)+'</b> is about <b>'+money(c,xr,total)+'</b>, of which stamp duty is about <b>'+money(c,xr,r.total)+'</b>.';
 
     // Enquiry summary
     var who=company?'Limited company'+(nonRes?', owned from outside the UK':', UK resident and controlled')+(relief?', letting as a rental business':', not a rental business')
@@ -674,7 +675,7 @@ function sdltCalc(price,o){
       'Mortgage: '+gbp(loan)+', deposit '+gbp(deposit)+'\n'+
       'Legal fee: '+gbp(legal+vat)+(vat?' incl. VAT':'')+', searches and other: '+gbp(disb)+'\n'+
       (hasLoan?'Valuation: '+gbp(val)+', lender fee: '+gbp(lender)+', broker fee: '+gbp(broker)+'\n':'')+
-      'Estimated total budget: '+gbp(total)+(on?' (about '+money(c,xr,total)+')':'');
+      'Estimated budget to plan for: '+gbp(total)+(on?' (about '+money(c,xr,total)+')':'');
     $('summary').textContent=s;
     $('calcFigures').value=s;
   }
