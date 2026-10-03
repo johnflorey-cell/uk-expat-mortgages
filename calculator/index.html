@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UK Expat Mortgage Calculator | How Much Can I Borrow &amp; Monthly Cost</title>
+<title>UK Expat Mortgage Calculator | How Much Could I Borrow &amp; Monthly Cost</title>
 <meta name="description" content="Free UK expat mortgage calculator. See how much buy-to-let mortgage you could get from your rental income, then the monthly cost at current expat rates, shown in your home currency.">
 <link rel="canonical" href="https://www.uk-expat-mortgage.co.uk/calculator/">
 <meta name="robots" content="index, follow">
@@ -230,7 +230,7 @@ footer strong{color:#fff}
 <section class="calc">
   <div class="wrap">
     <ol class="stages" aria-label="Calculator stages">
-      <li class="on" id="st1tab"><span>1</span> How much mortgage can I get?</li>
+      <li class="on" id="st1tab"><span>1</span> How much mortgage could I get?</li>
       <li id="st2tab"><span>2</span> What will it cost each month?</li>
     </ol>
   </div>
@@ -239,7 +239,7 @@ footer strong{color:#fff}
   <div class="wrap calc-grid" id="stage1">
     <div class="panel" id="inputs1">
       <p class="stagehead">Stage 1</p>
-      <h3>How much mortgage can I get?</h3>
+      <h3>How much mortgage could I get?</h3>
       <p class="sub">For buy-to-let, the mortgage is based on the rent the property will earn, up to a maximum of 75% of the value. For standard residential property in the UK only.</p>
 
       <div class="group">
@@ -303,7 +303,7 @@ footer strong{color:#fff}
           <div class="row" id="raiseRow"><span>Could raise above your current balance</span><b id="raise">£0</b></div>
         </div>
         <p class="formula" id="formula"></p>
-        <p class="note" id="resNote">For your own home, lenders also assess your income and outgoings, so the amount may be lower. Your adviser will confirm what you can borrow.</p>
+        <p class="note" id="resNote">For your own home, lenders also assess your income and outgoings, so the amount may be lower. Your adviser will confirm what you could borrow.</p>
       </div>
 
       <div class="cta-box">
@@ -502,7 +502,7 @@ footer strong{color:#fff}
 <footer>
   <div class="wrap">
     <p class="repo">YOUR HOME OR PROPERTY MAY BE REPOSSESSED IF YOU DO NOT KEEP UP REPAYMENTS ON A MORTGAGE OR ANY OTHER DEBT SECURED ON IT.</p>
-    <p>The property value and rental income used are subject to the lender's own valuation of the property. If the valuation is lower than the figure entered, the amount the lender will offer may be lower. This calculator is for standard residential property in the UK only. It does not apply to commercial or semi-commercial property, houses in multiple occupation (HMOs), auction purchases or other specialist property. This calculator is an indicative guide only. It is not a quote and does not constitute advice or an offer of lending. Results are estimates based on the figures you enter and simplified assumptions. The actual amount you can borrow, your interest rate and your repayments will depend on the lender, your circumstances and a full assessment. Stamp duty and other purchase costs are not included; use the <a href="/stamp-duty-calculator/" style="color:#fff">stamp duty and buying costs calculator</a>.</p>
+    <p>The property value and rental income used are subject to the lender's own valuation of the property. If the valuation is lower than the figure entered, the amount the lender will offer may be lower. This calculator is for standard residential property in the UK only. It does not apply to commercial or semi-commercial property, houses in multiple occupation (HMOs), auction purchases or other specialist property. This calculator is an indicative guide only. It is not a quote and does not constitute advice or an offer of lending. Results are estimates based on the figures you enter and simplified assumptions. The actual amount you could borrow, your interest rate and your repayments will depend on the lender, your circumstances and a full assessment. Stamp duty and other purchase costs are not included; use the <a href="/stamp-duty-calculator/" style="color:#fff">stamp duty and buying costs calculator</a>.</p>
     <p><strong>UK Expat Mortgages</strong> is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710. Registered address: Sterling House, 27 Hatchlands Road, Redhill, Surrey RH1 6RW.</p>
     <p>The Financial Conduct Authority does not regulate some aspects of buy to let mortgages, overseas mortgages and tax advice.</p>
     <p>A typical fee of up to 1% of the mortgage amount may be payable on successful completion. The fee will be agreed with each applicant prior to submitting an application. The total fee is non-refundable. We may also be paid commission from the lender.</p>
@@ -575,7 +575,7 @@ footer strong{color:#fff}
     return P*r/(1-Math.pow(1+r,-n));
   }
 
-  // ---------- STAGE 1: how much mortgage can I get? ----------
+  // ---------- STAGE 1: how much mortgage could I get? ----------
   function stage1(){
     var goal=radio('goal'),buying=goal!=='remo',btl=goal!=='home',owner=radio('owner');
     var value=num($('value'));
