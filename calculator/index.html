@@ -391,6 +391,7 @@ footer strong{color:#fff}
         <div class="ltvtag" id="payLtv"></div>
         <div class="fx" id="payFx"></div>
         <div class="alt" id="payAlt"></div>
+        <div class="ltvtag" id="payRent" style="margin-top:10px"></div>
         <div class="alt" style="margin-top:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px">Indicative guide only, not a quote or offer of lending.</div>
       </div>
 
@@ -417,6 +418,8 @@ footer strong{color:#fff}
         <h3>Your mortgage</h3>
         <div class="rows">
           <div class="row"><span>Mortgage amount</span><b id="loanOut">£0</b></div>
+          <div class="row" id="rentRow2"><span>Monthly rent (gross)</span><b id="rentOut2">£0</b></div>
+          <div class="row" id="rentPctRow"><span>Monthly payment as % of the rent</span><b id="rentPct">0%</b></div>
           <div class="row"><span>Loan to value</span><b id="ltv">0%</b></div>
           <div class="row"><span>Total interest over the term</span><b id="interest">£0</b></div>
           <div class="row" id="ioRow"><span>Mortgage to repay at the end of the term</span><b id="ioEnd">£0</b></div>
@@ -671,6 +674,13 @@ footer strong{color:#fff}
       $('fxRent').textContent=cf(num($('rent')))+' a month';
       $('fxInline').innerHTML='Your monthly payment of <b>'+gbp(pay)+'</b> is about <b>'+cf(pay)+'</b>.';
     }
+    var rentM=num($('rent')),rp=btl&&rentM>0?pay/rentM*100:0;
+    $('payRent').classList.toggle('hidden',!(btl&&rentM>0));
+    $('rentRow2').classList.toggle('hidden',!btl);
+    $('rentPctRow').classList.toggle('hidden',!btl);
+    $('rentOut2').textContent=gbp(rentM);
+    $('rentPct').textContent=rp.toFixed(1)+'%';
+    $('payRent').textContent=rp.toFixed(1)+'% of the '+gbp(rentM)+' monthly rent';
     $('payAlt').textContent=loan>0?(io?'On a repayment basis it would be '+gbp(other)+' a month':'On an interest only basis it would be '+gbp(other)+' a month'):'';
     $('loanOut').textContent=gbp(loan);
     $('ltv').textContent=ltv.toFixed(1)+'%';
@@ -701,7 +711,7 @@ footer strong{color:#fff}
       'Stage 1 maximum mortgage: '+gbp(S.maxMort)+' at '+(value>0?(S.maxMort/value*100).toFixed(1):'0')+'% LTV ('+$('maxLimit').textContent.toLowerCase()+')\n'+
       'Mortgage amount used: '+gbp(loan)+' ('+ltv.toFixed(1)+'% LTV)'+(buying?', deposit '+gbp(deposit):'')+'\n'+
       'Term: '+term+' years, '+(io?'interest only':'repayment')+', '+fix+' year fixed at '+rate.toFixed(2)+'% ('+(choice==='own'?'own rate':choice==='avg'?'average rate':choice+'est rate')+')\n'+
-      'Monthly payment (est.): '+gbp(pay)+($('payFx').textContent?' ('+$('payFx').textContent.replace('About ','')+')':'')+'\n'+
+      'Monthly payment (est.): '+gbp(pay)+($('payFx').textContent?' ('+$('payFx').textContent.replace('About ','')+')':'')+(btl&&rentM>0?', '+rp.toFixed(1)+'% of the gross monthly rent':'')+'\n'+
       sdSummary;
     $('summary').textContent=s.trim();
     $('calcFigures').value=s.trim();
