@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stamp Duty Calculator for Expats &amp; Non-UK Residents | Total Buying Costs</title>
+<meta name="description" content="Free UK stamp duty (SDLT) calculator for expats and non-UK residents. Includes the 2% non-resident and 5% additional property surcharges, company purchases, and your total budget: deposit, legal, valuation and broker fees.">
+<link rel="canonical" href="https://www.uk-expat-mortgage.co.uk/stamp-duty-calculator/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stamp Duty and Buying Costs Calculator for Expats | UK Expat Mortgages">
+<meta property="og:description" content="Work out UK stamp duty as a non-UK resident, individual or company, plus the full cash you need to buy.">
+<meta property="og:url" content="https://www.uk-expat-mortgage.co.uk/stamp-duty-calculator/">
+<meta property="og:locale" content="en_GB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Stamp Duty and Buying Costs Calculator for Expats",
+  "url": "https://www.uk-expat-mortgage.co.uk/stamp-duty-calculator/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "Calculate UK Stamp Duty Land Tax for expats and non-UK residents, buying as an individual or a company, plus the total cash needed to buy including deposit and fees.",
+  "provider": {"@type": "FinancialService", "name": "UK Expat Mortgages", "url": "https://www.uk-expat-mortgage.co.uk/"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.uk-expat-mortgage.co.uk/"},
+    {"@type":"ListItem","position":2,"name":"Stamp duty calculator","item":"https://www.uk-expat-mortgage.co.uk/stamp-duty-calculator/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Do expats and non-UK residents pay more stamp duty?","acceptedAnswer":{"@type":"Answer","text":"Yes. Buyers who are not UK resident pay a 2% surcharge on top of the normal stamp duty rates when buying residential property in England or Northern Ireland. For SDLT you are non-UK resident if you were not in the UK for at least 183 days in the 12 months before you buy."}},
+    {"@type":"Question","name":"What is the stamp duty surcharge on a buy-to-let or second home?","acceptedAnswer":{"@type":"Answer","text":"If you will own more than one residential property anywhere in the world after the purchase, and you are not replacing your main home, a 5% surcharge applies on top of the normal rates. For a non-UK resident this means 7% more than the standard rates on each band."}},
+    {"@type":"Question","name":"How much stamp duty does a limited company pay?","acceptedAnswer":{"@type":"Answer","text":"Companies buying residential property always pay the 5% additional property surcharge, plus 2% if the company is non-UK resident or controlled by non-UK residents. A 17% flat rate (19% for non-residents) can apply to properties over £500,000 unless a relief applies, such as the property being let to unconnected tenants as part of a rental business."}},
+    {"@type":"Question","name":"Can expats get first-time buyer relief?","acceptedAnswer":{"@type":"Answer","text":"Possibly. First-time buyer relief applies if you, and anyone buying with you, have never owned a home anywhere in the world, you will live in the property as your main home and the price is £500,000 or less. Non-UK residents still pay the 2% surcharge on top. It does not apply to buy-to-let or company purchases."}},
+    {"@type":"Question","name":"What other costs are there when buying a UK property?","acceptedAnswer":{"@type":"Answer","text":"As well as the deposit and stamp duty, allow for solicitor (conveyancing) fees plus VAT, searches and Land Registry fees, the lender's valuation and arrangement fees, and the mortgage broker fee. This calculator adds them up to give an estimate of the total cash you need."}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --ink:#10222e; --ink-soft:#44586a; --bg:#fbfaf7; --card:#ffffff;
+  --brand:#0e3b53; --accent:#c89b3c; --line:#e4e0d6; --tint:#f1ede4;
+  --good:#2f7a4f; --warn:#b7791f; --bad:#b23b3b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.2;color:var(--brand)}
+a{color:var(--brand)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:var(--bg)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:16px;padding-bottom:16px;gap:12px}
+.logo{font-family:Fraunces,serif;font-size:20px;font-weight:600;color:var(--brand);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav{display:flex;align-items:center;gap:22px}
+.navlink{font-size:15px;font-weight:600;text-decoration:none;color:var(--brand)}
+.navlink:hover{text-decoration:underline}
+@media (max-width:760px){.navlink .long{display:none}.navlink{text-transform:capitalize}}
+@media (max-width:440px){.nav{gap:14px}.logo{font-size:18px}.navlink{font-size:14px}}
+.btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:14px 26px;border-radius:6px;font-weight:600;border:0;cursor:pointer;font-size:16px;text-align:center}
+.btn:hover{background:#0a2c3f}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn.small{padding:10px 18px;font-size:15px}
+.btn.gold{background:var(--accent);color:#fff}
+.btn.gold:hover{background:#b0862f}
+.hero{padding:56px 0 40px;background:linear-gradient(180deg,var(--tint),var(--bg))}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:14px}
+.hero h1{font-size:clamp(32px,4.5vw,50px);max-width:860px;margin-bottom:18px}
+.hero p.lead{font-size:19px;color:var(--ink-soft);max-width:740px}
+.guide{margin-top:18px;max-width:740px;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:12px 16px}
+.crumb{font-size:14px;margin-bottom:18px;color:var(--ink-soft)}
+.crumb a{color:var(--ink-soft)}
+section{padding:64px 0}
+section h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:14px}
+.intro{color:var(--ink-soft);max-width:700px;margin-bottom:32px}
+
+.calc{padding-top:8px}
+.calc-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:28px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px}
+.panel h3{font-size:20px;margin-bottom:4px}
+.panel .sub{font-size:14px;color:var(--ink-soft);margin-bottom:18px}
+.group{border-top:1px solid var(--line);padding-top:20px;margin-top:20px}
+.group:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.glabel{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--accent);margin-bottom:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg);position:relative}
+.seg input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;left:0;top:0}
+.seg label{display:flex;align-items:center;justify-content:center;text-align:center;padding:11px 8px;font-size:15px;font-weight:600;cursor:pointer;color:var(--ink-soft);margin:0;line-height:1.3}
+.seg input:checked + label{background:var(--brand);color:#fff}
+.seg input:focus-visible + label{outline:2px solid var(--accent);outline-offset:-2px}
+.field{display:grid;gap:6px;margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+.field > span{font-size:14px;font-weight:600}
+.field small{font-size:13px;color:var(--ink-soft);font-weight:400}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.money{position:relative}
+.money::before{content:"£";position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-size:16px}
+.money input{padding-left:28px}
+.pct{position:relative}
+.pct::after{content:"%";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft)}
+.pct input{padding-right:30px}
+input,select,textarea{font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:6px;background:#fff;width:100%;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(14,59,83,.25);border-color:var(--brand)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:500;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:3px;flex:none;accent-color:var(--brand)}
+.hint{font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:400}
+.hidden{display:none!important}
+.feeline{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.feeline:last-child{border-bottom:0}
+.feeline .lbl{font-size:15px;font-weight:600}
+.feeline .lbl small{display:block;font-weight:400;font-size:13px;color:var(--ink-soft);line-height:1.45;margin-top:2px}
+.feeline input{padding-top:9px;padding-bottom:9px}
+@media (max-width:480px){.feeline{grid-template-columns:1fr}}
+
+.results{position:sticky;top:16px;display:grid;gap:16px}
+.hero-num{background:var(--brand);color:#e8eef2;border-radius:12px;padding:26px 28px}
+.hero-num .k{font-size:14px;color:#b9cbd6;font-weight:500}
+.hero-num .v{font-family:Fraunces,Georgia,serif;font-size:clamp(38px,5vw,50px);color:#fff;line-height:1.1;margin:4px 0 6px}
+.tag{display:inline-block;background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:8px}
+.hero-num .fx{font-size:17px;font-weight:600;color:#e3c889;min-height:1em}
+.hero-num .alt{font-size:14px;color:#b9cbd6;margin-top:8px}
+.rows{display:grid}
+.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.row:last-child{border-bottom:0}
+.row span{color:var(--ink-soft)}
+.row b{font-weight:600;text-align:right;white-space:nowrap}
+.row.total b{color:var(--brand);font-size:17px}
+.row.total span{color:var(--ink);font-weight:600}
+.bands{width:100%;border-collapse:collapse;font-size:15px;margin-top:6px;font-variant-numeric:tabular-nums}
+.bands th,.bands td{text-align:left;padding:8px 6px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.bands th{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600}
+.bands td:nth-child(2),.bands th:nth-child(2){text-align:center}
+.bands td:last-child,.bands th:last-child{text-align:right;padding-right:0}
+.bands tfoot td{font-weight:600;color:var(--brand);border-bottom:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font-size:13px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--tint);color:var(--brand)}
+.chip.warn{background:#fbf1de;color:var(--warn)}
+.chip.good{background:#e6f2ea;color:var(--good)}
+.note{font-size:14px;color:var(--ink-soft);margin-top:10px}
+.bar{display:flex;height:14px;border-radius:8px;overflow:hidden;background:var(--tint);margin:14px 0 10px}
+.bar i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-soft)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
+.fxinline{margin-top:12px;background:var(--tint);border-radius:8px;padding:12px 14px;font-size:15px;color:var(--ink)}
+.cta-box{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
+.cta-box p{font-size:15px;color:var(--ink-soft);margin:6px 0 14px}
+.cta-box .btn{width:100%}
+
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:26px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{color:var(--ink-soft);font-size:16px}
+.ratetable{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:15px;font-variant-numeric:tabular-nums}
+.ratetable th,.ratetable td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:right}
+.ratetable th:first-child,.ratetable td:first-child{text-align:left}
+.ratetable thead th{background:var(--brand);color:#fff;font-weight:600;font-size:14px}
+.ratetable tr:last-child td{border-bottom:0}
+.tablewrap{overflow-x:auto;margin-bottom:12px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin-bottom:12px}
+.faq summary{cursor:pointer;font-weight:600;color:var(--brand);font-size:17px}
+.faq details p{margin-top:12px;color:var(--ink-soft)}
+
+.contact{background:var(--tint)}
+.contact-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:28px;display:grid;gap:14px}
+form label{font-size:14px;font-weight:600;display:grid;gap:6px}
+textarea{min-height:100px;resize:vertical}
+.summary{background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:14px 16px;font-size:14px;color:var(--ink-soft);white-space:pre-line}
+footer{background:#0a2533;color:#9fb3c0;font-size:12px;line-height:1.5;padding:28px 0}
+footer p{margin-bottom:6px}
+footer strong{color:#fff}
+.repo{color:#fff;font-weight:600;margin-bottom:10px!important}
+
+@media (max-width:960px){
+  .calc-grid{grid-template-columns:1fr}
+  .results{position:static}
+  .cards{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .contact-box{grid-template-columns:1fr}
+  .hero{padding:40px 0 28px}
+  section{padding:48px 0}
+  header.top .btn{display:none}
+  .panel{padding:22px 18px}
+  .hero-num{padding:22px}
+}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/">UK Expat <span>Mortgages</span></a>
+    <div class="nav">
+      <a class="navlink" href="/calculator/"><span class="long">Mortgage </span>calculator</a>
+      <a class="navlink" href="/stamp-duty-calculator/">Stamp duty</a>
+      <a class="btn small" href="#contact">Free consultation</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="crumb"><a href="/">Home</a> / Stamp duty calculator</p>
+    <p class="eyebrow">Stamp duty and buying costs for expats</p>
+    <h1>UK stamp duty calculator for expats and non-UK residents</h1>
+    <p class="lead">Work out the Stamp Duty Land Tax (SDLT) on your UK purchase, including the 2% non-resident surcharge, the 5% surcharge on additional properties and the rules for buying through a limited company. Then see the total cash you need: deposit, stamp duty, legal fees, valuation and broker fees.</p>
+    <p class="guide"><strong>England and Northern Ireland only.</strong> Scotland (LBTT) and Wales (LTT) have their own taxes and rates. <a href="#contact">Ask an adviser</a> if you are buying there.<br><strong>Indicative guide only.</strong> Stamp duty depends on your exact circumstances. Your solicitor confirms the final figure before completion. You can check it on the <a href="https://www.tax.service.gov.uk/calculate-stamp-duty-land-tax/" target="_blank" rel="noopener">HMRC stamp duty calculator</a>.</p>
+  </div>
+</section>
+
+<section class="calc">
+  <div class="wrap calc-grid">
+    <div class="panel" id="inputs">
+      <h3>Your purchase</h3>
+      <p class="sub">Residential property in England or Northern Ireland. Rates from 1 April 2025.</p>
+
+      <div class="group">
+        <p class="glabel">The property</p>
+        <label class="field"><span>Purchase price</span>
+          <div class="money"><input id="price" inputmode="numeric" value="450,000" aria-label="Purchase price in pounds"></div>
+        </label>
+        <label class="field"><span>Mortgage amount</span>
+          <div class="money"><input id="loan" inputmode="numeric" value="337,500" aria-label="Mortgage amount in pounds"></div>
+          <span class="hint" id="loanHint">Expat lenders lend up to 75% of the price. Enter 0 for a cash purchase. <a href="/calculator/">Use the mortgage calculator</a> to see how much you could get.</span>
+        </label>
+      </div>
+
+      <div class="group">
+        <p class="glabel">About you</p>
+        <div class="field">
+          <span>Buying as</span>
+          <div class="seg" role="radiogroup" aria-label="Buying as">
+            <input type="radio" name="buyer" id="b-ind" value="ind" checked><label for="b-ind">Individual</label>
+            <input type="radio" name="buyer" id="b-co" value="co"><label for="b-co">Limited company</label>
+          </div>
+        </div>
+        <div class="field">
+          <span id="resLabel">Where do you live?</span>
+          <div class="seg" role="radiogroup" aria-label="UK residence">
+            <input type="radio" name="res" id="r-non" value="non" checked><label for="r-non">Outside the UK</label>
+            <input type="radio" name="res" id="r-uk" value="uk"><label for="r-uk">In the UK</label>
+          </div>
+          <span class="hint" id="resHint">For stamp duty you are non-UK resident if you were in the UK for fewer than 183 days in the 12 months before you buy. If you are buying with someone else and any of you is non-UK resident, the surcharge usually applies.</span>
+        </div>
+
+        <div id="indQs">
+          <div class="field">
+            <span>What is the property for?</span>
+            <div class="seg" role="radiogroup" aria-label="Property use">
+              <input type="radio" name="use" id="u-let" value="let" checked><label for="u-let">Buy-to-let or second home</label>
+              <input type="radio" name="use" id="u-home" value="home"><label for="u-home">To live in as my main home</label>
+            </div>
+          </div>
+          <div class="field">
+            <span>Will you own any other home or residential property anywhere in the world when you buy?</span>
+            <div class="seg" role="radiogroup" aria-label="Other property">
+              <input type="radio" name="other" id="o-yes" value="yes" checked><label for="o-yes">Yes</label>
+              <input type="radio" name="other" id="o-no" value="no"><label for="o-no">No</label>
+            </div>
+            <span class="hint">Include property overseas and part shares worth £40,000 or more. If you are buying with someone, count property owned by either of you, or by your spouse or civil partner.</span>
+          </div>
+          <div class="field" id="replaceQ">
+            <span>Are you selling your main home, or have you sold it in the last 3 years, and this replaces it?</span>
+            <div class="seg" role="radiogroup" aria-label="Replacing main home">
+              <input type="radio" name="replace" id="rp-no" value="no" checked><label for="rp-no">No</label>
+              <input type="radio" name="replace" id="rp-yes" value="yes"><label for="rp-yes">Yes</label>
+            </div>
+          </div>
+          <div class="field" id="ftbQ">
+            <span>Have you, and anyone buying with you, ever owned a home anywhere in the world?</span>
+            <div class="seg" role="radiogroup" aria-label="Previously owned">
+              <input type="radio" name="owned" id="ow-yes" value="yes" checked><label for="ow-yes">Yes, I have owned before</label>
+              <input type="radio" name="owned" id="ow-no" value="no"><label for="ow-no">No, first-time buyer</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="coQs" class="hidden">
+          <div class="field">
+            <span>Will the company let the property to tenants who are not connected to the company?</span>
+            <div class="seg" role="radiogroup" aria-label="Rental business">
+              <input type="radio" name="relief" id="rl-yes" value="yes" checked><label for="rl-yes">Yes, as a rental business</label>
+              <input type="radio" name="relief" id="rl-no" value="no"><label for="rl-no">No</label>
+            </div>
+            <span class="hint">Most buy-to-let limited companies (SPVs) qualify for relief from the 17% rate. It does not apply if the property will be lived in by the company's owners or their family.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group">
+        <p class="glabel">Buying costs <small style="text-transform:none;letter-spacing:0;color:var(--ink-soft);font-weight:400">(typical figures, change any of them)</small></p>
+        <div class="feeline"><div class="lbl">Solicitor's legal fee<small>Conveyancing for the purchase. Typically £1,500 to £2,500. More for leasehold, new build or company purchases.</small></div><div class="money"><input id="legal" inputmode="numeric" value="1,750" aria-label="Solicitor legal fee"></div></div>
+        <div class="feeline"><div class="lbl">VAT on legal fee (20%)<small><label class="check" style="font-size:13px;margin-top:4px"><input type="checkbox" id="vat" checked> Add VAT</label></small></div><div style="text-align:right;font-weight:600" id="vatOut">£350</div></div>
+        <div class="feeline"><div class="lbl">Searches, Land Registry and other costs<small>Local authority and other searches, Land Registry fee, ID checks and bank transfer fees.</small></div><div class="money"><input id="disb" inputmode="numeric" value="500" aria-label="Searches and disbursements"></div></div>
+        <div class="feeline" id="valLine"><div class="lbl">Valuation fee<small>Paid to the lender for its valuation. Set from the price, and some lenders include it free.</small></div><div class="money"><input id="valfee" inputmode="numeric" value="600" aria-label="Valuation fee"></div></div>
+        <div class="feeline" id="lenderLine"><div class="lbl">Lender arrangement fee<small>Usually £999 to £4,999, or a percentage of the loan. It can often be added to the mortgage instead.</small></div><div class="money"><input id="lenderfee" inputmode="numeric" value="1,999" aria-label="Lender arrangement fee"></div></div>
+        <div class="feeline" id="brokerLine"><div class="lbl">Mortgage broker fee<small>Up to 1% of the mortgage amount, agreed with you before we apply. <span id="brokerAmt"></span></small></div><div class="pct"><input id="brokerPct" inputmode="decimal" value="1.00" aria-label="Broker fee percentage"></div></div>
+      </div>
+
+      <div class="group">
+        <p class="glabel">See the figures in your own currency <small style="text-transform:none;letter-spacing:0;color:var(--ink-soft);font-weight:400">(optional)</small></p>
+        <div class="two">
+          <label class="field"><span>Currency</span>
+            <select id="ccy">
+              <option value="">Pounds only</option>
+              <option>AED</option><option>SAR</option><option>QAR</option><option>BHD</option><option>KWD</option><option>OMR</option>
+              <option>USD</option><option>CAD</option><option>EUR</option><option>HKD</option><option>SGD</option><option>MYR</option>
+              <option>CNY</option><option>INR</option><option>ZAR</option>
+            </select>
+          </label>
+          <label class="field"><span id="fxLabel">1 GBP equals</span>
+            <input id="fx" inputmode="decimal" placeholder="Choose a currency" aria-label="Exchange rate">
+          </label>
+        </div>
+        <p class="hint" id="fxHint">Choose your currency and the exchange rate is filled in for you. You can change it.</p>
+      </div>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <div class="hero-num">
+        <div class="k">Stamp duty to pay</div>
+        <div class="v" id="sdltOut">£0</div>
+        <div class="tag" id="effOut"></div>
+        <div class="fx" id="sdltFx"></div>
+        <div class="alt" id="ruleOut"></div>
+      </div>
+
+      <div class="panel">
+        <h3>How the stamp duty is worked out</h3>
+        <p class="sub" id="bandSub" style="margin-bottom:6px"></p>
+        <table class="bands">
+          <thead><tr><th>Part of the price</th><th>Rate</th><th>Tax</th></tr></thead>
+          <tbody id="bandBody"></tbody>
+          <tfoot><tr><td>Total stamp duty</td><td></td><td id="bandTotal">£0</td></tr></tfoot>
+        </table>
+        <div class="chips" id="chips"></div>
+        <p class="note" id="sdltNote"></p>
+      </div>
+
+      <div class="panel">
+        <h3>Total cash needed to buy</h3>
+        <div class="bar" id="bar" aria-hidden="true"></div>
+        <div class="legend" id="legend" aria-hidden="true"></div>
+        <div class="rows" style="margin-top:10px">
+          <div class="row"><span>Deposit <small id="depPct"></small></span><b id="depOut">£0</b></div>
+          <div class="row"><span>Stamp duty</span><b id="sdlt2">£0</b></div>
+          <div class="row"><span>Legal fee, including VAT if ticked</span><b id="legalOut">£0</b></div>
+          <div class="row"><span>Searches, Land Registry and other costs</span><b id="disbOut">£0</b></div>
+          <div class="row" id="valRow"><span>Valuation fee</span><b id="valOut">£0</b></div>
+          <div class="row" id="lenderRow"><span>Lender arrangement fee</span><b id="lenderOut">£0</b></div>
+          <div class="row" id="brokerRow"><span>Mortgage broker fee</span><b id="brokerOut">£0</b></div>
+          <div class="row total"><span>Estimated total budget</span><b id="totalOut">£0</b></div>
+        </div>
+        <div class="fxinline hidden" id="fxInline"></div>
+        <p class="note">Plus your mortgage of <b id="loanOut">£0</b>, which makes up the rest of the price. Also allow for a building survey if you want one, furnishing and letting costs for a buy-to-let, and exchange rate costs when you send money to the UK.</p>
+      </div>
+
+      <div class="cta-box">
+        <h3>Want these figures confirmed?</h3>
+        <p>Stamp duty for expats and companies has a lot of rules. Send us your figures and a specialist adviser will check them, find the most suitable lender and work with your solicitor on the final stamp duty figure.</p>
+        <a class="btn gold" href="#contact">Send my figures to an adviser</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <h2>Stamp duty rates for expats and non-UK residents</h2>
+    <p class="intro">Stamp duty is charged in slices, like income tax. Each rate applies only to the part of the price within that band. These are the rates for residential property in England and Northern Ireland from 1 April 2025.</p>
+    <div class="tablewrap">
+      <table class="ratetable">
+        <thead><tr><th>Part of the price</th><th>Main home, UK resident</th><th>Main home, non-UK resident</th><th>Additional property, UK resident</th><th>Additional property or company, non-UK resident</th></tr></thead>
+        <tbody>
+          <tr><td>Up to £125,000</td><td>0%</td><td>2%</td><td>5%</td><td>7%</td></tr>
+          <tr><td>£125,001 to £250,000</td><td>2%</td><td>4%</td><td>7%</td><td>9%</td></tr>
+          <tr><td>£250,001 to £925,000</td><td>5%</td><td>7%</td><td>10%</td><td>12%</td></tr>
+          <tr><td>£925,001 to £1.5 million</td><td>10%</td><td>12%</td><td>15%</td><td>17%</td></tr>
+          <tr><td>Over £1.5 million</td><td>12%</td><td>14%</td><td>17%</td><td>19%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hint" style="margin-bottom:32px">First-time buyers buying a main home of £500,000 or less pay 0% up to £300,000 and 5% from £300,001 to £500,000, plus 2% on each part if non-UK resident.</p>
+    <div class="cards">
+      <div class="card"><h3>Non-UK resident surcharge (2%)</h3><p>If you were in the UK for fewer than 183 days in the 12 months before buying, 2% is added to every band. A company pays it if it is non-UK resident or controlled by non-UK residents. If you become UK resident within a year of buying, you may be able to claim it back.</p></div>
+      <div class="card"><h3>Additional property surcharge (5%)</h3><p>If you will own more than one residential property anywhere in the world, including your home overseas, 5% is added to every band. This covers most buy-to-let purchases. It does not apply if you are replacing your main home.</p></div>
+      <div class="card"><h3>Buying through a limited company</h3><p>A company always pays the 5% additional property surcharge, and 2% more if it is controlled by non-UK residents. On homes over £500,000 a 17% flat rate (19% for non-residents) applies, unless the company qualifies for a relief, for example by letting the property to unconnected tenants.</p></div>
+      <div class="card"><h3>When it is paid</h3><p>Your solicitor files the stamp duty return and pays HMRC within 14 days of completion, so the money needs to be with them before you complete. It cannot be added to the mortgage.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>Stamp duty questions from expats</h2>
+    <details><summary>Do expats and non-UK residents pay more stamp duty?</summary><p>Yes. Buyers who are not UK resident pay a 2% surcharge on top of the normal stamp duty rates when buying residential property in England or Northern Ireland. For stamp duty you are non-UK resident if you were not in the UK for at least 183 days in the 12 months before you buy.</p></details>
+    <details><summary>What is the stamp duty surcharge on a buy-to-let or second home?</summary><p>If you will own more than one residential property anywhere in the world after the purchase, and you are not replacing your main home, a 5% surcharge applies on top of the normal rates. For a non-UK resident that means 7% more than the standard rate on each band.</p></details>
+    <details><summary>How much stamp duty does a limited company pay?</summary><p>Companies buying residential property always pay the 5% additional property surcharge, plus 2% if the company is non-UK resident or controlled by non-UK residents. A 17% flat rate (19% for non-residents) can apply to properties over £500,000 unless a relief applies, such as the property being let to unconnected tenants as part of a rental business.</p></details>
+    <details><summary>Can expats get first-time buyer relief?</summary><p>Possibly. First-time buyer relief applies if you, and anyone buying with you, have never owned a home anywhere in the world, you will live in the property as your main home and the price is £500,000 or less. Non-UK residents still pay the 2% surcharge on top. It does not apply to buy-to-let or company purchases.</p></details>
+    <details><summary>What other costs are there when buying a UK property?</summary><p>As well as the deposit and stamp duty, allow for solicitor (conveyancing) fees plus VAT, searches and Land Registry fees, the lender's valuation and arrangement fees, and the mortgage broker fee. This calculator adds them up to give an estimate of the total cash you need.</p></details>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-box">
+    <div>
+      <h2>Speak to a UK expat mortgage adviser</h2>
+      <p class="intro" style="margin-bottom:20px">Your stamp duty and cost figures are added to the form automatically. The consultation is free and there is no obligation.</p>
+      <p><strong>Email:</strong> <a href="mailto:john.florey@opesfp.com">john.florey@opesfp.com</a></p>
+      <p style="margin-top:18px"><a href="/calculator/">Mortgage calculator</a> &middot; <a href="/">Back to UK Expat Mortgages</a></p>
+    </div>
+    <form id="enquiry" action="https://formsubmit.co/john.florey@opesfp.com" method="POST">
+      <input type="hidden" name="_subject" value="New stamp duty calculator enquiry from UK Expat Mortgages website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Thank you for contacting UK Expat Mortgages. We have received your enquiry and your stamp duty and cost figures, and one of our specialist UK mortgage advisers will be in touch with you shortly. Kind regards, John Florey, UK Expat Mortgages">
+      <input type="hidden" name="_next" value="https://www.uk-expat-mortgage.co.uk/thank-you/">
+      <input type="hidden" name="calculator_figures" id="calcFigures">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <label>Name<input name="name" required autocomplete="name"></label>
+      <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      <label>Phone or WhatsApp<input name="phone" autocomplete="tel"></label>
+      <label>Country you live in<input name="country" autocomplete="country-name" placeholder="e.g. United Arab Emirates"></label>
+      <label>Anything else we should know?<textarea name="message" placeholder="e.g. I live in Dubai, own my home there and want to buy a flat in Manchester to let"></textarea></label>
+      <div><p style="font-size:14px;font-weight:600;margin-bottom:6px">Figures we will receive</p><div class="summary" id="summary"></div></div>
+      <p style="font-size:13px;color:var(--ink-soft)">By sending this form you agree to be contacted about your enquiry.</p>
+      <button class="btn" type="submit">Send enquiry</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="repo">YOUR HOME OR PROPERTY MAY BE REPOSSESSED IF YOU DO NOT KEEP UP REPAYMENTS ON A MORTGAGE OR ANY OTHER DEBT SECURED ON IT.</p>
+    <p>This stamp duty and buying costs calculator is an indicative guide only, for residential property in England and Northern Ireland. It uses the Stamp Duty Land Tax rates in force from 1 April 2025 and simplified assumptions. It does not cover every relief or circumstance, for example shared ownership, multiple dwellings, mixed use or non-residential property, leases, linked transactions or trusts. It is not tax or legal advice. Your solicitor or a tax adviser will confirm the stamp duty payable. Fees shown are typical estimates and will vary. All mortgages are subject to status, the lender's criteria and a valuation of the property.</p>
+    <p><strong>UK Expat Mortgages</strong> is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710. Registered address: Sterling House, 27 Hatchlands Road, Redhill, Surrey RH1 6RW.</p>
+    <p>The Financial Conduct Authority does not regulate some aspects of buy to let mortgages, overseas mortgages and tax advice.</p>
+    <p>A typical fee of up to 1% of the mortgage amount may be payable on successful completion. The fee will be agreed with each applicant prior to submitting an application. The total fee is non-refundable. We may also be paid commission from the lender.</p>
+    <p>If you have a complaint, please contact us in the first instance. If we cannot resolve it, you may be entitled to refer it to the Financial Ombudsman Service (www.financial-ombudsman.org.uk).</p>
+    <p>Privacy: information you submit through this website is used only to respond to your enquiry and to provide mortgage advice, and is not sold or shared for marketing purposes.</p>
+    <p>&copy; <span id="yr">2026</span> UK Expat Mortgages. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+/* SDLT-ENGINE-START */
+// Stamp Duty Land Tax, residential, England and Northern Ireland, rates from 1 April 2025.
+// Source: GOV.UK residential property rates, higher rates for additional properties,
+// non-UK resident surcharge and corporate bodies guidance. Checked 3 October 2026.
+var SDLT={
+  checked:'3 October 2026',
+  standard:[[125000,0],[250000,2],[925000,5],[1500000,10],[Infinity,12]],
+  ftb:[[300000,0],[500000,5]],
+  ftbMax:500000,
+  higher:5,          // additional property surcharge
+  nonRes:2,          // non-UK resident surcharge
+  higherMin:40000,   // higher rates do not apply below £40,000
+  corpFlat:17,       // 17% rate for companies, over corpMin, no relief
+  corpMin:500000
+};
+function sdltCalc(price,o){
+  // o: {company:bool, nonRes:bool, higher:bool, ftb:bool, relief:bool}
+  var res={total:0,slices:[],rule:'standard',surcharge:0,flat:0};
+  if(!(price>0))return res;
+  var nr=o.nonRes?SDLT.nonRes:0;
+  var higher=(o.company||o.higher)&&price>=SDLT.higherMin;
+  if(o.company&&price>SDLT.corpMin&&!o.relief){
+    var r=SDLT.corpFlat+nr;
+    res.rule='corporate17';res.flat=r;
+    res.total=Math.floor(price*r/100);
+    res.slices=[{from:0,to:price,rate:r,tax:res.total}];
+    return res;
+  }
+  var bands=SDLT.standard;
+  if(!o.company&&o.ftb&&!higher&&price<=SDLT.ftbMax){bands=SDLT.ftb;res.rule='ftb';}
+  else if(higher){res.rule='higher';}
+  var add=(higher?SDLT.higher:0)+nr;res.surcharge=add;
+  var prev=0,total=0;
+  for(var i=0;i<bands.length&&prev<price;i++){
+    var top=Math.min(bands[i][0],price),amt=top-prev,rate=bands[i][1]+add;
+    var tax=amt*rate/100;
+    res.slices.push({from:prev,to:top,rate:rate,tax:tax});
+    total+=tax;prev=top;
+  }
+  res.total=Math.floor(total);
+  return res;
+}
+/* SDLT-ENGINE-END */
+
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var gbp=function(n){return '£'+Math.round(n).toLocaleString('en-GB')};
+  var num=function(el){var v=parseFloat(String(el.value).replace(/[^0-9.]/g,''));return isFinite(v)?v:0};
+  var radio=function(n){return document.querySelector('input[name="'+n+'"]:checked').value};
+  var fmt=function(el){var v=num(el);el.value=v?v.toLocaleString('en-GB'):'0';};
+  var S={loanTouched:false,valTouched:false};
+
+  // Typical lender valuation fee by price. Editable on the page.
+  function valuationFee(p){
+    if(p<=250000)return 450;
+    if(p<=500000)return 600;
+    if(p<=750000)return 800;
+    if(p<=1000000)return 1000;
+    if(p<=2000000)return 1500;
+    return 2500;
+  }
+
+  // Exchange rates (1 GBP =), fallback figures, live rates fetched when a currency is chosen.
+  var FX={date:'29 September 2026',live:false,r:{AED:4.8684,SAR:4.9711,QAR:4.8253,BHD:0.4984,KWD:0.4085,OMR:0.5097,USD:1.3254,CAD:1.8777,EUR:1.1655,HKD:10.3993,SGD:1.6937,MYR:5.4142,CNY:8.9012,INR:127.22,ZAR:21.7554}};
+  var fxTyped=false,fxTried=false;
+  function fxDp(c){return FX.r[c]>=20?2:4;}
+  function fillFx(){
+    var c=$('ccy').value;
+    if(!c){$('fx').value='';calc();return;}
+    if(!fxTyped){$('fx').value=FX.r[c].toFixed(fxDp(c));}
+    $('fxHint').textContent='Indicative rate: 1 GBP = '+FX.r[c].toFixed(fxDp(c))+' '+c+(FX.live?', updated ':', as at ')+FX.date+'. You can change it. Exchange rates move, so the amount in your currency will change.';
+    calc();
+  }
+  function loadLiveFx(){
+    if(fxTried)return;fxTried=true;
+    try{
+      fetch('https://open.er-api.com/v6/latest/GBP').then(function(r){return r.json();}).then(function(d){
+        if(d&&d.result==='success'&&d.rates){
+          Object.keys(FX.r).forEach(function(k){if(d.rates[k])FX.r[k]=d.rates[k];});
+          FX.live=true;
+          FX.date=new Date(d.time_last_update_unix*1000).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+          fillFx();
+        }
+      }).catch(function(){});
+    }catch(e){}
+  }
+  $('ccy').addEventListener('change',function(){fxTyped=false;fillFx();loadLiveFx();});
+  $('fx').addEventListener('input',function(){fxTyped=true;});
+
+  // Pre-fill from the mortgage calculator, e.g. ?price=450000&loan=337500&buyer=co&use=let
+  (function(){
+    var q=new URLSearchParams(location.search);
+    var p=parseFloat(q.get('price')),l=parseFloat(q.get('loan'));
+    if(p>0)$('price').value=Math.round(p).toLocaleString('en-GB');
+    if(l>=0&&q.get('loan')!==null){$('loan').value=Math.round(l).toLocaleString('en-GB');S.loanTouched=true;}
+    if(q.get('buyer')==='co')$('b-co').checked=true;
+    if(q.get('use')==='home')$('u-home').checked=true;
+  })();
+
+  ['price','loan','legal','disb','valfee','lenderfee'].forEach(function(id){$(id).addEventListener('blur',function(){fmt($(id));});});
+  $('loan').addEventListener('input',function(){S.loanTouched=true;});
+  $('valfee').addEventListener('input',function(){S.valTouched=true;});
+
+  function money(c,xr,n){return c+' '+Math.round(n*xr).toLocaleString('en-GB');}
+
+  function calc(){
+    var price=num($('price'));
+    var company=radio('buyer')==='co',nonRes=radio('res')==='non';
+    var use=radio('use'),other=radio('other')==='yes',replace=radio('replace')==='yes',owned=radio('owned')==='yes';
+
+    $('indQs').classList.toggle('hidden',company);
+    $('coQs').classList.toggle('hidden',!company);
+    $('replaceQ').classList.toggle('hidden',!(other&&use==='home'));
+    $('ftbQ').classList.toggle('hidden',!(!other&&use==='home'));
+    $('resLabel').textContent=company?'Where are the company and its owners based?':'Where do you live?';
+    $('resHint').textContent=company
+      ?'The 2% surcharge applies if the company is non-UK resident, or is a UK company controlled by people who are non-UK resident.'
+      :'For stamp duty you are non-UK resident if you were in the UK for fewer than 183 days in the 12 months before you buy. If you are buying with someone else and any of you is non-UK resident, the surcharge usually applies.';
+    $('r-non').nextElementSibling.textContent=company?'Owned from outside the UK':'Outside the UK';
+    $('r-uk').nextElementSibling.textContent=company?'UK resident and controlled':'In the UK';
+
+    // Higher rates: company always; individual if they will own another dwelling and are not replacing their main home.
+    var higher=company||(other&&!(use==='home'&&replace));
+    var ftb=!company&&!other&&use==='home'&&!owned;
+    var relief=radio('relief')==='yes';
+    var r=sdltCalc(price,{company:company,nonRes:nonRes,higher:higher,ftb:ftb,relief:relief});
+
+    // Mortgage default is 75% of the price.
+    if(!S.loanTouched&&document.activeElement!==$('loan')){$('loan').value=Math.floor(price*0.75).toLocaleString('en-GB');}
+    var loan=Math.min(num($('loan')),price);
+    if(!S.valTouched&&document.activeElement!==$('valfee')){$('valfee').value=valuationFee(price).toLocaleString('en-GB');}
+    var hasLoan=loan>0;
+    ['valLine','lenderLine','brokerLine','valRow','lenderRow','brokerRow'].forEach(function(id){$(id).classList.toggle('hidden',!hasLoan);});
+    $('loanHint').innerHTML=num($('loan'))>price*0.75+1
+      ?'<span style="color:var(--bad)">This is above 75% of the price. Most expat lenders lend up to 75%.</span> <a href="/calculator/">Use the mortgage calculator</a> to see how much you could get.'
+      :'Expat lenders lend up to 75% of the price. Enter 0 for a cash purchase. <a href="/calculator/">Use the mortgage calculator</a> to see how much you could get.';
+
+    // Stamp duty display
+    $('sdltOut').textContent=gbp(r.total);
+    $('sdlt2').textContent=gbp(r.total);
+    $('bandTotal').textContent=gbp(r.total);
+    $('effOut').textContent=price>0?'Effective rate '+(r.total/price*100).toFixed(2)+'% of the price':'';
+    var rule,chips=[];
+    if(r.rule==='corporate17'){
+      rule='17% flat rate for companies on homes over £500,000'+(nonRes?', plus 2% non-UK resident surcharge':'');
+      chips.push(['warn','17% company rate'+(nonRes?' + 2%':'')]);
+    } else {
+      if(r.rule==='ftb'){rule='First-time buyer relief';chips.push(['good','First-time buyer relief']);}
+      else if(higher&&price>=SDLT.higherMin){rule='Standard rates plus 5% additional property surcharge';chips.push(['warn','+5% additional property']);}
+      else rule='Standard rates';
+      if(nonRes){rule+=', plus 2% non-UK resident surcharge';chips.push(['warn','+2% non-UK resident']);}
+    }
+    if(!company&&!other&&use==='home'&&!owned&&price>SDLT.ftbMax){chips.push(['', 'First-time buyer relief not available over £500,000']);}
+    if(company&&relief&&price>SDLT.corpMin){chips.push(['good','Relief from the 17% rate (rental business)']);}
+    $('ruleOut').textContent=rule;
+    $('chips').innerHTML=chips.map(function(c){return '<span class="chip '+c[0]+'">'+c[1]+'</span>';}).join('');
+    $('bandSub').textContent=r.rule==='corporate17'?'The flat rate applies to the whole price.':'Each rate applies only to the part of the price in that band. Rates shown include any surcharges.';
+    $('bandBody').innerHTML=r.slices.map(function(s){
+      var label=r.rule==='corporate17'?'Whole price ('+gbp(price)+')':(s.from===0?'Up to '+gbp(s.to):gbp(s.from+1)+' to '+gbp(s.to));
+      return '<tr><td>'+label+'</td><td>'+(+s.rate.toFixed(2))+'%</td><td>'+gbp(Math.floor(s.tax))+'</td></tr>';
+    }).join('');
+    var note='';
+    if(company)note='Companies always pay the additional property rates. ';
+    else if(higher)note='The 5% surcharge applies because you will own more than one residential property, including any overseas. ';
+    if(nonRes&&!company)note+='If you become UK resident within 12 months of buying you may be able to reclaim the 2% surcharge. ';
+    if(!company&&higher&&use==='home')note+='If you sell your previous main home within 3 years you may be able to reclaim the 5% surcharge. ';
+    note+='Rates from 1 April 2025, checked '+SDLT.checked+'.';
+    $('sdltNote').textContent=note;
+
+    // Costs
+    var deposit=Math.max(price-loan,0);
+    var legal=num($('legal')),vat=$('vat').checked?legal*0.2:0,disb=num($('disb'));
+    var val=hasLoan?num($('valfee')):0,lender=hasLoan?num($('lenderfee')):0;
+    var broker=hasLoan?Math.round(loan*num($('brokerPct'))/100):0;
+    $('vatOut').textContent=gbp(vat);
+    $('brokerAmt').textContent=hasLoan?'On '+gbp(loan)+' that is '+gbp(broker)+'.':'';
+    var total=deposit+r.total+legal+vat+disb+val+lender+broker;
+    $('depOut').textContent=gbp(deposit);
+    $('depPct').textContent=price>0?'('+(deposit/price*100).toFixed(0)+'% of the price)':'';
+    $('legalOut').textContent=gbp(legal+vat);
+    $('disbOut').textContent=gbp(disb);
+    $('valOut').textContent=gbp(val);
+    $('lenderOut').textContent=gbp(lender);
+    $('brokerOut').textContent=gbp(broker);
+    $('totalOut').textContent=gbp(total);
+    $('loanOut').textContent=gbp(loan);
+
+    var parts=[['Deposit',deposit,'#0e3b53'],['Stamp duty',r.total,'#c89b3c'],['Legal and searches',legal+vat+disb,'#6f8fa3'],['Lender, valuation and broker',val+lender+broker,'#b8c7d1']];
+    $('bar').innerHTML=total>0?parts.map(function(p){return p[1]>0?'<i style="width:'+(p[1]/total*100)+'%;background:'+p[2]+'"></i>':'';}).join(''):'';
+    $('legend').innerHTML=parts.map(function(p){return p[1]>0?'<span style="--c:'+p[2]+'">'+p[0]+'</span>':'';}).join('');
+
+    // Currency
+    var c=$('ccy').value,xr=num($('fx')),on=!!(c&&xr);
+    $('fxLabel').textContent=c?'1 GBP equals ('+c+')':'1 GBP equals';
+    $('sdltFx').textContent=on?'About '+money(c,xr,r.total):'';
+    $('fxInline').classList.toggle('hidden',!on);
+    if(on)$('fxInline').innerHTML='Your total budget of <b>'+gbp(total)+'</b> is about <b>'+money(c,xr,total)+'</b>, of which stamp duty is about <b>'+money(c,xr,r.total)+'</b>.';
+
+    // Enquiry summary
+    var who=company?'Limited company'+(nonRes?', owned from outside the UK':', UK resident and controlled')+(relief?', letting as a rental business':', not a rental business')
+      :'Individual, '+(nonRes?'non-UK resident':'UK resident')+', '+(use==='home'?'main home':'buy-to-let or second home')+', '+(other?'owns other property':'no other property')+(ftb?', first-time buyer':'')+(other&&use==='home'&&replace?', replacing main home':'');
+    var s='Indicative stamp duty and buying costs (England and Northern Ireland, not a quote)\n'+
+      'Purchase price: '+gbp(price)+'\n'+
+      'Buyer: '+who+'\n'+
+      'Stamp duty: '+gbp(r.total)+' ('+rule.toLowerCase()+')\n'+
+      'Mortgage: '+gbp(loan)+', deposit '+gbp(deposit)+'\n'+
+      'Legal fee: '+gbp(legal+vat)+(vat?' incl. VAT':'')+', searches and other: '+gbp(disb)+'\n'+
+      (hasLoan?'Valuation: '+gbp(val)+', lender fee: '+gbp(lender)+', broker fee: '+gbp(broker)+'\n':'')+
+      'Estimated total budget: '+gbp(total)+(on?' (about '+money(c,xr,total)+')':'');
+    $('summary').textContent=s;
+    $('calcFigures').value=s;
+  }
+
+  $('inputs').addEventListener('input',calc);
+  $('inputs').addEventListener('change',calc);
+  calc();
+
+  var f=$('enquiry');
+  f.addEventListener('submit',function(){calc();var b=f.querySelector('button[type=submit]');if(b){b.textContent='Sending...';b.style.opacity='.7';}});
+})();
+</script>
+</body>
+</html>
