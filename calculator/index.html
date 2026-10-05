@@ -102,6 +102,7 @@ section h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:14px}
 .field > span.hint{font-weight:400}
 .field small{font-size:13px;color:var(--ink-soft);font-weight:400}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.two > .field:last-child{margin-bottom:14px}
 .money{position:relative}
 .money::before{content:"£";position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-size:16px}
 .money input{padding-left:28px}
@@ -266,7 +267,7 @@ footer strong{color:#fff}
 
       <div class="group hidden" id="incomeGroup">
         <p class="glabel">Your income</p>
-        <div class="two" style="align-items:end">
+        <div class="two">
           <label class="field"><span>Currency you are paid in</span>
             <select id="incCcy">
               <option value="">Pounds (GBP)</option>
