@@ -105,6 +105,8 @@ section h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:14px}
 .money{position:relative}
 .money::before{content:"£";position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-size:16px}
 .money input{padding-left:28px}
+.money.ccy::before{content:attr(data-ccy);font-size:14px;font-weight:600}
+.money.ccy input{padding-left:52px}
 .pct{position:relative}
 .pct::after{content:"%";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft)}
 .pct input{padding-right:30px}
@@ -264,13 +266,34 @@ footer strong{color:#fff}
 
       <div class="group hidden" id="incomeGroup">
         <p class="glabel">Your income</p>
-        <label class="field"><span>Your annual income (gross, before tax)</span>
-          <div class="money"><input id="income1" inputmode="numeric" value="60,000" aria-label="Your annual income in pounds"></div>
-          <span class="hint">Salary plus regular allowances, converted into pounds. Some lenders reduce income paid in a foreign currency.</span>
+        <div class="two" style="align-items:end">
+          <label class="field"><span>Currency you are paid in</span>
+            <select id="incCcy">
+              <option value="">Pounds (GBP)</option>
+              <option>AED</option><option>SAR</option><option>QAR</option><option>BHD</option><option>KWD</option><option>OMR</option>
+              <option>USD</option><option>CAD</option><option>EUR</option><option>HKD</option><option>SGD</option><option>MYR</option>
+              <option>CNY</option><option>INR</option><option>ZAR</option>
+            </select>
+          </label>
+          <label class="field"><span>Income entered as</span>
+            <select id="incPer">
+              <option value="12">Monthly</option>
+              <option value="1" selected>Annual</option>
+            </select>
+          </label>
+        </div>
+        <label class="field hidden" id="incFxField"><span id="incFxLabel">Exchange rate: 1 GBP equals</span>
+          <input id="incFx" inputmode="decimal" aria-label="Exchange rate for income">
+          <span class="hint" id="incFxHint"></span>
         </label>
-        <label class="field"><span>Joint applicant's annual income <small>(optional)</small></span>
-          <div class="money"><input id="income2" inputmode="numeric" value="0" aria-label="Joint applicant annual income in pounds"></div>
+        <label class="field"><span id="inc1Label">Your annual income (gross, before tax)</span>
+          <div class="money" id="inc1Box"><input id="income1" inputmode="numeric" value="60,000" aria-label="Your gross income"></div>
+          <span class="hint">Salary plus regular allowances, before tax.</span>
         </label>
+        <label class="field"><span id="inc2Label">Joint applicant's annual income <small>(optional)</small></span>
+          <div class="money" id="inc2Box"><input id="income2" inputmode="numeric" value="0" aria-label="Joint applicant gross income"></div>
+        </label>
+        <div class="fxinline" id="incGbpBox"></div>
         <p class="hint">As a guide, lenders offer up to 4.5 times income for your own home, on a repayment basis.</p>
       </div>
 
@@ -568,12 +591,36 @@ footer strong{color:#fff}
           FX.live=true;
           var t=new Date(d.time_last_update_unix*1000);
           FX.date=t.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-          fillFx();
+          fillFx();fillIncFx();
         }
       }).catch(function(){});
     }catch(e){}
   }
   $('ccy').addEventListener('change',function(){fxTyped=false;fillFx();loadLiveFx();});
+  var incFxTyped=false;
+  function fillIncFx(){
+    var c=$('incCcy').value;
+    $('incFxField').classList.toggle('hidden',!c);
+    ['inc1Box','inc2Box'].forEach(function(id){var el=$(id);el.classList.toggle('ccy',!!c);el.setAttribute('data-ccy',c||'');});
+    if(c){
+      if(!incFxTyped){$('incFx').value=FX.r[c].toFixed(fxDp(c));}
+      $('incFxLabel').textContent='Exchange rate: 1 GBP equals ('+c+')';
+      $('incFxHint').textContent='Indicative rate'+(FX.live?', updated '+FX.date:', as at '+FX.date)+'. You can change it. Lenders often convert foreign income at a lower, more cautious rate, and some reduce it further.';
+    }
+    calc();
+  }
+  $('incCcy').addEventListener('change',function(){incFxTyped=false;fillIncFx();loadLiveFx();});
+  $('incFx').addEventListener('input',function(){incFxTyped=true;});
+  $('incPer').addEventListener('change',function(){
+    var per=$('incPer').value==='12'?'monthly':'annual';
+    $('inc1Label').textContent='Your '+per+' income (gross, before tax)';
+    $('inc2Label').innerHTML='Joint applicant\'s '+per+' income <small>(optional)</small>';
+  });
+  function incomeGBP(){
+    var c=$('incCcy').value,xr=c?num($('incFx')):1,mult=+$('incPer').value;
+    var raw=(num($('income1'))+num($('income2')))*mult;
+    return {c:c,xr:xr,mult:mult,raw:raw,gbp:xr>0?raw/xr:0};
+  }
   $('fx').addEventListener('input',function(){fxTyped=true;});
   var MAX_LTV=0.75;
   var S={maxMort:0,loanTouched:false,stressEdited:false};
@@ -626,8 +673,11 @@ footer strong{color:#fff}
       $('formula').classList.remove('hidden');
       if(rentMax<ltvMax){maxMort=rentMax;limit='Limited by the rent, at '+Math.round(icr*100)+'% cover';}
     } else {
-      var inc=num($('income1'))+num($('income2'));
+      var I=incomeGBP(),inc=Math.round(I.gbp);
       var incMax=Math.floor(inc*INCOME_MULT);
+      $('incGbpBox').innerHTML=(I.c||I.mult===12)
+        ?'Total annual income'+(I.c?' in pounds':'')+': <b>'+gbp(inc)+'</b>'+(I.c?' ('+I.c+' '+Math.round(I.raw).toLocaleString('en-GB')+' a year at 1 GBP = '+I.xr+' '+I.c+')':'')
+        :'Total annual income: <b>'+gbp(inc)+'</b>';
       $('incMax').textContent=gbp(incMax);
       $('formula').textContent='Income calculation: '+gbp(inc)+' x '+INCOME_MULT+' = '+gbp(incMax);
       $('formula').classList.remove('hidden');
@@ -738,7 +788,7 @@ footer strong{color:#fff}
       (buying?'Purchase price: ':'Property value: ')+gbp(value)+'\n'+
       (buying?'':'Current balance: '+gbp(num($('balance')))+'\n')+
       rentLine+
-      (btl?'':'Annual income: '+gbp(num($('income1')))+(num($('income2'))?' plus joint applicant '+gbp(num($('income2'))):'')+' (4.5 x income = '+gbp(Math.floor((num($('income1'))+num($('income2')))*INCOME_MULT))+')\n')+
+      (btl?'':(function(){var I=incomeGBP();return 'Income: '+(I.c||'GBP')+' '+num($('income1')).toLocaleString('en-GB')+(num($('income2'))?' plus joint applicant '+num($('income2')).toLocaleString('en-GB'):'')+' '+(I.mult===12?'a month':'a year')+(I.c?', at 1 GBP = '+I.xr+' '+I.c:'')+' = '+gbp(Math.round(I.gbp))+' a year (4.5 x income = '+gbp(Math.floor(Math.round(I.gbp)*INCOME_MULT))+')\n';})())+
       'Stage 1 maximum mortgage: '+gbp(S.maxMort)+' at '+(value>0?(S.maxMort/value*100).toFixed(1):'0')+'% LTV ('+$('maxLimit').textContent.toLowerCase()+')\n'+
       'Mortgage amount used: '+gbp(loan)+' ('+ltv.toFixed(1)+'% LTV)'+(buying?', deposit '+gbp(deposit):'')+'\n'+
       'Term: '+term+' years, '+(io?'interest only':'repayment')+', '+fix+' year fixed at '+rate.toFixed(2)+'% ('+(choice==='own'?'own rate':choice==='avg'?'average rate':choice+'est rate')+')\n'+
