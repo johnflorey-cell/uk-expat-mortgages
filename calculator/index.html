@@ -240,7 +240,7 @@ footer strong{color:#fff}
     <div class="panel" id="inputs1">
       <p class="stagehead">Stage 1</p>
       <h3>How much mortgage could I get?</h3>
-      <p class="sub">For buy-to-let, the mortgage is based on the rent the property will earn, up to a maximum of 75% of the value. For standard residential property in the UK only.</p>
+      <p class="sub">For buy-to-let, the mortgage is based on the rent the property will earn. For your own home, it is based on your income. In both cases up to a maximum of 75% of the value. For standard residential property in the UK only.</p>
 
       <div class="group">
         <p class="glabel">What are you looking to do?</p>
@@ -260,6 +260,18 @@ footer strong{color:#fff}
         <label class="field" id="balanceField"><span>Current mortgage balance</span>
           <div class="money"><input id="balance" inputmode="numeric" value="250,000" aria-label="Current mortgage balance"></div>
         </label>
+      </div>
+
+      <div class="group hidden" id="incomeGroup">
+        <p class="glabel">Your income</p>
+        <label class="field"><span>Your annual income (gross, before tax)</span>
+          <div class="money"><input id="income1" inputmode="numeric" value="60,000" aria-label="Your annual income in pounds"></div>
+          <span class="hint">Salary plus regular allowances, converted into pounds. Some lenders reduce income paid in a foreign currency.</span>
+        </label>
+        <label class="field"><span>Joint applicant's annual income <small>(optional)</small></span>
+          <div class="money"><input id="income2" inputmode="numeric" value="0" aria-label="Joint applicant annual income in pounds"></div>
+        </label>
+        <p class="hint">As a guide, lenders offer up to 4.5 times income for your own home, on a repayment basis.</p>
       </div>
 
       <div class="group" id="btlGroup">
@@ -296,6 +308,7 @@ footer strong{color:#fff}
         <h3>How it is worked out</h3>
         <div class="rows">
           <div class="row" id="rentRow"><span id="rentCalc">Based on rent</span><b id="rentMax">£0</b></div>
+          <div class="row" id="incRow"><span>Based on income (4.5 x income)</span><b id="incMax">£0</b></div>
           <div class="row"><span>Maximum at 75% of the value</span><b id="ltvMax">£0</b></div>
           <div class="row total"><span>Your maximum mortgage (the lower figure)</span><b id="maxMort2">£0</b></div>
           <div class="row"><span>Loan to value (LTV)</span><b id="maxLtv2">0%</b></div>
@@ -303,7 +316,7 @@ footer strong{color:#fff}
           <div class="row" id="raiseRow"><span>Could raise above your current balance</span><b id="raise">£0</b></div>
         </div>
         <p class="formula" id="formula"></p>
-        <p class="note" id="resNote">For your own home, lenders also assess your income and outgoings, so the amount may be lower. Your adviser will confirm what you could borrow.</p>
+        <p class="note" id="resNote">For your own home, 4.5 times income is a guide. Lenders also look at your outgoings, commitments, credit history and the currency you are paid in, so the amount may be lower. Your adviser will confirm what you could borrow.</p>
       </div>
 
       <div class="cta-box">
@@ -354,7 +367,8 @@ footer strong{color:#fff}
           </label>
         </div>
         <p class="hint" id="rateHint"></p>
-        <label class="field" style="margin-top:14px"><span>Interest only or repayment</span>
+        <p class="hint" id="homeRepay" style="margin-top:14px"><b>Repayment mortgage.</b> Mortgages for your own home are on a repayment basis, so you pay off the mortgage and the interest over the term.</p>
+        <label class="field" id="rtypeField" style="margin-top:14px"><span>Interest only or repayment</span>
           <select id="rtype">
             <option value="io">Interest only</option>
             <option value="cai">Repayment (capital and interest)</option>
@@ -531,6 +545,7 @@ footer strong{color:#fff}
     btlCo:{'2':{low:5.51,avg:6.08,high:6.64},'5':{low:5.69,avg:6.11,high:6.74}}
   };
   var ICR={ind:1.45,co:1.25};
+  var INCOME_MULT=4.5;
   // Fallback exchange rates (1 GBP =), 29 September 2026. Live rates are fetched when available.
   var FX={date:'29 September 2026',live:false,r:{AED:4.8684,SAR:4.9711,QAR:4.8253,BHD:0.4984,KWD:0.4085,OMR:0.5097,USD:1.3254,CAD:1.8777,EUR:1.1655,HKD:10.3993,SGD:1.6937,MYR:5.4142,CNY:8.9012,INR:127.22,ZAR:21.7554}};
   var fxTyped=false,fxTried=false;
@@ -562,7 +577,7 @@ footer strong{color:#fff}
   var S={maxMort:0,loanTouched:false,stressEdited:false};
   $('stressRate').addEventListener('input',function(){S.stressEdited=true;});
 
-  ['value','balance','rent','loan'].forEach(function(id){$(id).addEventListener('blur',function(){fmt($(id));});});
+  ['value','balance','rent','loan','income1','income2'].forEach(function(id){$(id).addEventListener('blur',function(){fmt($(id));});});
   $('rate').addEventListener('input',function(){$('rateChoice').value='own';});
   $('loan').addEventListener('input',function(){S.loanTouched=true;});
 
@@ -585,6 +600,8 @@ footer strong{color:#fff}
     $('btlGroup').classList.toggle('hidden',!btl);
     $('rentRow').classList.toggle('hidden',!btl);
     $('resNote').classList.toggle('hidden',btl);
+    $('incomeGroup').classList.toggle('hidden',btl);
+    $('incRow').classList.toggle('hidden',btl);
     $('minDepRow').classList.toggle('hidden',!buying);
     $('raiseRow').classList.toggle('hidden',buying);
 
@@ -607,7 +624,12 @@ footer strong{color:#fff}
       $('formula').classList.remove('hidden');
       if(rentMax<ltvMax){maxMort=rentMax;limit='Limited by the rent, at '+Math.round(icr*100)+'% cover';}
     } else {
-      $('formula').classList.add('hidden');
+      var inc=num($('income1'))+num($('income2'));
+      var incMax=Math.floor(inc*INCOME_MULT);
+      $('incMax').textContent=gbp(incMax);
+      $('formula').textContent='Income calculation: '+gbp(inc)+' x '+INCOME_MULT+' = '+gbp(incMax);
+      $('formula').classList.remove('hidden');
+      if(incMax<ltvMax){maxMort=incMax;limit='Limited by your income, at 4.5 times income';}
     }
     S.maxMort=maxMort;
     $('maxMort').textContent=gbp(maxMort);
@@ -641,6 +663,9 @@ footer strong{color:#fff}
     $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+RATES.updated+'. Updated monthly.';
     $('rLow').textContent=band.low.toFixed(2)+'%';$('rAvg').textContent=band.avg.toFixed(2)+'%';$('rHigh').textContent=band.high.toFixed(2)+'%';
 
+    if(!btl){$('rtype').value='cai';}
+    $('rtypeField').classList.toggle('hidden',!btl);
+    $('homeRepay').classList.toggle('hidden',btl);
     var term=+$('term').value,rate=num($('rate')),io=$('rtype').value==='io';
     $('termOut').textContent=term+' years';
     $('rtypeHint').textContent=btl
@@ -683,7 +708,7 @@ footer strong{color:#fff}
     $('rentPctLbl').textContent=(io?'Interest only':'Repayment')+' payment as % of the rent';
     var rpo=btl&&rentM>0?other/rentM*100:0;
     $('payRent').textContent=(io?'The interest only payment is ':'The repayment mortgage payment is ')+rp.toFixed(1)+'% of the '+gbp(rentM)+' monthly rent';
-    $('payAlt').textContent=loan>0?(io?'On a repayment basis it would be '+gbp(other)+' a month':'On an interest only basis it would be '+gbp(other)+' a month')+(btl&&rentM>0?', '+rpo.toFixed(1)+'% of the rent':''):'';
+    $('payAlt').textContent=!btl?'':loan>0?(io?'On a repayment basis it would be '+gbp(other)+' a month':'On an interest only basis it would be '+gbp(other)+' a month')+(btl&&rentM>0?', '+rpo.toFixed(1)+'% of the rent':''):'';
     $('loanOut').textContent=gbp(loan);
     $('ltv').textContent=ltv.toFixed(1)+'%';
     $('payLtv').textContent='On a '+gbp(loan)+' mortgage at '+ltv.toFixed(1)+'% loan to value';
@@ -710,6 +735,7 @@ footer strong{color:#fff}
       (buying?'Purchase price: ':'Property value: ')+gbp(value)+'\n'+
       (buying?'':'Current balance: '+gbp(num($('balance')))+'\n')+
       rentLine+
+      (btl?'':'Annual income: '+gbp(num($('income1')))+(num($('income2'))?' plus joint applicant '+gbp(num($('income2'))):'')+' (4.5 x income = '+gbp(Math.floor((num($('income1'))+num($('income2')))*INCOME_MULT))+')\n')+
       'Stage 1 maximum mortgage: '+gbp(S.maxMort)+' at '+(value>0?(S.maxMort/value*100).toFixed(1):'0')+'% LTV ('+$('maxLimit').textContent.toLowerCase()+')\n'+
       'Mortgage amount used: '+gbp(loan)+' ('+ltv.toFixed(1)+'% LTV)'+(buying?', deposit '+gbp(deposit):'')+'\n'+
       'Term: '+term+' years, '+(io?'interest only':'repayment')+', '+fix+' year fixed at '+rate.toFixed(2)+'% ('+(choice==='own'?'own rate':choice==='avg'?'average rate':choice+'est rate')+')\n'+
