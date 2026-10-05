@@ -540,7 +540,9 @@ footer strong{color:#fff}
   // Checked 29 September 2026. Lender names deliberately not shown.
   var RATES={
     updated:'29 September 2026',
-    res:{'2':{low:5.51,avg:5.61,high:5.70},'5':{low:5.80,avg:5.85,high:5.89}},
+    resUpdated:'5 October 2026',
+    // Residential (own home, repayment): Dudley BS and Nomo, rechecked 5 Oct 2026
+    res:{'2':{low:5.70,avg:5.80,high:5.89},'5':{low:5.80,avg:6.00,high:6.19}},
     btlInd:{'2':{low:5.51,avg:6.00,high:6.40},'5':{low:5.59,avg:6.06,high:6.54}},
     btlCo:{'2':{low:5.51,avg:6.08,high:6.64},'5':{low:5.69,avg:6.11,high:6.74}}
   };
@@ -658,9 +660,10 @@ footer strong{color:#fff}
     var cat=!btl?'res':(owner==='co'?'btlCo':'btlInd');
     var band=RATES[cat][fix],choice=$('rateChoice').value;
     if(choice!=='own'&&document.activeElement!==$('rate')){$('rate').value=band[choice].toFixed(2);}
+    var checked=cat==='res'?RATES.resUpdated:RATES.updated;
     var catName=cat==='res'?'residential':(cat==='btlCo'?'limited company buy-to-let':'individual buy-to-let');
-    $('rateHint').textContent='Expat '+catName+' '+fix+' year fixed rates up to 75% LTV currently range from '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, average '+band.avg.toFixed(2)+'%. Based on published rates from specialist expat lenders, checked '+RATES.updated+'. Rates are updated on a monthly basis. Rates vary by lender, and your mortgage adviser is best placed to advise on the most suitable one for your requirements.';
-    $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+RATES.updated+'. Updated monthly.';
+    $('rateHint').textContent='Expat '+catName+' '+fix+' year fixed rates up to 75% LTV currently range from '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, average '+band.avg.toFixed(2)+'%. Based on published rates from specialist expat lenders, checked '+checked+'. Rates are updated on a monthly basis. Rates vary by lender, and your mortgage adviser is best placed to advise on the most suitable one for your requirements.';
+    $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+checked+'. Updated monthly.';
     $('rLow').textContent=band.low.toFixed(2)+'%';$('rAvg').textContent=band.avg.toFixed(2)+'%';$('rHigh').textContent=band.high.toFixed(2)+'%';
 
     if(!btl){$('rtype').value='cai';}
