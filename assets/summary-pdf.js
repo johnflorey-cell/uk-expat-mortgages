@@ -83,7 +83,7 @@
     header(true);
 
     // Notice
-    var notice='Indicative guide only. This is not a quote, a mortgage offer or advice. All figures are subject to status, the lender\'s criteria and the lender\'s valuation of the property.';
+    var notice=d.notice||'Indicative guide only. This is not a quote, a mortgage offer or advice. All figures are subject to status, the lender\'s criteria and the lender\'s valuation of the property.';
     doc.setFontSize(9);var nl=doc.splitTextToSize(clean(notice),CW-8);
     doc.setFillColor.apply(doc,TINT);doc.rect(M,y,CW,nl.length*4+6,'F');
     doc.setFillColor.apply(doc,GOLD);doc.rect(M,y,1.4,nl.length*4+6,'F');
@@ -157,9 +157,9 @@
     doc.setFillColor.apply(doc,TINT);doc.roundedRect(M,y,CW,bh2,2,2,'F');
     doc.setFillColor.apply(doc,GOLD);doc.rect(M,y,1.4,bh2,'F');
     doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor.apply(doc,NAVY);
-    doc.text('Ready to take it further? Speak to your adviser',M+6,y+7);
+    doc.text(clean(d.contactTitle||'Ready to take it further? Speak to your adviser'),M+6,y+7);
     doc.setFont('helvetica','normal');doc.setFontSize(8.6);doc.setTextColor.apply(doc,SOFT);
-    doc.text('Rates and criteria vary by lender. Your adviser will recommend the most suitable lender for your requirements.',M+6,y+12);
+    doc.text(doc.splitTextToSize(clean(d.contactText||'Rates and criteria vary by lender. Your adviser will recommend the most suitable lender for your requirements.'),CW-12)[0],M+6,y+12);
     doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.setTextColor.apply(doc,INK);
     doc.text(clean(C.name)+(C.role?', '+clean(C.role):''),M+6,y+18);
     C.lines.forEach(function(l,i){
@@ -176,7 +176,7 @@
     ensure(20);
     doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor.apply(doc,NAVY);
     doc.text('Important information',M,y);y+=6;
-    para(repo,8.2,INK,true,2);
+    if(!d.noRepo)para(repo,8.2,INK,true,2);
     (d.disclaimers||[]).forEach(function(t){para(t,7.6,SOFT,false,1.6);});
 
     // Footer on every page
@@ -185,7 +185,7 @@
       doc.setPage(p);
       doc.setDrawColor.apply(doc,LINE);doc.line(M,H-14,W-M,H-14);
       doc.setFont('helvetica','normal');doc.setFontSize(7.2);doc.setTextColor.apply(doc,SOFT);
-      doc.text('Indicative guide only, not a quote or offer of lending. Prepared '+today+'.',M,H-9.5);
+      doc.text(clean(d.footer||'Indicative guide only, not a quote or offer of lending.')+' Prepared '+today+'.',M,H-9.5);
       doc.text('Page '+p+' of '+n,W-M,H-9.5,{align:'right'});
     }
     doc.save(d.filename||'uk-expat-mortgages-summary.pdf');

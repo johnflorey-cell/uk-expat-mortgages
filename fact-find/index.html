@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Fact-Find | UK Expat Mortgages</title>
+<meta name="description" content="Client fact-find for UK Expat Mortgages clients.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#10222e;--ink-soft:#44586a;--bg:#fbfaf7;--card:#fff;--brand:#0e3b53;--accent:#c89b3c;--line:#e4e0d6;--tint:#f1ede4;--bad:#b23b3b;--good:#2f7a4f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.2;color:var(--brand)}
+a{color:var(--brand)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:16px;padding-bottom:16px}
+.logo{font-family:Fraunces,serif;font-size:20px;font-weight:600;color:var(--brand);text-decoration:none}
+.logo span{color:var(--accent)}
+.secure{font-size:13px;color:var(--ink-soft)}
+.hero{padding:40px 0 24px;background:linear-gradient(180deg,var(--tint),var(--bg))}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:10px}
+.hero h1{font-size:clamp(28px,4vw,40px);margin-bottom:10px}
+.hero p{color:var(--ink-soft);max-width:680px}
+.guide{margin-top:16px;font-size:14px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:12px 16px}
+.steps{display:flex;gap:6px;margin:26px 0 18px;flex-wrap:wrap}
+.steps button{flex:1 1 0;min-width:90px;border:0;background:var(--tint);color:var(--ink-soft);font:inherit;font-size:13px;font-weight:600;padding:10px 6px;border-radius:8px;cursor:pointer}
+.steps button.on{background:var(--brand);color:#fff}
+.steps button.done{background:#e6f2ea;color:var(--good)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px;margin-bottom:28px}
+.panel h2{font-size:24px;margin-bottom:4px}
+.panel .sub{color:var(--ink-soft);font-size:14px;margin-bottom:20px}
+.step{display:none}.step.on{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 16px}
+.full{grid-column:1/-1}
+label.f{display:grid;gap:6px;font-size:14px;font-weight:600}
+label.f small{font-weight:400;color:var(--ink-soft)}
+input,select,textarea{font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;width:100%;color:var(--ink)}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(14,59,83,.25);border-color:var(--brand)}
+input.err,select.err,textarea.err{border-color:var(--bad);background:#fdf4f4}
+.applicant{border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:18px;background:#fdfcf9}
+.applicant h3{font-size:18px;margin-bottom:12px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;cursor:pointer;margin-top:12px}
+.check input{width:18px;height:18px;margin-top:3px;flex:none;accent-color:var(--brand)}
+.hint{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.hidden{display:none!important}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:13px 24px;border-radius:6px;font-weight:600;border:0;cursor:pointer;font-size:16px;text-align:center}
+.btn:hover{background:#0a2c3f}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn.gold{background:var(--accent)}
+.btn.gold:hover{background:#b0862f}
+.btn:disabled{opacity:.6;cursor:default}
+.msg{font-size:14px;color:var(--bad);margin-top:12px}
+.review{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:18px}
+.review h4{background:var(--tint);padding:8px 14px;font-size:14px;color:var(--brand)}
+.review .r{display:flex;justify-content:space-between;gap:16px;padding:7px 14px;border-top:1px solid var(--line);font-size:14px}
+.review .r span{color:var(--ink-soft)}.review .r b{text-align:right;font-weight:600}
+.finish{display:grid;gap:12px;margin-top:20px}
+.box{border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:var(--tint)}
+.box h3{font-size:18px;margin-bottom:6px}
+.box p,.box li{font-size:14px;color:var(--ink-soft)}
+.box ul{margin:8px 0 0 18px}
+.saved{font-size:13px;color:var(--ink-soft)}
+footer{background:#0a2533;color:#9fb3c0;font-size:12px;line-height:1.5;padding:26px 0}
+footer p{margin-bottom:6px}footer strong{color:#fff}
+@media (max-width:640px){.grid,.grid3{grid-template-columns:1fr}.panel{padding:20px 16px}.steps button{min-width:70px;font-size:12px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="/">UK Expat <span>Mortgages</span></a>
+  <span class="secure">Client fact-find</span>
+</div></header>
+
+<main>
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Getting started</p>
+  <h1>Your mortgage fact-find</h1>
+  <p id="greet">A few short sections so your adviser can find the right lenders for you. It takes about 5 minutes.</p>
+  <div class="guide"><strong>Private to you.</strong> Your answers stay on your device while you complete them and are not sent anywhere. At the end you download a PDF and upload it, with your documents, through the secure link from your adviser. If there are two applicants, complete one form together.</div>
+</div></section>
+
+<div class="wrap">
+  <div class="steps" id="steps"></div>
+
+  <form id="ff" class="panel" autocomplete="on" novalidate>
+
+    <!-- 1 ABOUT YOU -->
+    <div class="step" data-title="About you">
+      <h2>About you</h2>
+      <p class="sub">The main applicant. Add a second applicant below if you are buying with someone.</p>
+      <div id="appA"></div>
+      <label class="check"><input type="checkbox" id="joint"> There is a second applicant (joint purchase or company director)</label>
+      <div id="appB" class="hidden"></div>
+    </div>
+
+    <!-- 2 ADDRESS -->
+    <div class="step" data-title="Address">
+      <h2>Your address</h2>
+      <p class="sub">Where you live now. If there are two applicants at different addresses, add both.</p>
+      <div class="grid">
+        <label class="f full">Current address, including country<textarea name="addr" data-req></textarea></label>
+        <label class="f">Living there since<input type="month" name="addr_since" data-req></label>
+        <label class="f">Do you own or rent it?<select name="addr_tenure"><option></option><option>Own</option><option>Rent</option><option>Employer provided</option><option>Living with family</option></select></label>
+        <label class="f full" id="prevWrap">Previous addresses in the last 3 years, with dates <small>(only if you moved in the last 3 years)</small><textarea name="prev_addr"></textarea></label>
+      </div>
+    </div>
+
+    <!-- 3 WORK AND INCOME -->
+    <div class="step" data-title="Income">
+      <h2>Work and income</h2>
+      <p class="sub">Gross income before tax, in the currency you are paid in.</p>
+      <div id="incA"></div>
+      <div id="incB" class="hidden"></div>
+    </div>
+
+    <!-- 4 PROPERTY AND MORTGAGE -->
+    <div class="step" data-title="Property">
+      <h2>The property and mortgage</h2>
+      <p class="sub">Estimates are fine if you have not found a property yet.</p>
+      <div class="grid">
+        <label class="f">What are you looking to do?<select name="goal" data-req><option></option><option>Buy-to-let purchase</option><option>Buy-to-let remortgage</option><option>Buy own home</option><option>Remortgage own home</option></select></label>
+        <label class="f">Buying as<select name="owner" data-req><option></option><option>Individual(s)</option><option>Limited company (SPV)</option><option>Not sure yet</option></select></label>
+        <label class="f full hidden" id="coWrap">Company name and shareholders <small>(if known)</small><input name="company"></label>
+        <label class="f">Purchase price or current value (£)<input name="price" inputmode="numeric" data-req></label>
+        <label class="f">Mortgage required (£)<input name="loan" inputmode="numeric" data-req></label>
+        <label class="f" id="depWrap">Deposit available (£)<input name="deposit" inputmode="numeric"></label>
+        <label class="f" id="depSrcWrap">Where is the deposit from?<select name="deposit_src"><option></option><option>Savings</option><option>Gift from family</option><option>Sale of a property</option><option>Equity from another property</option><option>Other</option></select></label>
+        <label class="f hidden" id="balWrap">Current mortgage balance (£)<input name="balance" inputmode="numeric"></label>
+        <label class="f" id="rentWrap">Expected monthly rent (£)<input name="rent" inputmode="numeric"></label>
+        <label class="f">Property type<select name="ptype"><option></option><option>Flat or apartment</option><option>New build flat</option><option>House</option><option>New build house</option><option>Not decided yet</option></select></label>
+        <label class="f">Tenure<select name="tenure"><option></option><option>Freehold</option><option>Leasehold</option><option>Not sure</option></select></label>
+        <label class="f full">Property address <small>(if known)</small><input name="paddr"></label>
+        <label class="f">When are you hoping to complete?<select name="when"><option></option><option>As soon as possible</option><option>In 1 to 3 months</option><option>In 3 to 6 months</option><option>Just researching</option></select></label>
+        <label class="f">Other properties you own anywhere<select name="others"><option></option><option>None</option><option>1</option><option>2 to 3</option><option>4 or more</option></select></label>
+        <label class="f">Interested in Sharia-compliant finance?<select name="sharia"><option></option><option>No</option><option>Yes</option><option>Open to it</option></select></label>
+        <label class="f">Preferred fixed rate<select name="fix"><option></option><option>2 year fixed</option><option>5 year fixed</option><option>No preference</option></select></label>
+      </div>
+    </div>
+
+    <!-- 5 CREDIT -->
+    <div class="step" data-title="Credit">
+      <h2>Credit and commitments</h2>
+      <p class="sub">Honest answers help us go to the right lender first time.</p>
+      <div class="grid">
+        <label class="f full">In the last 6 years, have you had any missed payments, defaults, county court judgments, bankruptcy or a mortgage refused?<select name="adverse" data-req><option></option><option>No</option><option>Yes</option></select></label>
+        <label class="f full hidden" id="advWrap">Please give brief details<textarea name="adverse_details"></textarea></label>
+        <label class="f">Monthly loan and finance payments<input name="loans" placeholder="e.g. car loan AED 2,000"></label>
+        <label class="f">Credit card balances<input name="cards" placeholder="e.g. none, or USD 3,000"></label>
+        <label class="f full">Do you have a UK bank account?<select name="ukbank"><option></option><option>Yes</option><option>No</option></select></label>
+        <label class="f full">Anything else we should know?<textarea name="notes" placeholder="e.g. bonus paid annually, planning to return to the UK in 2028"></textarea></label>
+      </div>
+    </div>
+
+    <!-- 6 FINISH -->
+    <div class="step" data-title="Finish">
+      <h2>Check and finish</h2>
+      <p class="sub">Please check your answers, confirm the declarations, then download your fact-find.</p>
+      <div id="review"></div>
+      <label class="check"><input type="checkbox" name="decl_true" id="declTrue"> I confirm the information I have given is true and complete to the best of my knowledge, and I can provide documents to support it.</label>
+      <label class="check"><input type="checkbox" name="decl_data" id="declData"> I agree to UK Expat Mortgages and Opes Financial Partners holding and using this information to give me mortgage advice and to share it with lenders, solicitors and other parties for my application. If there is a second applicant, I have their permission to provide their details.</label>
+      <div class="finish">
+        <button type="button" class="btn" id="pdfBtn">1. Download my fact-find (PDF)</button>
+        <a class="btn gold hidden" id="upBtn" target="_blank" rel="noopener">2. Upload it with your documents</a>
+        <p class="hint hidden" id="noUp">Please email your fact-find PDF and documents to your adviser at <a href="mailto:john.florey@opesfp.com">john.florey@opesfp.com</a>.</p>
+      </div>
+      <div class="box" style="margin-top:18px">
+        <h3>Documents to upload</h3>
+        <p>Clear photos or scans are fine. You can upload them now or later using the same link.</p>
+        <ul id="docList"></ul>
+      </div>
+    </div>
+
+    <p class="msg hidden" id="msg"></p>
+    <div class="nav">
+      <button type="button" class="btn ghost" id="back">Back</button>
+      <span class="saved" id="saved"></span>
+      <button type="button" class="btn" id="next">Next</button>
+    </div>
+  </form>
+  <p class="hint" style="margin:-12px 0 30px">Your answers are saved on this device only, so you can come back to finish. <a href="#" id="clear">Clear my answers</a></p>
+</div>
+</main>
+
+<footer><div class="wrap">
+  <p><strong>UK Expat Mortgages</strong> is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710.</p>
+  <p>Privacy: the information in this fact-find is used only to provide mortgage advice and arrange your application. It is not sold or shared for marketing purposes.</p>
+  <p>&copy; <span id="yr">2026</span> UK Expat Mortgages.</p>
+</div></footer>
+
+<script src="/assets/summary-pdf.js" defer></script>
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var form=$('ff'),KEY='uem-factfind-v1';
+  var CCY=['GBP','AED','SAR','QAR','BHD','KWD','OMR','USD','CAD','EUR','HKD','SGD','MYR','CNY','INR','ZAR','Other'];
+  var q=new URLSearchParams(location.search),UP=(q.get('up')||'').replace(/[^A-Za-z0-9_-]/g,''),REF=q.get('ref')||'';
+
+  function opts(a){return '<option></option>'+a.map(function(o){return '<option>'+o+'</option>';}).join('');}
+  function applicant(p,n){
+    return '<div class="applicant"><h3>'+n+'</h3><div class="grid">'+
+    '<label class="f">Title<select name="'+p+'title" data-req>'+opts(['Mr','Mrs','Ms','Miss','Dr','Other'])+'</select></label>'+
+    '<label class="f">Date of birth<input type="date" name="'+p+'dob" data-req></label>'+
+    '<label class="f">First and middle names<input name="'+p+'first" autocomplete="given-name" data-req></label>'+
+    '<label class="f">Surname<input name="'+p+'last" autocomplete="family-name" data-req></label>'+
+    '<label class="f">Nationality (passport)<input name="'+p+'nat" data-req></label>'+
+    '<label class="f">UK status<select name="'+p+'uk" data-req>'+opts(['British citizen','Indefinite leave to remain or settled status','Neither'])+'</select></label>'+
+    '<label class="f">Country you live in<input name="'+p+'country" autocomplete="country-name" data-req></label>'+
+    '<label class="f">Marital status<select name="'+p+'marital">'+opts(['Single','Married','Civil partnership','Divorced','Widowed'])+'</select></label>'+
+    '<label class="f">Mobile or WhatsApp <small>(with country code)</small><input type="tel" name="'+p+'mobile" autocomplete="tel" data-req></label>'+
+    '<label class="f">Email<input type="email" name="'+p+'email" autocomplete="email" data-req></label>'+
+    '<label class="f">Financial dependants<select name="'+p+'deps">'+opts(['0','1','2','3','4','5 or more'])+'</select></label>'+
+    (p==='b_'?'<label class="f">Relationship to main applicant<input name="b_rel" placeholder="e.g. spouse, business partner"></label>':'')+
+    '</div></div>';
+  }
+  function income(p,n){
+    return '<div class="applicant"><h3>'+n+'</h3><div class="grid">'+
+    '<label class="f">Employment status<select name="'+p+'emp" data-req>'+opts(['Employed','Self-employed or company owner','Contractor','Retired','Not working'])+'</select></label>'+
+    '<label class="f">Job title<input name="'+p+'job"></label>'+
+    '<label class="f">Employer or business name<input name="'+p+'employer"></label>'+
+    '<label class="f">Country you work in<input name="'+p+'workcountry"></label>'+
+    '<label class="f">Started with this employer or business<input type="month" name="'+p+'start"></label>'+
+    '<label class="f">Paid in currency<select name="'+p+'ccy" data-req>'+opts(CCY)+'</select></label>'+
+    '<label class="f">Gross income amount<input name="'+p+'income" inputmode="numeric" data-req></label>'+
+    '<label class="f">Income is<select name="'+p+'per" data-req>'+opts(['Per month','Per year'])+'</select></label>'+
+    '<label class="f full">Other regular income <small>(bonus, allowances, rental income)</small><input name="'+p+'other" placeholder="e.g. housing allowance AED 8,000 a month, annual bonus about 2 months salary"></label>'+
+    '</div></div>';
+  }
+  $('appA').innerHTML=applicant('a_','Applicant 1');
+  $('appB').innerHTML=applicant('b_','Applicant 2');
+  $('incA').innerHTML=income('a_','Applicant 1');
+  $('incB').innerHTML=income('b_','Applicant 2');
+
+  // Steps
+  var steps=[].slice.call(document.querySelectorAll('.step')),cur=0;
+  $('steps').innerHTML=steps.map(function(s,i){return '<button type="button" data-i="'+i+'">'+(i+1)+'. '+s.getAttribute('data-title')+'</button>';}).join('');
+  var tabs=[].slice.call($('steps').children);
+  function show(i){
+    cur=i;steps.forEach(function(s,j){s.classList.toggle('on',j===i);});
+    tabs.forEach(function(t,j){t.classList.toggle('on',j===i);});
+    $('back').style.visibility=i===0?'hidden':'visible';
+    $('next').classList.toggle('hidden',i===steps.length-1);
+    $('msg').classList.add('hidden');
+    if(i===steps.length-1)buildReview();
+    window.scrollTo({top:$('steps').offsetTop-10,behavior:'smooth'});
+  }
+  function visible(el){return !!(el.offsetWidth||el.offsetHeight||el.getClientRects().length);}
+  function check(i){
+    var bad=[];
+    steps[i].querySelectorAll('[data-req]').forEach(function(el){
+      if(!visible(el))return;
+      var ok=String(el.value||'').trim()!=='';
+      if(el.type==='email'&&ok)ok=/.+@.+\..+/.test(el.value);
+      el.classList.toggle('err',!ok);if(!ok)bad.push(el);
+    });
+    if(bad.length){$('msg').textContent='Please complete the highlighted fields.';$('msg').classList.remove('hidden');bad[0].focus();return false;}
+    tabs[i].classList.add('done');return true;
+  }
+  $('next').onclick=function(){if(check(cur))show(cur+1);};
+  $('back').onclick=function(){show(Math.max(cur-1,0));};
+  tabs.forEach(function(t,i){t.onclick=function(){if(i<=cur||check(cur))show(i);};});
+
+  // Conditional fields
+  function V(n){var el=form.elements[n];return el?(el.type==='checkbox'?el.checked:String(el.value||'').trim()):'';}
+  function toggles(){
+    var joint=$('joint').checked;
+    $('appB').classList.toggle('hidden',!joint);$('incB').classList.toggle('hidden',!joint);
+    var g=V('goal'),re=/remortgage/i.test(g),btl=/buy-to-let/i.test(g);
+    $('balWrap').classList.toggle('hidden',!re);
+    $('depWrap').classList.toggle('hidden',re);$('depSrcWrap').classList.toggle('hidden',re);
+    $('rentWrap').classList.toggle('hidden',!(btl||g===''));
+    $('coWrap').classList.toggle('hidden',V('owner')!=='Limited company (SPV)');
+    $('advWrap').classList.toggle('hidden',V('adverse')!=='Yes');
+    var since=V('addr_since');var recent=!since||((Date.now()-new Date(since+'-01'))/31557600000)<3;
+    $('prevWrap').classList.toggle('hidden',!recent);
+  }
+
+  // Save on this device only
+  function save(){
+    var d={};[].forEach.call(form.elements,function(el){if(!el.name&&el.id!=='joint')return;var k=el.name||el.id;d[k]=el.type==='checkbox'?el.checked:el.value;});
+    try{localStorage.setItem(KEY,JSON.stringify(d));$('saved').textContent='Saved on this device';}catch(e){}
+  }
+  function load(){
+    try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(!d)return;
+      [].forEach.call(form.elements,function(el){var k=el.name||el.id;if(!(k in d))return;if(el.type==='checkbox')el.checked=!!d[k];else el.value=d[k];});
+    }catch(e){}
+  }
+  form.addEventListener('input',function(e){e.target.classList.remove('err');toggles();save();});
+  form.addEventListener('change',function(){toggles();save();});
+  $('clear').onclick=function(e){e.preventDefault();if(!confirm('Clear all your answers on this device?'))return;try{localStorage.removeItem(KEY);}catch(x){}form.reset();toggles();show(0);};
+
+  // Money formatting
+  ['price','loan','deposit','balance','rent','a_income','b_income'].forEach(function(n){
+    var el=form.elements[n];if(!el)return;
+    el.addEventListener('blur',function(){var v=parseFloat(String(el.value).replace(/[^0-9.]/g,''));if(isFinite(v)&&v>0)el.value=v.toLocaleString('en-GB');});
+  });
+
+  // Review data
+  function fmtMonth(v){if(!v)return '';var d=new Date(v+'-01');return isNaN(d)?v:d.toLocaleDateString('en-GB',{month:'long',year:'numeric'});}
+  function fmtDate(v){if(!v)return '';var d=new Date(v);return isNaN(d)?v:d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});}
+  function gbp(v){return v?'£'+v:'';}
+  function name(p){return [V(p+'title'),V(p+'first'),V(p+'last')].filter(Boolean).join(' ');}
+  function data(){
+    var joint=$('joint').checked,secs=[];
+    function person(p,n){return {heading:n+': '+(name(p)||'details'),rows:[
+      ['Date of birth',fmtDate(V(p+'dob'))],['Nationality',V(p+'nat')],['UK status',V(p+'uk')],['Country of residence',V(p+'country')],
+      ['Marital status',V(p+'marital')],['Financial dependants',V(p+'deps')],['Mobile or WhatsApp',V(p+'mobile')],['Email',V(p+'email')],
+      p==='b_'?['Relationship to applicant 1',V('b_rel')]:null]};}
+    function inc(p,n){return {heading:'Work and income: '+n,rows:[
+      ['Employment status',V(p+'emp')],['Job title',V(p+'job')],['Employer or business',V(p+'employer')],['Country of work',V(p+'workcountry')],
+      ['Started',fmtMonth(V(p+'start'))],['Gross income',[V(p+'ccy'),V(p+'income'),V(p+'per')?V(p+'per').toLowerCase():''].filter(Boolean).join(' ')],['Other regular income',V(p+'other')]]};}
+    secs.push(person('a_','Applicant 1'));if(joint)secs.push(person('b_','Applicant 2'));
+    secs.push({heading:'Address',rows:[['Current address',V('addr')],['Living there since',fmtMonth(V('addr_since'))],['Own or rent',V('addr_tenure')],['Previous addresses (last 3 years)',$('prevWrap').classList.contains('hidden')?'':V('prev_addr')]]});
+    secs.push(inc('a_','Applicant 1'));if(joint)secs.push(inc('b_','Applicant 2'));
+    var re=/remortgage/i.test(V('goal'));
+    secs.push({heading:'Property and mortgage',rows:[['Looking to',V('goal')],['Buying as',V('owner')],['Company and shareholders',$('coWrap').classList.contains('hidden')?'':V('company')],
+      ['Price or value',gbp(V('price'))],['Mortgage required',gbp(V('loan'))],[re?'Current mortgage balance':'Deposit available',gbp(V(re?'balance':'deposit'))],
+      re?null:['Source of deposit',V('deposit_src')],$('rentWrap').classList.contains('hidden')?null:['Expected monthly rent',gbp(V('rent'))],
+      ['Property type',V('ptype')],['Tenure',V('tenure')],['Property address',V('paddr')],['Hoping to complete',V('when')],['Other properties owned',V('others')],
+      ['Sharia-compliant finance',V('sharia')],['Preferred fixed rate',V('fix')]]});
+    secs.push({heading:'Credit and commitments',rows:[['Credit problems or refusals in the last 6 years',V('adverse')],['Details',V('adverse')==='Yes'?V('adverse_details'):''],
+      ['Monthly loan payments',V('loans')],['Credit card balances',V('cards')],['UK bank account',V('ukbank')],['Other information',V('notes')]]});
+    secs.push({heading:'Declarations',rows:[['Information true and complete',$('declTrue').checked?'Confirmed':'Not confirmed'],['Consent to use and share for the application',$('declData').checked?'Given':'Not given']]});
+    return secs;
+  }
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function buildReview(){
+    toggles();
+    $('review').innerHTML=data().map(function(s){
+      var rows=s.rows.filter(function(r){return r&&r[1];});
+      return '<div class="review"><h4>'+esc(s.heading)+'</h4>'+rows.map(function(r){return '<div class="r"><span>'+esc(r[0])+'</span><b>'+esc(r[1])+'</b></div>';}).join('')+'</div>';
+    }).join('');
+    var g=V('goal'),re=/remortgage/i.test(g),btl=/buy-to-let/i.test(g),co=V('owner')==='Limited company (SPV)';
+    var docs=['Passport (photo page) for each applicant','Visa or residence permit for the country you live in','Proof of address dated in the last 3 months, such as a utility bill or bank statement',
+      'Last 3 months payslips, or for self-employed the last 2 years accounts or tax returns','Last 3 to 6 months bank statements showing your salary','Employment contract or a letter from your employer confirming salary and allowances',
+      re?'Latest mortgage statement for the property':'Proof of deposit, such as savings statements, and a gift letter if the deposit is a gift',
+      btl?'Letting agent rental valuation, if you have one':null,co?'Company documents: certificate of incorporation and shareholder details':null,'Property details or the agreed sale, if you have found a property'];
+    $('docList').innerHTML=docs.filter(Boolean).map(function(d){return '<li>'+esc(d)+'</li>';}).join('');
+  }
+
+  // PDF
+  window.buildSummary=function(){
+    var secs=data(),who=[V('a_first'),V('a_last')].filter(Boolean).join(' ')+($('joint').checked&&V('b_last')?' and '+[V('b_first'),V('b_last')].filter(Boolean).join(' '):'');
+    return {
+      title:'Client fact-find',
+      subtitle:who||'Mortgage applicant',
+      filename:'Fact-find '+(V('a_last')||'client').replace(/[^A-Za-z0-9 -]/g,'')+(V('a_first')?' '+V('a_first').split(' ')[0]:'')+'.pdf',
+      notice:'Information provided by the applicant for mortgage advice. Supporting documents will be required to verify it.',
+      footer:'Client fact-find, UK Expat Mortgages.',
+      highlights:[],
+      sections:secs,
+      contactTitle:'Next step: upload this fact-find with your documents',
+      contactText:UP?'Use the secure upload link your adviser sent you. Questions? Contact your adviser:':'Email this fact-find and your documents to your adviser:',
+      noRepo:true,
+      disclaimers:[
+        'Data protection: the information in this fact-find is held by UK Expat Mortgages and Opes Financial Partners Ltd to provide mortgage advice and arrange your application. It may be shared with lenders, solicitors, valuers and other parties involved in your application, and with regulators for compliance monitoring. It is not sold or shared for marketing purposes.',
+        'UK Expat Mortgages is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710.',
+        'YOUR HOME OR PROPERTY MAY BE REPOSSESSED IF YOU DO NOT KEEP UP REPAYMENTS ON A MORTGAGE OR ANY OTHER DEBT SECURED ON IT.'
+      ]
+    };
+  };
+  $('pdfBtn').onclick=function(){
+    if(!$('declTrue').checked||!$('declData').checked){$('msg').textContent='Please tick both declarations before downloading.';$('msg').classList.remove('hidden');return;}
+    $('msg').classList.add('hidden');
+    for(var i=0;i<steps.length-1;i++){if(!check(i)){show(i);return;}}
+    downloadSummaryPDF($('pdfBtn'));
+    if(UP)$('upBtn').classList.remove('hidden');else $('noUp').classList.remove('hidden');
+  };
+  if(UP){$('upBtn').href='https://www.dropbox.com/request/'+UP;$('upBtn').classList.remove('hidden');}
+  if(REF){$('greet').textContent='Hello '+REF.replace(/[<>]/g,'')+'. A few short sections so your adviser can find the right lenders for you. It takes about 5 minutes.';}
+
+  load();toggles();show(0);
+})();
+</script>
+</body>
+</html>
