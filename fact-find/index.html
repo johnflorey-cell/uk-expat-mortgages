@@ -82,7 +82,7 @@ footer p{margin-bottom:6px}footer strong{color:#fff}
   <p class="eyebrow">Getting started</p>
   <h1>Your mortgage fact-find</h1>
   <p id="greet">A few short sections so your adviser can find the right lenders for you. It takes about 5 minutes.</p>
-  <div class="guide"><strong>Private to you.</strong> Your answers stay on your device while you complete them and are not sent anywhere. At the end you download a PDF and upload it, with your documents, through the secure link from your adviser. If there are two applicants, complete one form together.</div>
+  <div class="guide"><strong>Private to you.</strong> Your answers stay on your device while you complete them and are not sent anywhere. At the end you send it, with your documents, securely to your adviser. If there are two applicants, complete one form together.</div>
 </div></section>
 
 <div class="wrap">
@@ -160,11 +160,23 @@ footer p{margin-bottom:6px}footer strong{color:#fff}
     <!-- 6 FINISH -->
     <div class="step" data-title="Finish">
       <h2>Check and finish</h2>
-      <p class="sub">Please check your answers, confirm the declarations, then download your fact-find.</p>
+      <p class="sub" id="finSub">Please check your answers, confirm the declarations, then download your fact-find.</p>
       <div id="review"></div>
       <label class="check"><input type="checkbox" name="decl_true" id="declTrue"> I confirm the information I have given is true and complete to the best of my knowledge, and I can provide documents to support it.</label>
       <label class="check"><input type="checkbox" name="decl_data" id="declData"> I agree to UK Expat Mortgages and Opes Financial Partners holding and using this information to give me mortgage advice and to share it with lenders, solicitors and other parties for my application. If there is a second applicant, I have their permission to provide their details.</label>
-      <div class="finish">
+      <div class="finish hidden" id="autoBox">
+        <label class="f full" style="margin-bottom:6px">Add your documents now (optional)<input type="file" id="docs" multiple accept="image/*,.pdf,.doc,.docx,.heic,.heif"></label>
+        <p class="hint" style="margin:0 0 12px">Photos taken on your phone are fine. You can pick several at once, or send them later.</p>
+        <ul id="picked" class="hint" style="margin:0 0 14px;padding-left:18px"></ul>
+        <button type="button" class="btn gold" id="sendBtn">Submit to my adviser</button>
+        <p class="hint" id="sendMsg" style="margin-top:10px"></p>
+        <p class="hint" style="margin-top:6px"><a href="#" id="copyLink">Download a copy for my records</a></p>
+      </div>
+      <div class="finish hidden" id="doneBox">
+        <h3 style="color:#2f7a4f;margin:0 0 6px">Thank you, your fact-find has been sent</h3>
+        <p id="doneTxt" style="margin:0"></p>
+      </div>
+      <div class="finish" id="manualBox">
         <button type="button" class="btn" id="pdfBtn">1. Download my fact-find (PDF)</button>
         <a class="btn gold hidden" id="upBtn" target="_blank" rel="noopener">2. Upload it with your documents</a>
         <p class="hint hidden" id="noUp">Please email your fact-find PDF and documents to your adviser at <a href="mailto:john.florey@opesfp.com">john.florey@opesfp.com</a>.</p>
@@ -365,13 +377,57 @@ document.getElementById('yr').textContent=new Date().getFullYear();
       ]
     };
   };
-  $('pdfBtn').onclick=function(){
-    if(!$('declTrue').checked||!$('declData').checked){$('msg').textContent='Please tick both declarations before downloading.';$('msg').classList.remove('hidden');return;}
+  function readyToSend(verb){
+    if(!$('declTrue').checked||!$('declData').checked){$('msg').textContent='Please tick both declarations before '+verb+'.';$('msg').classList.remove('hidden');return false;}
     $('msg').classList.add('hidden');
-    for(var i=0;i<steps.length-1;i++){if(!check(i)){show(i);return;}}
+    for(var i=0;i<steps.length-1;i++){if(!check(i)){show(i);return false;}}
+    return true;
+  }
+  $('pdfBtn').onclick=function(){
+    if(!readyToSend('downloading'))return;
     downloadSummaryPDF($('pdfBtn'));
     if(UP)$('upBtn').classList.remove('hidden');else $('noUp').classList.remove('hidden');
   };
+  // Direct send to the adviser's Dropbox, when this link has a client folder and the site is connected
+  var CL=(q.get('c')||'').replace(/[\\\/<>:"|?*]/g,'').slice(0,100);
+  if(CL&&window.fetch&&window.FormData){
+    fetch('/api/submit',{cache:'no-store'}).then(function(r){return r.ok?r.json():{};}).then(function(j){
+      if(!j.ready)return;
+      $('manualBox').classList.add('hidden');$('autoBox').classList.remove('hidden');
+      $('finSub').textContent='Please check your answers, confirm the declarations, then submit. Your fact-find goes straight to your adviser.';
+    }).catch(function(){});
+  }
+  function kb(n){return n>1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';}
+  $('docs').onchange=function(){
+    $('picked').innerHTML=Array.prototype.map.call(this.files,function(f){return '<li>'+esc(f.name)+' ('+kb(f.size)+')</li>';}).join('');
+  };
+  $('copyLink').onclick=function(e){e.preventDefault();if(readyToSend('downloading'))downloadSummaryPDF(null);};
+  $('sendBtn').onclick=function(){
+    if(!readyToSend('submitting'))return;
+    var btn=$('sendBtn'),files=$('docs').files,big=0;
+    for(var i=0;i<files.length;i++){big+=files[i].size;if(files[i].size>25*1048576){$('sendMsg').textContent=files[i].name+' is too large (over 25 MB). Please remove it and send it later.';return;}}
+    if(files.length>20){$('sendMsg').textContent='Please choose up to 20 documents at a time.';return;}
+    if(big>75*1048576){$('sendMsg').textContent='These documents are too large to send together. Please choose fewer and send the rest later.';return;}
+    btn.disabled=true;btn.textContent='Sending, please keep this page open...';$('sendMsg').textContent='';
+    makeSummaryPDF().then(function(p){
+      var fd=new FormData(),who=[V('a_first'),V('a_last')].filter(Boolean).join(' ');
+      fd.append('c',CL);fd.append('who',who);fd.append('factfind',p.blob,p.filename);
+      for(var i=0;i<files.length;i++)fd.append('docs',files[i],files[i].name);
+      return fetch('/api/submit',{method:'POST',body:fd}).then(function(r){return r.json().catch(function(){return {ok:false};});});
+    }).then(function(j){
+      if(!j||!j.ok)throw new Error(j&&j.error||'failed');
+      $('autoBox').classList.add('hidden');$('doneBox').classList.remove('hidden');
+      $('doneTxt').innerHTML='Your adviser, John Florey, will be in touch.'+(files.length?' Your '+files.length+' document'+(files.length>1?'s were':' was')+' sent too.':'')+
+        (UP?' If you have more documents later, you can <a href="https://www.dropbox.com/request/'+UP+'" target="_blank" rel="noopener">upload them here</a>.':' You can send any further documents to <a href="mailto:john.florey@opesfp.com">john.florey@opesfp.com</a>.');
+      $('finSub').textContent='All done. Thank you.';
+    }).catch(function(e){
+      btn.disabled=false;btn.textContent='Submit to my adviser';
+      $('sendMsg').textContent=(e&&e.message)==='file_type'?'One of the documents is a file type we cannot accept. Please send photos, PDFs or Word files.':
+        'Sorry, that did not send. Please try again, or use the option below to download your fact-find and upload it instead.';
+      $('manualBox').classList.remove('hidden');
+    });
+  };
+
   if(UP){$('upBtn').href='https://www.dropbox.com/request/'+UP;$('upBtn').classList.remove('hidden');}
   var TTL=(q.get('t')||'').replace(/[<>]/g,'').slice(0,80);
   if(TTL){document.querySelector('.hero h1').textContent=TTL;document.title=TTL+' | UK Expat Mortgages';}

@@ -188,14 +188,22 @@
       doc.text(clean(d.footer||'Indicative guide only, not a quote or offer of lending.')+' Prepared '+today+'.',M,H-9.5);
       doc.text('Page '+p+' of '+n,W-M,H-9.5,{align:'right'});
     }
-    doc.save(d.filename||'uk-expat-mortgages-summary.pdf');
+    return doc;
   }
+
+  // Build the PDF without saving it: resolves to {blob, filename}
+  window.makeSummaryPDF=function(){
+    return loadJsPDF().then(function(){
+      var d=window.buildSummary();
+      return {blob:render(d).output('blob'),filename:d.filename||'uk-expat-mortgages-summary.pdf'};
+    });
+  };
 
   window.downloadSummaryPDF=function(btn){
     var label=btn?btn.innerHTML:'';
     if(btn){btn.disabled=true;btn.innerHTML='Preparing your PDF...';}
     loadJsPDF().then(function(){
-      render(window.buildSummary());
+      var d=window.buildSummary();render(d).save(d.filename||'uk-expat-mortgages-summary.pdf');
     }).catch(function(){
       alert('Sorry, the PDF could not be created just now. Please check your connection and try again.');
     }).then(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}});
