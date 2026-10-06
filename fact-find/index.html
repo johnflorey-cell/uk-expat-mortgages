@@ -433,6 +433,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   if(TTL){document.querySelector('.hero h1').textContent=TTL;document.title=TTL+' | UK Expat Mortgages';}
   if(REF){$('greet').textContent='Hello '+REF.replace(/[<>]/g,'')+'. A few short sections so your adviser can find the right lenders for you. It takes about 5 minutes.';}
 
+  $('declTrue').addEventListener('change',buildReview);$('declData').addEventListener('change',buildReview);
   load();toggles();show(0);
 })();
 </script>
