@@ -473,7 +473,7 @@ footer strong{color:#fff}
         <p class="note">Stamp duty, solicitor, valuation, lender and broker fees are extra. Stamp duty for non-UK residents depends on whether you buy as an individual or a company (companies pay a surcharge) and whether you already own property. Your solicitor calculates the final stamp duty, not your mortgage broker.</p>
         <div class="budget-box">
           <p class="budget-head">Next: your total budget to plan for</p>
-          <p class="budget-text">See your deposit, stamp duty and all buying fees added up in one figure.</p>
+          <p class="budget-text">See your deposit, stamp duty and all buying fees added up in one figure, then download a PDF summary of your mortgage, monthly repayment and budget.</p>
           <a class="btn gold" id="sdltLink" href="/stamp-duty-calculator/">Estimate my total budget &rarr;</a>
         </div>
       </div>
@@ -774,7 +774,8 @@ footer strong{color:#fff}
 
     var deposit=Math.max(value-loan,0),sdSummary='';
     if(buying){$('dep2').textContent=gbp(deposit);}
-    $('sdltLink').href='/stamp-duty-calculator/?price='+Math.round(value)+'&loan='+Math.round(loan)+'&buyer='+(btl&&owner==='co'?'co':'ind')+'&use='+(btl?'let':'home');
+    $('sdltLink').href='/stamp-duty-calculator/?price='+Math.round(value)+'&loan='+Math.round(loan)+'&buyer='+(btl&&owner==='co'?'co':'ind')+'&use='+(btl?'let':'home')
+      +'&rate='+rate.toFixed(2)+'&term='+term+'&fix='+fix+'&rt='+(io?'io':'cai')+'&rc='+choice+'&goal='+goal+'&max='+Math.round(S.maxMort);
 
     var rows='';
     [-1,0,1,2].forEach(function(d){

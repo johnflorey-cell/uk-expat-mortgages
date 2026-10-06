@@ -165,6 +165,10 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(14,59,83,.25);bor
 .cta-box{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
 .cta-box p{font-size:15px;color:var(--ink-soft);margin:6px 0 14px}
 .cta-box .btn{width:100%}
+.pdf-box{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:12px;padding:20px 24px}
+.pdf-box h3{font-size:18px}
+.pdf-box p{font-size:14px;color:var(--ink-soft);margin:6px 0 12px}
+.pdf-box .btn{width:100%}
 
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:26px}
@@ -396,6 +400,12 @@ footer strong{color:#fff}
         <p>Your solicitor will calculate and confirm the stamp duty. We arrange the mortgage: send us your figures and a specialist adviser will find the most suitable lender for your purchase and budget.</p>
         <a class="btn gold" href="#contact">Send my figures to an adviser</a>
       </div>
+
+      <div class="pdf-box" id="pdfBox">
+        <h3>Download your summary</h3>
+        <p id="pdfText">Keep a PDF of your mortgage, monthly repayment and buying budget, with your adviser's contact details, for your records.</p>
+        <button type="button" class="btn" id="pdfBtn" onclick="downloadSummaryPDF(this)">Download my summary (PDF)</button>
+      </div>
     </div>
   </div>
 </section>
@@ -480,6 +490,7 @@ footer strong{color:#fff}
 </footer>
 
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script src="/assets/summary-pdf.js" defer></script>
 <script>
 /* SDLT-ENGINE-START */
 // Stamp Duty Land Tax, residential, England and Northern Ireland, rates from 1 April 2025.
@@ -578,7 +589,14 @@ function sdltCalc(price,o){
     if(l>=0&&q.get('loan')!==null){$('loan').value=Math.round(l).toLocaleString('en-GB');S.loanTouched=true;}
     if(q.get('buyer')==='co')$('b-co').checked=true;
     if(q.get('use')==='home')$('u-home').checked=true;
+    // Mortgage details carried over from the calculator, used in the PDF summary
+    var rt=parseFloat(q.get('rate')),tm=parseInt(q.get('term'),10);
+    if(rt>0&&tm>0){S.mort={rate:rt,term:tm,fix:q.get('fix')||'5',io:q.get('rt')==='io',choice:q.get('rc')||'',goal:q.get('goal')||'',max:parseFloat(q.get('max'))||0};}
   })();
+  function payment(P,annual,years,io){
+    if(P<=0)return 0;var r=annual/100/12;if(io)return P*r;var n=years*12;
+    return r===0?P/n:P*r/(1-Math.pow(1+r,-n));
+  }
 
   ['price','loan','legal','disb','valfee','lenderfee'].forEach(function(id){$(id).addEventListener('blur',function(){fmt($(id));});});
   $('loan').addEventListener('input',function(){S.loanTouched=true;});
@@ -701,7 +719,77 @@ function sdltCalc(price,o){
       'Estimated budget to plan for: '+gbp(total)+(on?' (about '+money(c,xr,total)+')':'')+', for a property worth '+gbp(price);
     $('summary').textContent=s;
     $('calcFigures').value=s;
+    S.last={price:price,company:company,nonRes:nonRes,who:who,sdlt:r.total,rule:rule,loan:loan,deposit:deposit,legal:legal,vat:vat,disb:disb,val:val,lender:lender,broker:broker,brokerPct:num($('brokerPct')),total:total,hasLoan:hasLoan,c:c,xr:xr,on:on};
+    $('pdfText').textContent=S.mort
+      ?'Keep a PDF of your mortgage, monthly repayment and buying budget, with your adviser\'s contact details, for your records.'
+      :'Keep a PDF of your stamp duty and buying budget, with your adviser\'s contact details, for your records. Use the mortgage calculator first to include your monthly repayment.';
   }
+
+  window.buildSummary=function(){
+    calc();
+    var L=S.last,M=S.mort,secs=[],hl=[],pct=function(n){return (L.price>0?(n/L.price*100).toFixed(1):'0')+'%';};
+    var pay=0;
+    if(M&&L.hasLoan){
+      pay=payment(L.loan,M.rate,M.term,M.io);
+      var other=payment(L.loan,M.rate,M.term,!M.io);
+      var goal=M.goal==='btl'?'Buy-to-let investment':M.goal==='home'?'Buying own home':M.goal==='remo'?'Remortgaging':'';
+      secs.push({heading:'Your mortgage',rows:[
+        ['Looking to',goal],
+        ['Property price',gbp(L.price)],
+        ['Mortgage amount',gbp(L.loan),1],
+        ['Loan to value (LTV)',pct(L.loan)],
+        M.max>0?['Maximum mortgage from the calculator',gbp(M.max)]:null,
+        ['Deposit',gbp(L.deposit)+' ('+pct(L.deposit)+' of the price)']
+      ]});
+      secs.push({heading:'Your monthly repayment',rows:[
+        ['Interest rate (indicative)',M.rate.toFixed(2)+'%'+(M.choice?' ('+(M.choice==='avg'?'average':M.choice==='own'?'own rate':M.choice+'est')+' of current expat rates)':'')],
+        ['Fixed rate period',M.fix+' years'],
+        ['Mortgage term',M.term+' years'],
+        ['Repayment type',M.io?'Interest only':'Repayment (capital and interest)'],
+        ['Estimated monthly payment',gbp(pay)+' a month',1],
+        [M.io?'On a repayment basis it would be':'On an interest only basis it would be',M.goal==='home'?'':gbp(other)+' a month'],
+        L.on?['Monthly payment in '+L.c,money(L.c,L.xr,pay)+' a month']:null,
+        M.io?['Mortgage to repay at the end of the term',gbp(L.loan)]:null
+      ],note:'Rates vary by lender and change often. When the fixed rate period ends, the mortgage moves to the lender\'s variable rate unless you choose another fixed rate.'});
+    } else if(L.hasLoan){
+      secs.push({heading:'Your mortgage',rows:[['Property price',gbp(L.price)],['Mortgage amount',gbp(L.loan),1],['Loan to value (LTV)',pct(L.loan)],['Deposit',gbp(L.deposit)]],note:'Use the mortgage calculator at uk-expat-mortgage.co.uk/calculator to see how much you could borrow and your monthly repayment.'});
+    }
+    var bands=[].slice.call(document.querySelectorAll('#bandBody tr')).map(function(tr){var td=tr.children;return [td[0].textContent+' at '+td[1].textContent,td[2].textContent];});
+    secs.push({heading:'Estimated stamp duty',rows:[['Buyer',L.who],['How it is charged',L.rule]].concat(bands).concat([['Estimated stamp duty',gbp(L.sdlt)+' ('+pct(L.sdlt)+' of the price)',1]]),
+      note:'England and Northern Ireland only. A general guide, not a definitive figure: your solicitor calculates and confirms the final stamp duty, not your mortgage broker.'});
+    secs.push({heading:'Your estimated budget to plan for',rows:[
+      [L.hasLoan?'Deposit':'Purchase price (cash)',gbp(L.deposit)],
+      ['Stamp duty',gbp(L.sdlt)],
+      ['Solicitor (conveyancing) fee'+(L.vat?', including VAT':''),gbp(L.legal+L.vat)],
+      ['Searches, Land Registry and other costs',gbp(L.disb)],
+      L.hasLoan?['Valuation fee',gbp(L.val)]:null,
+      L.hasLoan?['Lender arrangement fee',gbp(L.lender)]:null,
+      L.hasLoan?['Mortgage broker fee ('+L.brokerPct+'% of the mortgage)',gbp(L.broker)]:null,
+      ['Estimated budget to plan for',gbp(L.total),1],
+      L.on?['Budget in '+L.c,money(L.c,L.xr,L.total)]:null
+    ],note:'Fees are typical estimates and will vary. Also allow for a building survey if wanted, furnishing and letting costs for a buy-to-let, and exchange rate costs when sending money to the UK.'+(L.on?' Converted at 1 GBP = '+L.xr+' '+L.c+'; exchange rates move.':'')});
+    hl.push(['Budget to plan for',gbp(L.total),'Deposit, stamp duty, fees']);
+    if(M&&L.hasLoan)hl.push(['Monthly payment',gbp(pay),M.io?'Interest only':'Repayment']);
+    if(L.hasLoan)hl.push(['Mortgage',gbp(L.loan),pct(L.loan)+' loan to value']);
+    hl.push(['Stamp duty',gbp(L.sdlt),'Estimate only']);
+    return {
+      title:'Your UK property purchase summary',
+      subtitle:'Property price '+gbp(L.price),
+      filename:'UK-Expat-Mortgages-summary.pdf',
+      highlights:hl.slice(0,4),
+      sections:secs,
+      disclaimers:[
+        'This summary is an indicative guide only. It is not a quote, a mortgage offer or advice, and the figures are not definitive. It is based on the figures you entered and simplified assumptions on the date shown.',
+        'For standard UK residential property only. It does not cover commercial or semi-commercial property, houses in multiple occupation (HMOs), multi-unit purchases, auction purchases or other specialist property.',
+        'All mortgages are subject to status, the lender\'s criteria and the lender\'s valuation of the property. If the valuation is lower than the figure used, the amount the lender will offer may be lower. Rates, criteria and availability vary by lender and can change at any time.',
+        'Stamp duty figures are general estimates for England and Northern Ireland using the rates in force from 1 April 2025. They are not tax advice. Your solicitor (conveyancer) or a tax adviser calculates and confirms the stamp duty, not your mortgage broker.',
+        'Where income is paid, or payments are made, in a foreign currency, changes in exchange rates may affect the amount you need to repay in sterling.',
+        'UK Expat Mortgages is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710. Registered address: Sterling House, 27 Hatchlands Road, Redhill, Surrey RH1 6RW.',
+        'The Financial Conduct Authority does not regulate some aspects of buy to let mortgages, overseas mortgages and tax advice.',
+        'A typical fee of up to 1% of the mortgage amount may be payable on successful completion. The fee will be agreed with each applicant prior to submitting an application. The total fee is non-refundable. We may also be paid commission from the lender.'
+      ]
+    };
+  };
 
   $('inputs').addEventListener('input',calc);
   $('inputs').addEventListener('change',calc);
