@@ -389,8 +389,8 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     if(UP)$('upBtn').classList.remove('hidden');else $('noUp').classList.remove('hidden');
   };
   // Direct send to the adviser's Dropbox, when this link has a client folder and the site is connected
-  var CL=(q.get('c')||'').replace(/[\\\/<>:"|?*]/g,'').slice(0,100);
-  if(CL&&window.fetch&&window.FormData){
+  var CL=(q.get('c')||'').replace(/[\\\/<>:"|?*]/g,'').slice(0,100),SG=(q.get('s')||'').replace(/[^A-Za-z0-9_-]/g,'');
+  if(CL&&SG&&window.fetch&&window.FormData){
     fetch('/api/submit',{cache:'no-store'}).then(function(r){return r.ok?r.json():{};}).then(function(j){
       if(!j.ready)return;
       $('manualBox').classList.add('hidden');$('autoBox').classList.remove('hidden');
@@ -411,14 +411,14 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     btn.disabled=true;btn.textContent='Sending, please keep this page open...';$('sendMsg').textContent='';
     makeSummaryPDF().then(function(p){
       var fd=new FormData(),who=[V('a_first'),V('a_last')].filter(Boolean).join(' ');
-      fd.append('c',CL);fd.append('who',who);fd.append('factfind',p.blob,p.filename);
+      fd.append('c',CL);fd.append('s',SG);fd.append('who',who);fd.append('factfind',p.blob,p.filename);
       for(var i=0;i<files.length;i++)fd.append('docs',files[i],files[i].name);
       return fetch('/api/submit',{method:'POST',body:fd}).then(function(r){return r.json().catch(function(){return {ok:false};});});
     }).then(function(j){
       if(!j||!j.ok)throw new Error(j&&j.error||'failed');
       $('autoBox').classList.add('hidden');$('doneBox').classList.remove('hidden');
       $('doneTxt').innerHTML='Your adviser, John Florey, will be in touch.'+(files.length?' Your '+files.length+' document'+(files.length>1?'s were':' was')+' sent too.':'')+
-        (UP?' If you have more documents later, you can <a href="https://www.dropbox.com/request/'+UP+'" target="_blank" rel="noopener">upload them here</a>.':' You can send any further documents to <a href="mailto:john.florey@opesfp.com">john.florey@opesfp.com</a>.');
+        (UP?' If you have more documents later, you can <a href="https://www.dropbox.com/request/'+UP+'" target="_blank" rel="noopener">upload them here</a>.':' To send more documents later, open the same link again, go to the last page and submit them.');
       $('finSub').textContent='All done. Thank you.';
     }).catch(function(e){
       btn.disabled=false;btn.textContent='Submit to my adviser';

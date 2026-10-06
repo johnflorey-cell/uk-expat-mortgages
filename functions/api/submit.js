@@ -1,60 +1,9 @@
-// Cloudflare Pages Function: saves a client's fact-find PDF and documents into their Dropbox folder.
-// Settings (Cloudflare Pages > Settings > Variables and secrets):
-//   DROPBOX_REFRESH_TOKEN  (secret, from /setup/dropbox/)
-//   DROPBOX_APP_KEY        optional, defaults to the UK Expat Fact-find app
-//   DROPBOX_ROOT_NS        optional, team root namespace id
-//   DROPBOX_BASE           optional, folder that holds the client folders
+// Saves a client's fact-find PDF and documents into their Dropbox folder.
+// Needs the Cloudflare secret DROPBOX_REFRESH_TOKEN (from /setup/dropbox/).
+import { cfg, json, cleanName, accessToken, folderExists, upload, verify } from '../_lib/dbx.js';
 
-const APP_KEY = '5ju3aifj0qfxi11';
-const ROOT_NS = '229468454';
-const BASE = '/02 Mortgages and Property/MORTGAGES/APPLICANTS MORTGAGE APPLICANTS/APPLICANTS';
 const MAX_FILE = 25 * 1024 * 1024, MAX_TOTAL = 80 * 1024 * 1024, MAX_FILES = 20;
 const OK_EXT = /\.(pdf|jpe?g|png|heic|heif|webp|gif|tiff?|docx?|xlsx?|txt)$/i;
-
-const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
-const ascii = s => s.replace(/[\u007f-￿]/g, c => '\\u' + ('0000' + c.charCodeAt(0).toString(16)).slice(-4));
-const cleanName = s => String(s || '').replace(/[\\/:*?"<>|\x00-\x1f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120);
-
-function cfg(env) {
-  return {
-    token: env.DROPBOX_REFRESH_TOKEN || '',
-    key: env.DROPBOX_APP_KEY || APP_KEY,
-    secret: env.DROPBOX_APP_SECRET || '',
-    root: env.DROPBOX_ROOT_NS || ROOT_NS,
-    base: (env.DROPBOX_BASE || BASE).replace(/\/+$/, '')
-  };
-}
-
-async function accessToken(c) {
-  const body = new URLSearchParams({ grant_type: 'refresh_token', refresh_token: c.token, client_id: c.key });
-  if (c.secret) body.set('client_secret', c.secret);
-  const r = await fetch('https://api.dropboxapi.com/oauth2/token', { method: 'POST', body });
-  if (!r.ok) throw new Error('token ' + r.status + ' ' + (await r.text()).slice(0, 200));
-  return (await r.json()).access_token;
-}
-
-function hdrs(c, tok, extra) {
-  return Object.assign({ Authorization: 'Bearer ' + tok, 'Dropbox-API-Path-Root': JSON.stringify({ '.tag': 'root', root: c.root }) }, extra || {});
-}
-
-async function folderExists(c, tok, path) {
-  const r = await fetch('https://api.dropboxapi.com/2/files/get_metadata', {
-    method: 'POST', headers: hdrs(c, tok, { 'Content-Type': 'application/json' }), body: JSON.stringify({ path })
-  });
-  if (r.ok) return (await r.json())['.tag'] === 'folder';
-  if (r.status === 409) return false;
-  throw new Error('meta ' + r.status + ' ' + (await r.text()).slice(0, 200));
-}
-
-async function upload(c, tok, path, data) {
-  const r = await fetch('https://content.dropboxapi.com/2/files/upload', {
-    method: 'POST',
-    headers: hdrs(c, tok, { 'Content-Type': 'application/octet-stream', 'Dropbox-API-Arg': ascii(JSON.stringify({ path, mode: 'add', autorename: true, mute: false })) }),
-    body: data
-  });
-  if (!r.ok) throw new Error('upload ' + r.status + ' ' + (await r.text()).slice(0, 200));
-  return (await r.json()).name;
-}
 
 export async function onRequestGet({ env }) {
   return json({ ready: !!cfg(env).token });
@@ -68,6 +17,7 @@ export async function onRequestPost({ request, env }) {
 
   const client = cleanName(form.get('c'));
   if (!client || /\.\./.test(client)) return json({ ok: false, error: 'bad_client' }, 400);
+  if (!(await verify(env, client, String(form.get('s') || '')))) return json({ ok: false, error: 'bad_link' }, 403);
   const who = cleanName(form.get('who')) || 'Client';
 
   const ff = form.get('factfind');
@@ -87,16 +37,16 @@ export async function onRequestPost({ request, env }) {
     const folder = c.base + '/' + client;
     if (!(await folderExists(c, tok, folder))) return json({ ok: false, error: 'unknown_client' }, 404);
     const stamp = new Date().toISOString().slice(0, 10);
-    const saved = [];
+    let saved = 0;
     if (ff) {
       const buf = await ff.arrayBuffer();
       if (new TextDecoder().decode(new Uint8Array(buf.slice(0, 5))) !== '%PDF-') return json({ ok: false, error: 'bad_pdf' }, 400);
-      saved.push(await upload(c, tok, folder + '/01 Fact-find/Fact-find ' + who + ' ' + stamp + '.pdf', buf));
+      await upload(c, tok, folder + '/01 Fact-find/Fact-find ' + who + ' ' + stamp + '.pdf', buf); saved++;
     }
     for (const f of docs) {
-      saved.push(await upload(c, tok, folder + '/00 Client Uploads/' + who + ' - ' + (cleanName(f.name) || 'document'), await f.arrayBuffer()));
+      await upload(c, tok, folder + '/00 Client Uploads/' + who + ' - ' + (cleanName(f.name) || 'document'), await f.arrayBuffer()); saved++;
     }
-    return json({ ok: true, saved: saved.length });
+    return json({ ok: true, saved });
   } catch (e) {
     console.log('submit error', e && e.message);
     return json({ ok: false, error: 'dropbox' }, 502);
