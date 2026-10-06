@@ -373,6 +373,8 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     if(UP)$('upBtn').classList.remove('hidden');else $('noUp').classList.remove('hidden');
   };
   if(UP){$('upBtn').href='https://www.dropbox.com/request/'+UP;$('upBtn').classList.remove('hidden');}
+  var TTL=(q.get('t')||'').replace(/[<>]/g,'').slice(0,80);
+  if(TTL){document.querySelector('.hero h1').textContent=TTL;document.title=TTL+' | UK Expat Mortgages';}
   if(REF){$('greet').textContent='Hello '+REF.replace(/[<>]/g,'')+'. A few short sections so your adviser can find the right lenders for you. It takes about 5 minutes.';}
 
   load();toggles();show(0);
