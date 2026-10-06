@@ -777,6 +777,8 @@ function sdltCalc(price,o){
       subtitle:'Property price '+gbp(L.price),
       filename:'UK-Expat-Mortgages-summary.pdf',
       highlights:hl.slice(0,4),
+      headline:'To buy a property for '+gbp(L.price)+' you need to budget for approximately '+gbp(L.total)+' to cover the purchase'+(L.on?' (about '+money(L.c,L.xr,L.total)+')':'')+'.',
+      headlineSub:L.hasLoan?'This is your deposit of '+gbp(L.deposit)+' plus stamp duty and buying fees of '+gbp(L.total-L.deposit)+', with a mortgage of '+gbp(L.loan)+' covering the rest of the price.':'This is the purchase price plus stamp duty and buying fees of '+gbp(L.total-L.deposit)+'.',
       sections:secs,
       disclaimers:[
         'This summary is an indicative guide only. It is not a quote, a mortgage offer or advice, and the figures are not definitive. It is based on the figures you entered and simplified assumptions on the date shown.',

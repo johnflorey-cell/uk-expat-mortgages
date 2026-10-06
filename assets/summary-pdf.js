@@ -109,6 +109,21 @@
       y+=bh+9;
     }
 
+    // Headline budget statement
+    if(d.headline){
+      doc.setFont('helvetica','bold');doc.setFontSize(11.5);
+      var hlines=doc.splitTextToSize(clean(d.headline),CW-12);
+      doc.setFont('helvetica','normal');doc.setFontSize(8.6);var sub=d.headlineSub?doc.splitTextToSize(clean(d.headlineSub),CW-12):[];
+      var hh=hlines.length*5.4+(sub.length?sub.length*4+2:0)+9;
+      keep(hh+6);
+      doc.setFillColor(253,248,236);doc.setDrawColor.apply(doc,GOLD);doc.roundedRect(M,y,CW,hh,2,2,'FD');
+      doc.setTextColor.apply(doc,NAVY);doc.setFont('helvetica','bold');doc.setFontSize(11.5);
+      hlines.forEach(function(l,i){doc.text(l,M+6,y+7+i*5.4);});
+      if(sub.length){doc.setFont('helvetica','normal');doc.setFontSize(8.6);doc.setTextColor.apply(doc,SOFT);
+        sub.forEach(function(l,i){doc.text(l,M+6,y+7+hlines.length*5.4+1+i*4);});}
+      y+=hh+8;
+    }
+
     // Sections
     (d.sections||[]).forEach(function(sec){
       var rows=(sec.rows||[]).filter(function(r){return r&&r[1]!==''&&r[1]!=null;});
