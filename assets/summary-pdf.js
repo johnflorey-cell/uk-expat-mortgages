@@ -59,6 +59,27 @@
       y+=gap||0;
     }
 
+    // Height measuring, so a section is never split across two pages
+    var LIMIT=H-22,TOP=24;
+    function newPage(){doc.addPage();header(false);}
+    function keep(h){ if(y+h>LIMIT && h<=LIMIT-TOP) newPage(); }
+    function paraH(t,size,bold,gap){
+      doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(size);
+      return doc.splitTextToSize(clean(t),CW).length*size*0.42+(gap||0);
+    }
+    function rowsOf(sec){return (sec.rows||[]).filter(function(r){return r&&r[1]!==''&&r[1]!=null;});}
+    function sectionH(sec){
+      var h=7.5;
+      rowsOf(sec).forEach(function(r){
+        doc.setFontSize(9.2);
+        doc.setFont('helvetica','normal');var a=doc.splitTextToSize(clean(r[0]),CW*0.52).length;
+        doc.setFont('helvetica','bold');var b=doc.splitTextToSize(clean(r[1]),CW*0.46).length;
+        h+=Math.max(a,b)*4.1+4.6;
+      });
+      if(sec.note)h+=0.5+paraH(sec.note,8.2,false,1);
+      return h+4;
+    }
+
     header(true);
 
     // Notice
@@ -92,6 +113,7 @@
     (d.sections||[]).forEach(function(sec){
       var rows=(sec.rows||[]).filter(function(r){return r&&r[1]!==''&&r[1]!=null;});
       if(!rows.length&&!sec.note)return;
+      keep(sectionH(sec));
       ensure(16);
       doc.setFont('helvetica','bold');doc.setFontSize(11.5);doc.setTextColor.apply(doc,NAVY);
       doc.text(clean(sec.heading),M,y);y+=2.5;
@@ -116,7 +138,7 @@
     // Next steps: adviser contact
     var C=d.contact||{name:'John Florey',role:'Specialist UK Expat Mortgage Adviser',lines:[['Email','john.florey@opesfp.com'],['Website','www.uk-expat-mortgage.co.uk']]};
     var bh2=22+C.lines.length*5.2;
-    ensure(bh2+6);
+    keep(bh2+6);
     doc.setFillColor.apply(doc,TINT);doc.roundedRect(M,y,CW,bh2,2,2,'F');
     doc.setFillColor.apply(doc,GOLD);doc.rect(M,y,1.4,bh2,'F');
     doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor.apply(doc,NAVY);
@@ -131,11 +153,15 @@
     });
     y+=bh2+8;
 
-    // Important information
+    // Important information, kept together on one page where possible
+    var repo='YOUR HOME OR PROPERTY MAY BE REPOSSESSED IF YOU DO NOT KEEP UP REPAYMENTS ON A MORTGAGE OR ANY OTHER DEBT SECURED ON IT.';
+    var infoH=6+paraH(repo,8.2,true,2);
+    (d.disclaimers||[]).forEach(function(t){infoH+=paraH(t,7.6,false,1.6);});
+    keep(infoH);
     ensure(20);
     doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor.apply(doc,NAVY);
     doc.text('Important information',M,y);y+=6;
-    para('YOUR HOME OR PROPERTY MAY BE REPOSSESSED IF YOU DO NOT KEEP UP REPAYMENTS ON A MORTGAGE OR ANY OTHER DEBT SECURED ON IT.',8.2,INK,true,2);
+    para(repo,8.2,INK,true,2);
     (d.disclaimers||[]).forEach(function(t){para(t,7.6,SOFT,false,1.6);});
 
     // Footer on every page
