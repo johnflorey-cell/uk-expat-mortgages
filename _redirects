@@ -10,3 +10,6 @@
 /post/* / 301
 /apply/john-test /fact-find/?ref=John&t=John%27s%20Test%20Link%20Mortgage%20App&up=rul7dbgfarx2zyqetb8w&c=TEST%20CLIENT%20-%20Oct%202026 302
 /apply/john-test/ /fact-find/?ref=John&t=John%27s%20Test%20Link%20Mortgage%20App&up=rul7dbgfarx2zyqetb8w&c=TEST%20CLIENT%20-%20Oct%202026 302
+/advisor /adviser/ 301
+/advisor/ /adviser/ 301
+/new-client /adviser/ 301
