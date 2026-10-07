@@ -9,7 +9,26 @@ export async function onRequestGet({ env }) {
   return json({ ready: !!cfg(env).token });
 }
 
-export async function onRequestPost({ request, env }) {
+// Email John that something arrived (name, file count and folder only; no client answers or documents)
+async function notify(env, who, client, hasFF, nDocs) {
+  const to = env.NOTIFY_EMAIL || 'john.florey@opesfp.com';
+  const when = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0, 16).replace('T', ' ') + ' (Bahrain)';
+  const what = [hasFF ? 'Fact-find' : '', nDocs ? nDocs + ' document' + (nDocs > 1 ? 's' : '') : ''].filter(Boolean).join(' and ');
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/' + to, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json', Origin: 'https://www.uk-expat-mortgage.co.uk', Referer: 'https://www.uk-expat-mortgage.co.uk/fact-find/' },
+      body: JSON.stringify({
+        _subject: (hasFF ? 'New fact-find: ' : 'New documents: ') + who,
+        _template: 'table', _captcha: 'false',
+        Client: who, Received: what, 'Dropbox folder': client, Time: when
+      })
+    });
+    console.log('notify', r.status);
+  } catch (e) { console.log('notify error', e && e.message); }
+}
+
+export async function onRequestPost({ request, env, waitUntil }) {
   const c = cfg(env);
   if (!c.token) return json({ ok: false, error: 'not_configured' }, 503);
   let form;
@@ -46,6 +65,7 @@ export async function onRequestPost({ request, env }) {
     for (const f of docs) {
       await upload(c, tok, folder + '/00 Client Uploads/' + who + ' - ' + (cleanName(f.name) || 'document'), await f.arrayBuffer()); saved++;
     }
+    if (typeof waitUntil === 'function') waitUntil(notify(env, who, client, !!ff, docs.length)); else await notify(env, who, client, !!ff, docs.length);
     return json({ ok: true, saved });
   } catch (e) {
     console.log('submit error', e && e.message);
