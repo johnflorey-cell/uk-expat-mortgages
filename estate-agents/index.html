@@ -96,6 +96,18 @@ header.top .tag{color:var(--hero-hi)}
 .btn.ghost{background:#fff;color:var(--brand);border:1.5px solid var(--brand)}
 .btn:disabled{opacity:.6;cursor:default}
 .send{background:var(--send);border:1.5px solid var(--accent)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:600;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--brand)}
+.sdtoggle{background:var(--send);border:1.5px dashed var(--accent);border-radius:10px;padding:14px 16px}
+.sdcard{background:#fff;border:2px solid var(--accent);border-radius:12px;padding:22px 24px;margin-bottom:18px}
+.sdcard .k{font-size:14px;color:var(--ink-soft);font-weight:600}
+.sdcard .v{font-family:Fraunces,Georgia,serif;font-size:clamp(32px,4.5vw,42px);color:var(--brand);line-height:1.1;margin:4px 0 10px}
+.sdcard .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.sdcard .chip{font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--tint);color:var(--brand)}
+.sdcard .chip.warn{background:#fdf0ea;color:#a34a26}
+.sdcard .chip.good{background:#e6f2ea;color:var(--good)}
+.sdcard .budget{background:var(--brand);color:#fff;border-radius:8px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.sdcard .budget b{font-family:Fraunces,Georgia,serif;font-size:22px}
 .send .btns{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
 .send .btns .full{grid-column:1/-1}
 .preview{background:#fff;border:1px dashed var(--line);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--ink-soft);white-space:pre-line;max-height:240px;overflow:auto;margin-top:6px}
@@ -230,6 +242,70 @@ footer strong{color:#fff}
           <p class="hint" id="rateHint"></p>
         </div>
       </div>
+
+      <div class="panel">
+        <h3>Stamp duty and buying costs <small style="font-family:Inter,sans-serif;font-size:14px;color:var(--ink-soft);font-weight:400">(optional)</small></h3>
+        <div class="sdtoggle">
+          <label class="check"><input type="checkbox" id="sdOn"> Include an estimate of stamp duty and buying costs, as a guide</label>
+          <p class="hint" style="margin:6px 0 0 30px">Adds a second box to the summary, the message and the PDF. A general guide only: your client's solicitor calculates the stamp duty.</p>
+        </div>
+        <div id="sdBox" class="hidden" style="margin-top:18px">
+          <div class="group">
+            <p class="glabel">About your client</p>
+            <div class="field"><span id="sdResLabel">Where does your client live?</span>
+              <div class="seg" role="radiogroup" aria-label="UK residence">
+                <input type="radio" name="sdres" id="sr-non" value="non" checked><label for="sr-non">Outside the UK</label>
+                <input type="radio" name="sdres" id="sr-uk" value="uk"><label for="sr-uk">In the UK</label>
+              </div>
+              <span class="hint" id="sdResHint">Non-UK resident for stamp duty means fewer than 183 days in the UK in the 12 months before buying. If any joint buyer is non-UK resident, the 2% surcharge usually applies.</span>
+            </div>
+            <div id="sdIndQs">
+              <div class="field"><span>Will your client own any other home or residential property anywhere in the world when they buy?</span>
+                <div class="seg" role="radiogroup" aria-label="Other property">
+                  <input type="radio" name="sdother" id="so-yes" value="yes" checked><label for="so-yes">Yes</label>
+                  <input type="radio" name="sdother" id="so-no" value="no"><label for="so-no">No</label>
+                </div>
+                <span class="hint">Include property overseas worth £40,000 or more, and property owned by a joint buyer or spouse.</span>
+              </div>
+              <div class="field hidden" id="sdReplaceQ"><span>Is this replacing your client's main home (sold now or in the last 3 years)?</span>
+                <div class="seg" role="radiogroup" aria-label="Replacing main home">
+                  <input type="radio" name="sdreplace" id="sp-no" value="no" checked><label for="sp-no">No</label>
+                  <input type="radio" name="sdreplace" id="sp-yes" value="yes"><label for="sp-yes">Yes</label>
+                </div>
+              </div>
+              <div class="field hidden" id="sdFtbQ"><span>Has your client, or anyone buying with them, ever owned a home anywhere in the world?</span>
+                <div class="seg" role="radiogroup" aria-label="Previously owned">
+                  <input type="radio" name="sdowned" id="sw-yes" value="yes" checked><label for="sw-yes">Yes, owned before</label>
+                  <input type="radio" name="sdowned" id="sw-no" value="no"><label for="sw-no">No, first-time buyer</label>
+                </div>
+              </div>
+            </div>
+            <div id="sdCoQs" class="hidden">
+              <div class="field"><span>Will the company let the property to tenants not connected to the company?</span>
+                <div class="seg" role="radiogroup" aria-label="Rental business">
+                  <input type="radio" name="sdrelief" id="sl-yes" value="yes" checked><label for="sl-yes">Yes, as a rental business</label>
+                  <input type="radio" name="sdrelief" id="sl-no" value="no"><label for="sl-no">No</label>
+                </div>
+                <span class="hint">Most buy-to-let companies (SPVs) qualify for relief from the 17% rate on homes over £500,000.</span>
+              </div>
+            </div>
+          </div>
+          <div class="group">
+            <p class="glabel">Buying costs <small style="text-transform:none;letter-spacing:0;color:var(--ink-soft);font-weight:400">(typical figures, change any of them)</small></p>
+            <div class="two">
+              <label class="field"><span>Solicitor's legal fee</span><div class="money"><input id="sdLegal" inputmode="numeric" value="1,250" aria-label="Solicitor legal fee"></div></label>
+              <label class="field"><span>Searches and other costs</span><div class="money"><input id="sdDisb" inputmode="numeric" value="300" aria-label="Searches and other costs"></div></label>
+            </div>
+            <label class="check" style="font-weight:500;font-size:14px;margin:-4px 0 14px"><input type="checkbox" id="sdVat" checked> Add 20% VAT to the legal fee</label>
+            <div class="two">
+              <label class="field"><span>Valuation fee</span><div class="money"><input id="sdVal" inputmode="numeric" value="600" aria-label="Valuation fee"></div></label>
+              <label class="field"><span>Lender arrangement fee</span><div class="money"><input id="sdLender" inputmode="numeric" value="1,999" aria-label="Lender arrangement fee"></div></label>
+            </div>
+            <label class="field"><span>Mortgage broker fee <small>(% of the mortgage)</small></span><div class="pct"><input id="sdBroker" inputmode="decimal" value="1" aria-label="Broker fee percentage"></div></label>
+            <p class="hint">Legal fees from £1,250, more for leasehold, new build or company purchases. Valuation from £350, rising with the price. Fees vary, these are typical estimates.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="results" aria-live="polite">
@@ -240,6 +316,22 @@ footer strong{color:#fff}
         <div class="ltvtag" id="maxLtv"></div>
         <div class="lim" id="maxLimit"></div>
         <div class="alt">Guide only, not a quote or offer of lending. Your client must speak to a mortgage adviser before relying on these figures.</div>
+      </div>
+
+      <div class="sdcard hidden" id="sdCard">
+        <div class="k">Stamp duty and buying costs (guide)</div>
+        <div class="v" id="sdCosts">£0</div>
+        <div class="chips" id="sdChips"></div>
+        <div class="rows">
+          <div class="row"><span id="sdRuleRow">Estimated stamp duty</span><b id="sdTax">£0</b></div>
+          <div class="row"><span>Solicitor's legal fee <span id="sdVatLbl">(incl. VAT)</span></span><b id="sdLegalOut">£0</b></div>
+          <div class="row"><span>Searches and other costs</span><b id="sdDisbOut">£0</b></div>
+          <div class="row"><span>Valuation fee</span><b id="sdValOut">£0</b></div>
+          <div class="row"><span>Lender arrangement fee</span><b id="sdLenderOut">£0</b></div>
+          <div class="row"><span id="sdBrokerLbl">Mortgage broker fee</span><b id="sdBrokerOut">£0</b></div>
+        </div>
+        <div class="budget"><span>Total budget to plan for, including the deposit of <span id="sdDepOut">£0</span></span><b id="sdBudget">£0</b></div>
+        <p class="note">A general guide only, not a definitive figure. Stamp duty is for England and Northern Ireland, using the rates from 1 April 2025. Your client's solicitor (conveyancer) calculates and confirms the stamp duty, not the mortgage broker. Fees are typical estimates and will vary.</p>
       </div>
 
       <div class="panel">
@@ -256,7 +348,7 @@ footer strong{color:#fff}
           <div class="row hidden" id="payFxRow"><span id="payFxLbl"></span><b id="payFx"></b></div>
         </div>
         <p class="formula" id="formula"></p>
-        <p class="note">Stamp duty, legal, valuation, lender and broker fees are extra. Your client can estimate these on the <a href="/stamp-duty-calculator/" target="_blank" rel="noopener">stamp duty and buying costs calculator</a>.</p>
+        <p class="note" id="extraNote">Stamp duty, legal, valuation, lender and broker fees are extra. Tick "Include an estimate of stamp duty and buying costs" to add them, or your client can estimate them on the <a href="/stamp-duty-calculator/" target="_blank" rel="noopener">stamp duty and buying costs calculator</a>.</p>
       </div>
 
       <div class="panel send">
@@ -324,6 +416,51 @@ footer strong{color:#fff}
 </footer>
 
 <script src="/assets/summary-pdf.js" defer></script>
+<script>
+/* SDLT-ENGINE-START */
+// Stamp Duty Land Tax, residential, England and Northern Ireland, rates from 1 April 2025.
+// Source: GOV.UK residential property rates, higher rates for additional properties,
+// non-UK resident surcharge and corporate bodies guidance. Checked 3 October 2026.
+var SDLT={
+  checked:'3 October 2026',
+  standard:[[125000,0],[250000,2],[925000,5],[1500000,10],[Infinity,12]],
+  ftb:[[300000,0],[500000,5]],
+  ftbMax:500000,
+  higher:5,          // additional property surcharge
+  nonRes:2,          // non-UK resident surcharge
+  higherMin:40000,   // higher rates do not apply below £40,000
+  corpFlat:17,       // 17% rate for companies, over corpMin, no relief
+  corpMin:500000
+};
+function sdltCalc(price,o){
+  // o: {company:bool, nonRes:bool, higher:bool, ftb:bool, relief:bool}
+  var res={total:0,slices:[],rule:'standard',surcharge:0,flat:0};
+  if(!(price>0))return res;
+  var nr=o.nonRes?SDLT.nonRes:0;
+  var higher=(o.company||o.higher)&&price>=SDLT.higherMin;
+  if(o.company&&price>SDLT.corpMin&&!o.relief){
+    var r=SDLT.corpFlat+nr;
+    res.rule='corporate17';res.flat=r;
+    res.total=Math.floor(price*r/100);
+    res.slices=[{from:0,to:price,rate:r,tax:res.total}];
+    return res;
+  }
+  var bands=SDLT.standard;
+  if(!o.company&&o.ftb&&!higher&&price<=SDLT.ftbMax){bands=SDLT.ftb;res.rule='ftb';}
+  else if(higher){res.rule='higher';}
+  var add=(higher?SDLT.higher:0)+nr;res.surcharge=add;
+  var prev=0,total=0;
+  for(var i=0;i<bands.length&&prev<price;i++){
+    var top=Math.min(bands[i][0],price),amt=top-prev,rate=bands[i][1]+add;
+    var tax=amt*rate/100;
+    res.slices.push({from:prev,to:top,rate:rate,tax:tax});
+    total+=tax;prev=top;
+  }
+  res.total=Math.floor(total);
+  return res;
+}
+/* SDLT-ENGINE-END */
+</script>
 <script>
 (function(){
   var $=function(id){return document.getElementById(id)};
@@ -451,9 +588,54 @@ footer strong{color:#fff}
     var showFx=!btl&&!!L.c;
     $('payFxRow').classList.toggle('hidden',!showFx);
     if(showFx){$('payFxLbl').textContent='Monthly payment in '+L.c;$('payFx').textContent=L.c+' '+Math.round(pay*L.xr).toLocaleString('en-GB');}
+    // Stamp duty and buying costs (optional)
+    var sdOn=$('sdOn').checked;L.sdOn=sdOn;
+    $('sdBox').classList.toggle('hidden',!sdOn);
+    $('sdCard').classList.toggle('hidden',!sdOn);
+    $('extraNote').classList.toggle('hidden',sdOn);
+    if(sdOn){
+      var company=btl&&owner==='co',nonRes=radio('sdres')==='non',other=radio('sdother')==='yes';
+      var replace=radio('sdreplace')==='yes',owned=radio('sdowned')==='yes',relief=radio('sdrelief')==='yes';
+      $('sdIndQs').classList.toggle('hidden',company);
+      $('sdCoQs').classList.toggle('hidden',!company);
+      $('sdReplaceQ').classList.toggle('hidden',!(!btl&&other));
+      $('sdFtbQ').classList.toggle('hidden',!(!btl&&!other));
+      $('sdResLabel').textContent=company?'Where are the company and its owners based?':'Where does your client live?';
+      $('sdResHint').textContent=company?'The 2% surcharge applies if the company is non-UK resident, or is controlled by people who are non-UK resident.':'Non-UK resident for stamp duty means fewer than 183 days in the UK in the 12 months before buying. If any joint buyer is non-UK resident, the 2% surcharge usually applies.';
+      var higher=company||(other&&!(!btl&&replace));
+      var ftb=!company&&!btl&&!other&&!owned;
+      var r=sdltCalc(value,{company:company,nonRes:nonRes,higher:higher,ftb:ftb,relief:relief});
+      var rule,chips=[];
+      if(r.rule==='corporate17'){rule='17% flat rate for companies on homes over £500,000'+(nonRes?', plus 2% non-UK resident surcharge':'');chips.push(['warn','17% company rate'+(nonRes?' + 2%':'')]);}
+      else{
+        if(r.rule==='ftb'){rule='First-time buyer relief';chips.push(['good','First-time buyer relief']);}
+        else if(company&&value>=SDLT.higherMin){rule='Standard rates plus 5% company surcharge';chips.push(['warn','+5% company surcharge']);}
+        else if(higher&&value>=SDLT.higherMin){rule='Standard rates plus 5% additional property surcharge';chips.push(['warn','+5% additional property']);}
+        else rule='Standard rates';
+        if(nonRes){rule+=', plus 2% non-UK resident surcharge';chips.push(['warn','+2% non-UK resident']);}
+      }
+      if(ftb&&value>SDLT.ftbMax)chips.push(['','First-time buyer relief not available over £500,000']);
+      if(!S.valTouched&&document.activeElement!==$('sdVal'))$('sdVal').value=valuationFee(value).toLocaleString('en-GB');
+      var legal=num($('sdLegal')),vat=$('sdVat').checked?Math.round(legal*0.2):0,disb=num($('sdDisb')),val=num($('sdVal')),lender=num($('sdLender'));
+      var bpct=num($('sdBroker')),broker=Math.round(maxMort*bpct/100);
+      var fees=legal+vat+disb+val+lender+broker,costs=r.total+fees,budget=dep+costs;
+      $('sdCosts').textContent=gbp(costs);
+      $('sdChips').innerHTML=chips.map(function(c){return '<span class="chip '+c[0]+'">'+c[1]+'</span>';}).join('');
+      $('sdRuleRow').textContent='Estimated stamp duty ('+(value>0?(r.total/value*100).toFixed(2):'0')+'% of the price)';
+      $('sdTax').textContent=gbp(r.total);
+      $('sdVatLbl').textContent=vat?'(incl. VAT)':'';
+      $('sdLegalOut').textContent=gbp(legal+vat);$('sdDisbOut').textContent=gbp(disb);$('sdValOut').textContent=gbp(val);$('sdLenderOut').textContent=gbp(lender);
+      $('sdBrokerLbl').textContent='Mortgage broker fee ('+(+bpct.toFixed(2))+'% of the mortgage)';$('sdBrokerOut').textContent=gbp(broker);
+      $('sdDepOut').textContent=gbp(dep);$('sdBudget').textContent=gbp(budget);
+      L.sd={tax:r.total,rule:rule,eff:value>0?r.total/value*100:0,legal:legal,vat:vat,disb:disb,val:val,lender:lender,bpct:bpct,broker:broker,fees:fees,costs:costs,budget:budget,
+        who:company?'Limited company'+(nonRes?' controlled from outside the UK':''):(nonRes?'Non-UK resident':'UK resident')+(ftb?', first-time buyer':higher?', will own another property':'')};
+    }
     S.last=L;
     buildMessage();
   }
+  function valuationFee(p){if(p<=250000)return 350;if(p<=500000)return 600;if(p<=750000)return 800;if(p<=1000000)return 1000;if(p<=2000000)return 1500;return 2500;}
+  ['sdLegal','sdDisb','sdVal','sdLender'].forEach(function(id){$(id).addEventListener('blur',function(){fmt($(id));});});
+  $('sdVal').addEventListener('input',function(){S.valTouched=true;});
 
   // ---- client message, links and referral form ----
   function clientLink(){
@@ -473,7 +655,8 @@ footer strong{color:#fff}
             :'Salary to evidence (4.5 x income): '+gbp(L.incNeed)+' gross a year'+(L.c?' (about '+L.c+' '+Math.round(L.incNeed*L.xr).toLocaleString('en-GB')+' at 1 GBP = '+L.xr+')':'')+'\n')+
       'Maximum mortgage: '+gbp(L.maxMort)+' at '+L.ltv.toFixed(1)+'% LTV ('+L.limit.toLowerCase()+')\n'+
       'Minimum deposit: '+gbp(L.dep)+'\n'+
-      'Estimated monthly payment: '+gbp(L.pay)+' ('+(L.io?'interest only':'repayment over '+L.term+' years')+', 5 year fixed at '+L.rate.toFixed(2)+'%)';
+      'Estimated monthly payment: '+gbp(L.pay)+' ('+(L.io?'interest only':'repayment over '+L.term+' years')+', 5 year fixed at '+L.rate.toFixed(2)+'%)'+
+      (L.sdOn?'\nStamp duty (guide): '+gbp(L.sd.tax)+' ('+L.sd.rule+'; '+L.sd.who+')\nBuying fees: '+gbp(L.sd.fees)+' (legal '+gbp(L.sd.legal+L.sd.vat)+', searches '+gbp(L.sd.disb)+', valuation '+gbp(L.sd.val)+', lender '+gbp(L.sd.lender)+', broker '+gbp(L.sd.broker)+')\nTotal budget incl. deposit: '+gbp(L.sd.budget):'');
   }
   function buildMessage(){
     var L=S.last;if(!L)return;
@@ -485,7 +668,12 @@ footer strong{color:#fff}
         :'- Mortgage needed: '+gbp(L.maxMort)+' ('+L.ltv.toFixed(0)+'% of the price), with a deposit of '+gbp(L.dep)+'\n'+
          '- You will need to evidence a gross salary of about '+gbp(L.incNeed)+' a year'+(L.c?' (about '+L.c+' '+Math.round(L.incNeed*L.xr).toLocaleString('en-GB')+')':'')+', combined if buying jointly\n')+
       '- Estimated monthly payment: '+gbp(L.pay)+(L.io?' interest only':' repayment')+(L.c?' (about '+L.c+' '+Math.round(L.pay*L.xr).toLocaleString('en-GB')+')':'')+', based on a 5 year fixed rate of '+L.rate.toFixed(2)+'%\n\n'+
-      'IMPORTANT: this is a guide only. It is not a quote, a mortgage offer or advice, and should not be relied on to make a decision. You need to speak to a mortgage adviser, who will confirm what you can borrow after a full assessment. All mortgages are subject to status, the lender\'s criteria and valuation. Stamp duty and buying fees are extra.\n\n'+
+      (L.sdOn?'Stamp duty and buying costs (a guide):\n\n'+
+        '- Estimated stamp duty: '+gbp(L.sd.tax)+' ('+L.sd.rule+')\n'+
+        '- Legal, valuation, lender and broker fees: about '+gbp(L.sd.fees)+'\n'+
+        '- Total budget to plan for, including your deposit of '+gbp(L.dep)+': about '+gbp(L.sd.budget)+'\n\n':'')+
+      'IMPORTANT: this is a guide only. It is not a quote, a mortgage offer or advice, and should not be relied on to make a decision. You need to speak to a mortgage adviser, who will confirm what you can borrow after a full assessment. All mortgages are subject to status, the lender\'s criteria and valuation. '+
+      (L.sdOn?'The stamp duty and costs are a general guide, not definitive: your solicitor calculates and confirms the stamp duty.\n\n':'Stamp duty and buying fees are extra.\n\n')+
       'Your mortgage adviser: John Florey, Specialist UK Expat Mortgage Adviser\n'+
       'john.florey@opesfp.com\n'+clientLink()+
       (a.name||a.agency?'\n\n'+[a.name,a.agency].filter(Boolean).join('\n'):'');
@@ -566,11 +754,30 @@ footer strong{color:#fff}
       ['Estimated monthly payment',gbp(L.pay)+' a month',1],
       !L.btl&&L.c&&L.xr>0?['Monthly payment in '+L.c,L.c+' '+Math.round(L.pay*L.xr).toLocaleString('en-GB')+' a month']:null,
       L.io?['Mortgage to repay at the end of the term',gbp(L.maxMort)]:null
-    ],note:'Expat '+L.catName+' 5 year fixed rates up to 75% LTV currently range from '+L.band.low.toFixed(2)+'% to '+L.band.high.toFixed(2)+'%. Rates vary by lender and change often. Stamp duty, legal, valuation, lender and broker fees are extra: see the stamp duty and buying costs calculator at uk-expat-mortgage.co.uk/stamp-duty-calculator.'});
+    ],note:'Expat '+L.catName+' 5 year fixed rates up to 75% LTV currently range from '+L.band.low.toFixed(2)+'% to '+L.band.high.toFixed(2)+'%. Rates vary by lender and change often.'+(L.sdOn?'':' Stamp duty, legal, valuation, lender and broker fees are extra: see the stamp duty and buying costs calculator at uk-expat-mortgage.co.uk/stamp-duty-calculator.')});
+    if(L.sdOn){
+      var sd=L.sd;
+      secs.push({heading:'Estimated stamp duty',rows:[
+        ['Buyer',sd.who],
+        ['How it is charged',sd.rule],
+        ['Estimated stamp duty',gbp(sd.tax)+' ('+sd.eff.toFixed(2)+'% of the price)',1]
+      ],note:'England and Northern Ireland, rates from 1 April 2025. A general guide, not a definitive figure: your solicitor (conveyancer) calculates and confirms the final stamp duty, not your mortgage broker.'});
+      secs.push({heading:'Your estimated budget to plan for',rows:[
+        ['Deposit',gbp(L.dep)],
+        ['Stamp duty',gbp(sd.tax)],
+        ['Solicitor (conveyancing) fee'+(sd.vat?', including VAT':''),gbp(sd.legal+sd.vat)],
+        ['Searches, Land Registry and other costs',gbp(sd.disb)],
+        ['Valuation fee',gbp(sd.val)],
+        ['Lender arrangement fee',gbp(sd.lender)],
+        ['Mortgage broker fee ('+(+sd.bpct.toFixed(2))+'% of the mortgage)',gbp(sd.broker)],
+        ['Estimated budget to plan for',gbp(sd.budget),1]
+      ],note:'Fees are typical estimates and will vary. Also allow for a building survey if wanted, furnishing and letting costs for a buy-to-let, and exchange rate costs when sending money to the UK.'});
+    }
     var lines=[['Email','john.florey@opesfp.com'],['Website','www.uk-expat-mortgage.co.uk']];
     if(agentLine())lines.push(['Agent',agentLine()+(a.phone?', '+a.phone:'')]);
     var hl=L.btl?[['Maximum mortgage',gbp(L.maxMort),L.ltv.toFixed(1)+'% loan to value'],['Deposit from',gbp(L.dep),pct(L.dep)+' of the price'],['Monthly payment',gbp(L.pay),'Interest only']]
       :[['Salary to evidence',gbp(L.incNeed),'Gross a year'],['Mortgage needed',gbp(L.maxMort),L.ltv.toFixed(1)+'% loan to value'],['Deposit',gbp(L.dep),pct(L.dep)+' of the price'],['Monthly payment',gbp(L.pay),'Repayment']];
+    if(L.sdOn){hl=hl.slice(0,3);hl.push(['Stamp duty and costs',gbp(L.sd.costs),'Budget '+gbp(L.sd.budget)]);}
     return {
       title:'UK mortgage guide: '+(!pr?'property':pr.length>44?pr.slice(0,42)+'...':pr),
       subtitle:[cl?'For '+cl:'',agentLine()?'Prepared by '+agentLine():''].filter(Boolean).join(', ')||'Purchase price '+gbp(L.value),
@@ -580,7 +787,7 @@ footer strong{color:#fff}
       highlights:hl,
       headline:L.btl?'For a buy-to-let purchase at '+gbp(L.value)+', a mortgage of up to '+gbp(L.maxMort)+' could be available, with a deposit from '+gbp(L.dep)+'.'
         :'To buy this home at '+gbp(L.value)+' with a mortgage of '+gbp(L.maxMort)+', you will need to evidence a gross salary of about '+gbp(L.incNeed)+' a year'+(L.c?' (about '+L.c+' '+Math.round(L.incNeed*L.xr).toLocaleString('en-GB')+')':'')+'.',
-      headlineSub:'Estimated monthly payment of '+gbp(L.pay)+' ('+(L.io?'interest only':'repayment over '+L.term+' years')+') at '+L.rate.toFixed(2)+'%. Subject to status, the lender\'s criteria and valuation.',
+      headlineSub:'Estimated monthly payment of '+gbp(L.pay)+' ('+(L.io?'interest only':'repayment over '+L.term+' years')+') at '+L.rate.toFixed(2)+'%.'+(L.sdOn?' With stamp duty and buying costs of about '+gbp(L.sd.costs)+', the total budget to plan for, including the deposit, is about '+gbp(L.sd.budget)+'.':'')+' Subject to status, the lender\'s criteria and valuation.',
       sections:secs,
       contactTitle:'Next step: you need to speak to a mortgage adviser',
       contactText:'I will check which lenders suit your country, income and currency, and can arrange a Decision in Principle.',
@@ -594,9 +801,10 @@ footer strong{color:#fff}
         'UK Expat Mortgages is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710. Registered address: Sterling House, 27 Hatchlands Road, Redhill, Surrey RH1 6RW.',
         'The Financial Conduct Authority does not regulate some aspects of buy to let mortgages, overseas mortgages and tax advice.',
         'A typical fee of up to 1% of the mortgage amount may be payable on successful completion. The fee will be agreed with each applicant prior to submitting an application. The total fee is non-refundable. We may also be paid commission from the lender.',
+        L.sdOn?'Stamp duty figures are general estimates for England and Northern Ireland using the rates in force from 1 April 2025. They are not tax advice and are not definitive. Your solicitor (conveyancer) or a tax adviser calculates and confirms the stamp duty, not your mortgage broker. Buying fees are typical estimates and will vary.':null,
         'Sharia mortgages (Home Purchase Plans) are not included in these rates. The standard mortgage figures can be used as a guide, although Sharia mortgages usually have a slightly higher rate.',
         'The estate agent named has provided this guide for information only. The estate agent is not a mortgage adviser and does not give mortgage advice.'
-      ]
+      ].filter(Boolean)
     };
   };
   $('pdfBtn').addEventListener('click',function(){if(needRef())return;notify('PDF download');window.downloadSummaryPDF($('pdfBtn'));});
