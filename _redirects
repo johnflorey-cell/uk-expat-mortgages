@@ -13,3 +13,7 @@
 /advisor /adviser/ 301
 /advisor/ /adviser/ 301
 /new-client /adviser/ 301
+/agents /estate-agents/ 301
+/agents/ /estate-agents/ 301
+/agent /estate-agents/ 301
+/estate-agent /estate-agents/ 301
