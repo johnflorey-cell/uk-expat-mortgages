@@ -6,15 +6,16 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Estate Agents | Client Mortgage Guide | UK Expat Mortgages</title>
 <meta name="description" content="For estate agents: check a guide to the UK mortgage your overseas client could get, then send it to them by WhatsApp, email or PDF.">
-<meta name="theme-color" content="#0e3b53">
+<meta name="theme-color" content="#0f4c4c">
 <link rel="icon" href="/adviser/icon-192.png">
 <link rel="apple-touch-icon" href="/adviser/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#10222e; --ink-soft:#44586a; --bg:#fbfaf7; --card:#ffffff;
-  --brand:#0e3b53; --accent:#c89b3c; --line:#e4e0d6; --tint:#f1ede4;
+  --ink:#132826; --ink-soft:#4a5f5c; --bg:#f6faf9; --card:#ffffff;
+  --brand:#0f4c4c; --accent:#d0673f; --line:#d9e5e2; --tint:#e8f1ef;
+  --hero-soft:#b5d3cf; --hero-hi:#f4b393; --send:#fdf0ea; --foot:#0b3434;
   --good:#2f7a4f; --warn:#b7791f; --bad:#b23b3b; --wa:#1f8f4e;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -62,19 +63,19 @@ section{padding:28px 0 56px}
 .pct::after{content:"%";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft)}
 .pct input{padding-right:30px}
 input,select,textarea{font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:6px;background:#fff;width:100%;color:var(--ink)}
-input:focus,select:focus,textarea:focus{outline:2px solid rgba(14,59,83,.25);border-color:var(--brand)}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(15,76,76,.25);border-color:var(--brand)}
 textarea{min-height:90px;resize:vertical}
 .hint{font-size:13px;color:var(--ink-soft)}
 .hidden{display:none!important}
 .saved{font-size:13px;color:var(--good);font-weight:600;min-height:1em}
 .fxinline{margin-top:4px;background:var(--tint);border-radius:8px;padding:10px 12px;font-size:14px}
 .results{position:sticky;top:16px}
-.hero-num{background:var(--brand);color:#e8eef2;border-radius:12px;padding:24px;margin-bottom:18px}
-.hero-num .k{font-size:14px;color:#b9cbd6;font-weight:500}
+.hero-num{background:var(--brand);color:#e6f1ef;border-radius:12px;padding:24px;margin-bottom:18px}
+.hero-num .k{font-size:14px;color:var(--hero-soft);font-weight:500}
 .hero-num .v{font-family:Fraunces,Georgia,serif;font-size:clamp(36px,5vw,48px);color:#fff;line-height:1.1;margin:4px 0 6px}
 .ltvtag{display:inline-block;background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:8px}
-.hero-num .lim{font-size:15px;font-weight:600;color:#e3c889}
-.hero-num .alt{font-size:13px;color:#b9cbd6;margin-top:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
+.hero-num .lim{font-size:15px;font-weight:600;color:var(--hero-hi)}
+.hero-num .alt{font-size:13px;color:var(--hero-soft);margin-top:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
 .rows{display:grid}
 .row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
 .row:last-child{border-bottom:0}
@@ -84,12 +85,17 @@ textarea{min-height:90px;resize:vertical}
 .formula{font-size:13px;color:var(--ink-soft);background:var(--tint);border-radius:6px;padding:10px 12px;margin-top:10px}
 .note{font-size:13px;color:var(--ink-soft);margin-top:8px}
 .btn{display:block;width:100%;background:var(--brand);color:#fff;text-decoration:none;padding:14px 18px;border-radius:8px;font-weight:600;border:0;cursor:pointer;font-size:16px;text-align:center;margin-top:10px;font-family:inherit}
-.btn:hover{filter:brightness(.93)}
+.btn:hover{filter:brightness(.92)}
+.hero{border-bottom:3px solid var(--accent)}
+header.top{background:var(--brand);border-bottom:0}
+header.top .logo{color:#fff}
+header.top .logo span{color:var(--hero-hi)}
+header.top .tag{color:var(--hero-hi)}
 .btn.gold{background:var(--accent)}
 .btn.wa{background:var(--wa)}
 .btn.ghost{background:#fff;color:var(--brand);border:1.5px solid var(--brand)}
 .btn:disabled{opacity:.6;cursor:default}
-.send{background:#fbf1de;border:1.5px solid var(--accent)}
+.send{background:var(--send);border:1.5px solid var(--accent)}
 .send .btns{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
 .send .btns .full{grid-column:1/-1}
 .preview{background:#fff;border:1px dashed var(--line);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--ink-soft);white-space:pre-line;max-height:240px;overflow:auto;margin-top:6px}
@@ -97,7 +103,7 @@ textarea{min-height:90px;resize:vertical}
 .refer{background:var(--tint)}
 .refer form{display:grid;gap:12px}
 .refer label{font-size:14px;font-weight:600;display:grid;gap:6px}
-footer{background:#0a2533;color:#9fb3c0;font-size:12px;line-height:1.5;padding:28px 0}
+footer{background:var(--foot);color:#a9c4c0;font-size:12px;line-height:1.5;padding:28px 0}
 footer p{margin-bottom:6px}
 footer strong{color:#fff}
 .repo{color:#fff;font-weight:600;margin-bottom:10px!important}
@@ -228,7 +234,7 @@ footer strong{color:#fff}
 
     <div class="results" aria-live="polite">
       <div class="hero-num">
-        <div class="k" id="refLine" style="color:#e3c889;font-weight:600;margin-bottom:6px"></div>
+        <div class="k" id="refLine" style="color:var(--hero-hi);font-weight:600;margin-bottom:6px"></div>
         <div class="k" id="heroLbl">Maximum mortgage your client could get</div>
         <div class="v" id="maxMort">£0</div>
         <div class="ltvtag" id="maxLtv"></div>
