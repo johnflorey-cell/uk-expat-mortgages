@@ -132,7 +132,7 @@ footer strong{color:#fff}
       <li><b>2</b>Enter the property and the rent, or for an own home the deposit.</li>
       <li><b>3</b>Send the guide to your client, or introduce them to me directly.</li>
     </ol>
-    <p class="guide"><strong>A guide only. Your client must speak to a mortgage adviser.</strong> These figures are not a quote, a mortgage offer or advice, and must not be relied on to make a decision. Only a qualified mortgage adviser can confirm what your client can borrow, after a full assessment.<br> Standard UK residential property only (not commercial, HMOs, multi-unit or auction purchases). Subject to status, the lender's criteria and valuation. Up to 75% loan to value.</p>
+    <p class="guide"><strong>A guide only. Your client must speak to a mortgage adviser.</strong> These figures are not a quote, a mortgage offer or advice, and must not be relied on to make a decision. Only a qualified mortgage adviser can confirm what your client can borrow, after a full assessment.<br> Standard UK residential property only (not commercial, HMOs, multi-unit or auction purchases). Sharia mortgages (Home Purchase Plans) are not included in these rates. The standard mortgage figures can be used as a guide, although Sharia mortgages usually have a slightly higher rate. Subject to status, the lender's criteria and valuation. Up to 75% loan to value.</p>
   </div>
 </div>
 
@@ -401,7 +401,7 @@ footer strong{color:#fff}
     if(!S.rateEdited&&document.activeElement!==$('rate'))$('rate').value=band.avg.toFixed(2);
     var rate=num($('rate')),term=+$('term').value,io=btl;
     var catName=cat==='res'?'residential':(cat==='btlCo'?'limited company buy-to-let':'individual buy-to-let');
-    $('rateHint').textContent='Uses the average expat '+catName+' 5 year fixed rate of '+band.avg.toFixed(2)+'% (range '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, checked '+(cat==='res'?RATES.resUpdated:RATES.updated)+', updated monthly). '+(btl?'Buy-to-let shown on an interest only basis, the most popular choice for investors.':'Own home shown on a repayment basis.');
+    $('rateHint').textContent='Uses the average expat '+catName+' 5 year fixed rate of '+band.avg.toFixed(2)+'% (range '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, checked '+(cat==='res'?RATES.resUpdated:RATES.updated)+', checked weekly). '+(btl?'Buy-to-let shown on an interest only basis, the most popular choice for investors.':'Own home shown on a repayment basis.');
     var L={goal:goal,btl:btl,owner:owner,value:value,ltvMax:ltvMax,rate:rate,term:term,io:io,band:band,catName:catName};
 
     if(btl){
@@ -594,6 +594,7 @@ footer strong{color:#fff}
         'UK Expat Mortgages is a trading name. Mortgage advice and arrangement is provided by Opes Financial Partners Ltd, 243 Knightsbridge, London SW7 1DN, which is authorised and regulated by the Financial Conduct Authority, FCA number 598462. Registered in England and Wales No: 7556710. Registered address: Sterling House, 27 Hatchlands Road, Redhill, Surrey RH1 6RW.',
         'The Financial Conduct Authority does not regulate some aspects of buy to let mortgages, overseas mortgages and tax advice.',
         'A typical fee of up to 1% of the mortgage amount may be payable on successful completion. The fee will be agreed with each applicant prior to submitting an application. The total fee is non-refundable. We may also be paid commission from the lender.',
+        'Sharia mortgages (Home Purchase Plans) are not included in these rates. The standard mortgage figures can be used as a guide, although Sharia mortgages usually have a slightly higher rate.',
         'The estate agent named has provided this guide for information only. The estate agent is not a mortgage adviser and does not give mortgage advice.'
       ]
     };

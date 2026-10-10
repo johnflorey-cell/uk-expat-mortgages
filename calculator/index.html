@@ -233,7 +233,7 @@ footer strong{color:#fff}
     <p class="eyebrow">Free expat mortgage calculator</p>
     <h1>UK expat mortgage calculator</h1>
     <p class="lead">Two quick stages. First, find out how much mortgage you could get, based on the rent and an industry standard of up to a maximum of 75% of the value. Then see what it would cost each month, including the payment in your home currency.</p>
-    <p class="guide"><strong>Indicative guide only.</strong> This calculator gives estimates to help you plan. It is not a quote, a mortgage offer or advice.<br><strong>Standard UK residential property only.</strong> It does not cover commercial or semi-commercial property, HMOs, multi-unit purchases, auction purchases or other specialist property. If your purchase is one of these, <a href="#contact">speak to an adviser</a>.<br><strong>Subject to valuation.</strong> The property value and rent are subject to the lender's valuation.</p>
+    <p class="guide"><strong>Indicative guide only.</strong> This calculator gives estimates to help you plan. It is not a quote, a mortgage offer or advice.<br><strong>Standard UK residential property only.</strong> It does not cover commercial or semi-commercial property, HMOs, multi-unit purchases, auction purchases or other specialist property. If your purchase is one of these, <a href="#contact">speak to an adviser</a>.<br><strong>Sharia mortgages.</strong> Sharia mortgages (Home Purchase Plans) are not included in these rates. The standard mortgage figures can be used as a guide, although Sharia mortgages usually have a slightly higher rate.<br><strong>Subject to valuation.</strong> The property value and rent are subject to the lender's valuation.</p>
   </div>
 </section>
 
@@ -456,7 +456,7 @@ footer strong{color:#fff}
         <h3>Rates vary by lender</h3>
         <p class="sub" id="rangeCat" style="margin-bottom:10px"></p>
         <div class="rangerow"><div><span>Lowest</span><b id="rLow"></b></div><div><span>Average</span><b id="rAvg"></b></div><div><span>Highest</span><b id="rHigh"></b></div></div>
-        <p class="note"><strong>Rates are updated on a monthly basis.</strong> There is a range of rates depending on the lender, and each lender has its own criteria, fees and rental cover rules. Your mortgage adviser is best placed to advise on the most suitable one for your requirements.</p>
+        <p class="note"><strong>Rates are checked weekly.</strong> There is a range of rates depending on the lender, and each lender has its own criteria, fees and rental cover rules. Your mortgage adviser is best placed to advise on the most suitable one for your requirements. Sharia mortgages (Home Purchase Plans) are not included in these rates. The standard mortgage figures can be used as a guide, although Sharia mortgages usually have a slightly higher rate.</p>
       </div>
 
       <div class="panel">
@@ -720,8 +720,8 @@ footer strong{color:#fff}
     if(choice!=='own'&&document.activeElement!==$('rate')){$('rate').value=band[choice].toFixed(2);}
     var checked=cat==='res'?RATES.resUpdated:RATES.updated;
     var catName=cat==='res'?'residential':(cat==='btlCo'?'limited company buy-to-let':'individual buy-to-let');
-    $('rateHint').textContent='Expat '+catName+' '+fix+' year fixed rates up to 75% LTV currently range from '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, average '+band.avg.toFixed(2)+'%. Based on published rates from specialist expat lenders, checked '+checked+'. Rates are updated on a monthly basis. Rates vary by lender, and your mortgage adviser is best placed to advise on the most suitable one for your requirements.';
-    $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+checked+'. Updated monthly.';
+    $('rateHint').textContent='Expat '+catName+' '+fix+' year fixed rates up to 75% LTV currently range from '+band.low.toFixed(2)+'% to '+band.high.toFixed(2)+'%, average '+band.avg.toFixed(2)+'%. Based on published rates from specialist expat lenders, checked '+checked+'. Rates are checked weekly. Rates vary by lender, and your mortgage adviser is best placed to advise on the most suitable one for your requirements.';
+    $('rangeCat').textContent='Expat '+catName+', '+fix+' year fixed, up to 75% LTV. Checked '+checked+'. Rates are checked weekly.';
     $('rLow').textContent=band.low.toFixed(2)+'%';$('rAvg').textContent=band.avg.toFixed(2)+'%';$('rHigh').textContent=band.high.toFixed(2)+'%';
 
     if(!btl){$('rtype').value='cai';}
