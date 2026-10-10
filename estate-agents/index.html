@@ -233,7 +233,7 @@ footer strong{color:#fff}
           <p class="glabel">Monthly payment estimate</p>
           <div class="two">
             <label class="field"><span>Interest rate <small>(5 year fixed)</small></span>
-              <div class="pct"><input id="rate" inputmode="decimal" value="6.06" aria-label="Interest rate"></div>
+              <div class="pct"><input id="rate" inputmode="decimal" value="6.11" aria-label="Interest rate"></div>
             </label>
             <label class="field"><span>Mortgage term</span>
               <select id="term"><option>5</option><option>10</option><option>15</option><option>20</option><option selected>25</option></select>
@@ -471,8 +471,8 @@ function sdltCalc(price,o){
   $('yr').textContent=new Date().getFullYear();
 
   // Same rules and rates as /calculator/ (keep in step when rates are updated)
-  var RATES={updated:'29 September 2026',resUpdated:'5 October 2026',
-    res:{low:5.80,avg:6.00,high:6.19},btlInd:{low:5.59,avg:6.06,high:6.54},btlCo:{low:5.69,avg:6.11,high:6.74}};
+  var RATES={updated:'10 October 2026',resUpdated:'10 October 2026',
+    res:{low:5.80,avg:6.00,high:6.19},btlInd:{low:5.59,avg:6.11,high:6.54},btlCo:{low:5.69,avg:6.17,high:6.74}};
   var ICR={ind:1.45,co:1.25},INCOME_MULT=4.5,MAX_LTV=0.75;
   var FX={date:'29 September 2026',live:false,r:{AED:4.8684,SAR:4.9711,QAR:4.8253,BHD:0.4984,KWD:0.4085,OMR:0.5097,USD:1.3254,CAD:1.8777,EUR:1.1655,HKD:10.3993,SGD:1.6937,MYR:5.4142,CNY:8.9012,INR:127.22,ZAR:21.7554}};
   var S={rateEdited:false,last:null,sent:{}};
